@@ -1,8 +1,10 @@
 # Byte-compiled / optimized / DLL files
+*data/
+*docs/
 __pycache__/
 *.py[cod]
 *$py.class
-
+*data/
 # C extensions
 *.so
 /examples/data/
