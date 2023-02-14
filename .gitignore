@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 *data/
+*notebooks/dev/*.ipynb
 *docs/
 __pycache__/
 *.py[cod]
