@@ -19,8 +19,8 @@ pip install -U iQual
 - ### From source
 
 ```bash
-git clone https://github.com/worldbank/iqual.git```
-cd iqual
+git clone https://github.com/worldbank/iQual.git
+cd iQual
 pip install -e .
 ```
 
