@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 *data/
 *dev/
+*dictionaries/
 *docs/
 __pycache__/
 *.py[cod]

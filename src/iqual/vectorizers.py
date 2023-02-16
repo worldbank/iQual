@@ -8,39 +8,23 @@ Options include:
     - `saved-dictionary`
 """
 import spacy
-import pickle
 import scipy.sparse
 import numpy as np
 import sklearn.feature_extraction.text
 from sentence_transformers import SentenceTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
+from .utils import save_pickle_data, load_pickle_data
 
 __all__ = ['get_vectorizer_options', 'load_vectorizer', 'DictionaryVectorizer', 'SentenceTransformerVectorizer', 'SpacyVectorizer', 'ScikitLearnVectorizer', 'load_pickle_data', 'save_pickle_data']
 
-def load_pickle_data(pkl_filepath):
-    """
-    Load pickle data from file.
-    """
-    with open(pkl_filepath, "rb") as pkl_file:
-        doc = pickle.load(pkl_file)
-    return doc
-
-
-def save_pickle_data(doc, pkl_filepath):
-    """
-    Save pickle data to file.
-    """
-    with open(pkl_filepath, "wb") as pkl_file:
-        pickle.dump(doc, pkl_file, protocol=pickle.HIGHEST_PROTOCOL)
-    print(f"Saved file in {pkl_filepath}")
 
 def get_vectorizer_options():
     """Return a list of vectorizer options"""
     return [
-        'scikit-learn-vectorizer',
-        'sentence-transformer-vectorizer',
-        'dictionary-vectorizer',
-        'spacy-vectorizer'
+        'scikit-learn',
+        'sentence-transformers',
+        'saved-dictionary',
+        'spacy'
     ]
 
 def load_vectorizer(model,env, **kwargs):
@@ -50,13 +34,13 @@ def load_vectorizer(model,env, **kwargs):
     Args:
     """  
     assert env in get_vectorizer_options(), f"{env} is not a valid vectorizer option"  
-    if env   == 'scikit-learn-vectorizer':
+    if env   == 'scikit-learn':
         return ScikitLearnVectorizer(model, **kwargs)
-    elif env == 'sentence-transformer-vectorizer':
+    elif env == 'sentence-transformers':
         return SentenceTransformerVectorizer(model, **kwargs)
-    elif env == 'dictionary-vectorizer':
+    elif env == 'saved-dictionary':
         return DictionaryVectorizer(model, **kwargs)
-    elif env == 'spacy-vectorizer':
+    elif env == 'spacy':
         return SpacyVectorizer(model, **kwargs)
     else:
         raise ValueError("{} is not a valid env".format(env))
@@ -86,7 +70,7 @@ class DictionaryVectorizer(BaseEstimator, TransformerMixin):
         )
 
     def get_params(self, **kwargs):
-        return {'model': self.model, 'env': 'saved-dict'}
+        return {'model': self.model, 'env': 'saved-dictionary'}
 
     def set_params(self, **param_args):
         self.model = param_args.get('model', self.model)
@@ -108,9 +92,8 @@ class SentenceTransformerVectorizer(BaseEstimator, TransformerMixin):
         Generates embeddings for sentences using the aforementioned initalized `SentenceBert` model        
         Args:
              X                   : list of sentences to encode                  (List[str])
-             convert_to_numpy    :                                              (Bool)
-             output_value        : {sentence_embedding; token_embeddings}
-             normalize_embeddings : whether to normalize embeddings              (Bool)
+             convert_to_numpy    : whether to convert output to numpy array     (Bool)
+             normalize_embeddings : whether to normalize embeddings              (Bool) 
         Returns:
             Encoded embeddings of sentences
 
@@ -208,5 +191,5 @@ class Vectorizer(BaseEstimator, TransformerMixin):
 
     def set_params(self, **kwargs):
         self.model = kwargs.get("model", "CountVectorizer")
-        self.env  = kwargs.get("env", "scikit-learn-vectorizer")
+        self.env  = kwargs.get("env", "scikit-learn")
         self.vectorizer      = load_vectorizer(str(self.model),str(self.env),**{k:v for k,v in kwargs.items() if k not in ['model','env']})

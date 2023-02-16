@@ -31,7 +31,7 @@ def column_selector(data, column_name,reshape=False):
 
 def construct_text_pipelines(
     q_col,a_col,
-    env="scikit-learn-vectorizer",
+    env="scikit-learn",
     model="TfidfVectorizer",
     **kwargs
 ):
@@ -91,7 +91,7 @@ class NLPModel:
             diagram (bool): Create model diagram
         """
         if enable_caching is True:
-            self.cache_dir = mkdtemp(prefix="nlpqualtoolkit_")
+            self.cache_dir = mkdtemp(prefix="iqual_")
         else:
             self.cache_dir = None
         self.diagram        = diagram                
@@ -104,7 +104,7 @@ class NLPModel:
     def add_text_features(
         self,
         q_col,a_col,
-        env="scikit-learn-vectorizer",
+        env="scikit-learn",
         model="TfidfVectorizer",
         **kwargs
     ):

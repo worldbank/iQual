@@ -1,4 +1,9 @@
 from setuptools import setup, find_packages
+# Read requirements.txt
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
+# Setup
 
 setup(
     name='iQual',
@@ -10,19 +15,12 @@ setup(
     packages=find_packages(where='src'),
     exclude_package_data={'': ['data','notebooks','docs','tests']},
     package_dir={'': 'src'},
-    install_requires=[
-        'numpy',
-        'pandas',
-        'scikit-learn',
-        'sentence-transformers',
-        'spacy',        
-    ],
+    install_requires=required,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
