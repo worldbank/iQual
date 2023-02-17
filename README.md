@@ -16,7 +16,7 @@ pip install -U iQual
 ```sh
 git clone https://github.com/worldbank/iQual.git
 cd iQual
-python setup.py install
+pip install -e .
 ```
 
 ### Dependencies

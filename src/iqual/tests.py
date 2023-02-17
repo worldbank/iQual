@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
 
-# TODO: Add support for statsmodels - parent class
 class Bias:
-    
+    # TODO: Add support for statsmodels - parent class
+
     models = smf.__all__ # List of statsapiformula models
 
     def __init__(
@@ -525,4 +525,146 @@ class Interpretability:
                 log_fstat=np.log(fstats[var]),
                 pval=pvals[var],
                 ))
+        return pd.DataFrame(results)
+
+
+class Efficiency:
+    """
+    Class to compute the efficiency of a model
+    """
+
+    def __init__(self,
+                 train_df,
+                 test_df,
+                 machine_df,
+                 annotation_vars,
+                 uid_var='uid',
+                 act_suffix='_act',
+                 pred_suffix='_pred'):
+        """
+        Args:
+            train_df (pandas dataframe): dataframe containing the training data
+            test_df (pandas dataframe): dataframe containing the `test data` OR `cross-validation predictions`
+            machine_df (pandas dataframe): dataframe containing the unannotated data
+            annotation_vars (list): list of annotation variables
+            uid_var (str): user id variable
+            act_suffix (str): suffix for the actual values
+            pred_suffix (str): suffix for the predicted values
+
+        """
+        self.train_df = train_df
+        self.test_df = test_df
+        self.human_df = pd.concat([train_df, test_df])
+
+        self.machine_df = machine_df
+
+        self.annotation_vars = annotation_vars
+        self.act_suffix = act_suffix
+        self.pred_suffix = pred_suffix
+
+        self.n_m = self.machine_df[uid_var].nunique()
+        self.n_h = self.human_df[uid_var].nunique()
+        self.n_sum = self.n_h + self.n_m
+
+    def get_variance_machine(self, var):
+        """
+        Get the variance of the machine data
+        Returns:
+            sig2_y (float): variance of the machine data
+        """
+        return self.machine_df[var+self.pred_suffix].var()
+
+    def get_variance_human(self, var):
+        """
+        Get the variance of the Human data
+        Returns:
+            sig2_h (float): variance of the Human data
+        """
+        return self.human_df[var+self.act_suffix].var()
+
+    def get_variance_residual(self, var):
+        """
+        Get the variance of the residuals
+        Returns:
+            sig2_eps (float): variance of the residuals
+        """
+        return (self.test_df[var+self.act_suffix] - self.test_df[var+self.pred_suffix]).var()
+
+    def get_mean_human(self, var):
+        """
+        Get the mean of the Human data
+        Returns:
+            mu_h (float): mean of the Human data
+        """
+        return self.human_df[var+self.act_suffix].mean()
+
+    def get_mean_machine(self, var):
+        """
+        Get the mean of the Machine data
+        Returns:
+            mu_m (float): mean of the Machine data
+        """
+        return self.machine_df[var+self.pred_suffix].mean()
+
+    def get_std_error_human(self, sig2_h):
+        """
+        Get the standard error of the Human data
+        Returns:
+            se_h (float): standard error of the annotated data
+        """
+        return np.sqrt(sig2_h/self.n_h)
+
+    def get_std_error_machine(self, sig2_m):
+        """
+        Get the standard error of the Machine data
+        Returns:
+            se_m (float): standard error of the Machine data
+        """
+        return np.sqrt(sig2_m/self.n_m)
+
+    def get_std_error_enhanced(self, sig2_h, sig2_m):
+        """
+        Get the standard error of the Enhanced Data
+        Returns:
+            se_enh (float): standard error of the Enhanced Data
+        """
+        return np.sqrt(((self.n_h * sig2_h) + (self.n_m * sig2_m))/(self.n_sum**2))
+
+    def get_results(self, var):
+        """
+        Get the results for a particular annotation variable
+        """
+        mu_h = self.get_mean_human(var)
+        mu_m = self.get_mean_machine(var)
+
+        sig2_h = self.get_variance_human(var)
+        sig2_y = self.get_variance_machine(var)
+        sig2_eps = self.get_variance_residual(var)
+
+        sig2_m = sig2_y + sig2_eps
+
+        se_h = self.get_std_error_human(sig2_h)
+        se_m = self.get_std_error_machine(sig2_m)
+        se_enh = self.get_std_error_enhanced(sig2_h, sig2_m)
+
+        return dict(
+            annotation=var,
+            sig2_m=sig2_m,
+            sig2_y=sig2_y,
+            sig2_h=sig2_h,
+            sig2_eps=sig2_eps,
+            mu_h=mu_h,
+            mu_m=mu_m,
+            se_h=se_h,
+            se_m=se_m,
+            se_enh=se_enh,
+        )
+
+    def get_results_all(self):
+        """
+        Get the results for all annotation variables
+        """
+        results = []
+        for var in self.annotation_vars:
+            results.append(self.get_results(var))
         return pd.DataFrame(results)

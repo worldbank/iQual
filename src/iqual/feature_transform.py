@@ -10,9 +10,15 @@ from sklearn.base import BaseEstimator,TransformerMixin
 
 class FeatureScaler(BaseEstimator,TransformerMixin):
     """
+    Feature Scaling Methods    
     """
     def __init__(self,name='StandardScaler',**kwargs):
         """
+        Feature Scaling Methods
+
+        Args:
+            name (str, optional): Name of the Scaler. Defaults to 'StandardScaler'.
+            **kwargs: Keyword arguments to pass to the Scaler.        
         """
         self.name = name
         if isinstance(self.name,str):
@@ -39,6 +45,7 @@ class FeatureScaler(BaseEstimator,TransformerMixin):
     
     def fit(self,*args,**kwargs):
         """
+        Fit the scaler to the data.
         """
         if self.scaler is not None:
             self.scaler.fit(*args,**kwargs)
@@ -48,6 +55,7 @@ class FeatureScaler(BaseEstimator,TransformerMixin):
 
     def transform(self,X,**kwargs):
         """
+        Transform the data.
         """
         if self.scaler is None:
             return X
@@ -56,8 +64,8 @@ class FeatureScaler(BaseEstimator,TransformerMixin):
 
     def fit_transform(self,X,y=None,**kwargs):
         """
+        Fit the scaler to the data and transform it.
         """
-
         if self.scaler is not None:
             return self.scaler.fit_transform(X,**kwargs)
         else:
@@ -65,10 +73,7 @@ class FeatureScaler(BaseEstimator,TransformerMixin):
 
 def apply_feature_scaling(X,name='StandardScaler',**kwargs):
     """
-    Callable function to apply a `stateless` scaler to a matrix.
-
-        For use with FunctionTransformer.
-
+    Callable function to apply a `stateless` scaler to a matrix. For use with FunctionTransformer.
     """
     return FeatureScaler(name=name,**kwargs).fit_transform(X)
 
@@ -76,10 +81,14 @@ def apply_feature_scaling(X,name='StandardScaler',**kwargs):
 
 class DimensionalityReduction(BaseEstimator,TransformerMixin):
     """
-        Dimensionality Reduction Methods
+    Dimensionality Reduction Methods
     """
     def __init__(self,name='TruncatedSVD',**kwargs):
         """
+        Dimensionality Reduction Methods
+        Args:
+            name (str, optional): Name of the Dimensionality Reduction Method. Defaults to 'TruncatedSVD'.
+            **kwargs: Keyword arguments to pass to the Dimensionality Reduction Method.
         """
         self.name = name        
         if self.name=="UMAP":        
@@ -94,19 +103,21 @@ class DimensionalityReduction(BaseEstimator,TransformerMixin):
     def set_params(self,**kwargs):
         self.method.set_params(**kwargs)
         
-
     def fit(self, *args, **kwargs):
         """
+        Fit the Dimensionality Reduction Method to the data.
         """
         self.method.fit(*args, **kwargs)
         return self
 
     def transform(self,X,**kwargs):
         """
+        Transform the data.
         """
         return self.method.transform(X,**kwargs)
     
     def fit_transform(self,X,y=None,**kwargs):
         """
+        Fit the Dimensionality Reduction Method to the data and transform it.
         """
         return self.method.fit_transform(X,**kwargs)    

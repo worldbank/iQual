@@ -1,12 +1,9 @@
 # /usr/bin/env python
-"""
-    This module contains the `Evalutation` class which contains
-        common metrics for measuring the classification performance.
+"""This module contains the `Evalutation` class which contains common metrics for measuring the classification performance.
 """
 
 import pandas as pd
 import sklearn.metrics
-
 
 def count_outcomes(y_true, y_pred, outcome_type="true_positives"):
     """
@@ -65,11 +62,6 @@ def calc_f1_score_from_labels(y_true, y_pred):
     Calculates the F1 score from true-labels and predicted-labels.
     """
     return sklearn.metrics.f1_score(y_true, y_pred)
-
-
-
-
-
 
 
 class EvaluationScorer:

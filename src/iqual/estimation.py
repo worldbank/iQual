@@ -1,5 +1,3 @@
-# !/usr/bin/python3
-
 """Post-Vectorization Estimation Module"""
 
 import sklearn
@@ -46,7 +44,8 @@ def get_probas_from_decisions(X):
     return  1/(1+np.exp(-X))
 
 def load_estimator(model,estimator_options=estimator_options):
-    """ 
+    """
+    Load an estimator from sklearn. 
     """
     if model in estimator_options:
         return getattr(getattr(sklearn,estimator_options.get(model)),model)
@@ -55,8 +54,7 @@ def load_estimator(model,estimator_options=estimator_options):
 
 class BinaryThresholder(BaseEstimator):
     """ 
-        Custom Threshold Predictor to be used in the pipeline.
-
+    Custom Threshold Predictor to be used in the pipeline.
     """
 
     def __init__(
@@ -67,7 +65,13 @@ class BinaryThresholder(BaseEstimator):
         threshold=0.5,
         scoring_metric="f1_score",
     ):
-        """ 
+        """
+        Args:
+            use_threshold (bool): Whether to use thresholding or not. Defaults to True.
+            threshold_range (tuple): Range of thresholds to search over. Defaults to (0.001, 0.999).
+            steps (int): Number of steps to search over. Defaults to 100.
+            threshold (float): Threshold to use. Defaults to 0.5.
+            scoring_metric (str): Scoring metric to use. Defaults to "f1_score".             
         """
         self.use_threshold   = use_threshold
         self.steps           = steps
@@ -107,11 +111,12 @@ class BinaryThresholder(BaseEstimator):
 
     def fit(self, X=None, Y=None, *args, **kwargs):
         """
-            Fit the estimator.
-            Args:
-                X : probas of the classifier
-                Y : labels
-            
+        Fit the estimator.
+        Args:
+            X : probas of the classifier
+            Y : labels
+        Returns:
+            self
         """
         if self.use_threshold is True:
             t0, t1 = min(X[:, 1]), max(X[:, 1])
@@ -150,6 +155,7 @@ class BinaryThresholder(BaseEstimator):
 
     def predict(self, X, thresh=None, validate=False, **pred_kwargs):
         """
+        Predict the class labels for the provided data.
         """
         if self.use_threshold is False:
             return X
@@ -170,6 +176,7 @@ class BinaryThresholder(BaseEstimator):
 
     def validate_proba(self, probas, **kwargs):
         """
+        Check if the probabilities are valid
         """
         if len(set(probas))>1:
             return True
@@ -242,7 +249,6 @@ class Classifier(BaseEstimator, TransformerMixin):
         """        
         Predict the probability of each class for each sample.
         """
-
         # If `predict_proba` is available, use it
         if hasattr(self.classifier, "predict_proba"):
             return self.classifier.predict_proba(X, **kwargs)

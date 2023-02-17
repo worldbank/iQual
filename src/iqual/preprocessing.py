@@ -101,6 +101,9 @@ def remove_space_between_numbers(text):
 
 
 def remove_dashes(x):
+    """
+    Removes dashes from strings
+    """
     x = re.sub("-+", " ", x)
     x = re.sub(" +", " ", x)
     return x
@@ -121,7 +124,7 @@ def replace_numbers(text):
 def keep_alnum_only(text):
     """
     Removes all non-alphanumeric characters from strings
-        NOTE: This function will remove whitespaces as well.
+    NOTE: This function will remove whitespaces as well.
     """
     return ''.join([a for a in text if a.isalnum()])
 
@@ -146,8 +149,7 @@ def count_words(text):
 
 def mask_digits(s):
     """
-    Experimental function to mask digits in strings
-    
+    Experimental function to mask digits in strings    
     Replaces all digits with '#'
     """
     s = "".join(["#" if x.isdigit() else x for x in s])
@@ -184,35 +186,6 @@ def replace_whole_words(text,replace_words:dict):
 #contractions_path = os.path.join(package_dir,r'assets/contractions.json')
 #stopwords_path = os.path.join(package_dir,r'assets/stopwords.json')
 #contractions = json.load(open(contractions_path,'r'))
-#stopwords = json.load(open(stopwords_path ,'r'))
-
-def remove_transliteration_accents(text):
-
-    """Removes transliteration accents from strings"""    
-    nfkd_form = unicodedata.normalize('NFKD', text)
-    return u"".join([c for c in nfkd_form if (unicodedata.combining(c)==0) and (unicodedata.name(c).startswith('BEN')==False)])
-
-def translate_numbers(s,bengali_num_dict):
-    """
-    For bengali text only.
-    Replaces all numbers with their respective bengali numbers.
-
-    Dictionary not in repository.
-    """
-    for n in range(100,-1,-1):
-        s = re.sub(str(n),bengali_num_dict[str(n)],s)
-    return s
-
-def replace_contractions(text,contractions):
-    """
-    Replaces all contractions in strings
-    """
-    for c in contractions:
-        # Replace full words
-        text = re.sub(r"\b{}\b".format(c),contractions[c],text,flags=re.IGNORECASE)
-    return text
-
-        
-    
+#stopwords = json.load(open(stopwords_path ,'r'))    
 '''
 
