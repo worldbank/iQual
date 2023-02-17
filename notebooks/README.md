@@ -16,11 +16,15 @@ This directory contains Jupyter notebooks that demonstrate how to use the `iQual
 * [Model with Multiple Classifiers](Model-MultipleClassifiers.ipynb) - This notebook demonstrates how to construct a model for a single annotation task using multiple classifiers. This can be useful if you want to compare the performance of different classifiers.
 
 * [Model with Multiple Annotations](Model-MultipleAnnotations.ipynb) - This notebook demonstrates how to run the model fitting process for a multiple annotations.
+
 * [Model with Bootstrap](Model-Bootstrap.ipynb) - This notebook demonstrates how to run the model fitting process with bootstrap resampling.
 
 * [Bias Test](BiasTest.ipynb) - This notebook demonstrates how to run the bias tests on a model.
 
 * [Interpretability Tests](InterpretabilityTest.ipynb) - This notebook demonstrates how to run the interpretability tests on a model.
+
+* [Interpretability with increasing N<sub>h</sub>](Interpretability_Increasing_N_h.ipynb) - This notebook demonstrates how to interpretability increases with increasing N<sub>h</sub>.
+
 * [Distribution of Regression Coefficients](RegressionCoefficientTest.ipynb) - This notebook demonstrates how to run the interpretability tests on a model and plot the distribution of regression coefficients.
 
 * [Efficiency Tests](EfficiencyTest.ipynb) - This notebook demonstrates how to run the efficiency tests on a model.

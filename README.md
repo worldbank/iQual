@@ -4,9 +4,6 @@ This repository contains the code and resources necessary to implement the techn
 
 With `iQual`, researchers can efficiently analyze large amounts of qualitative data while maintaining the nuance and accuracy of human interpretation.
 
-
-### `NOTE`: This package is still under development.
-
 ## Installation
 - To install iQual using pip, use the following command:
 ```sh
@@ -19,17 +16,23 @@ cd iQual
 pip install -e .
 ```
 
-### Dependencies
+## Dependencies
 
 iQual requires Python 3.7+ and the following dependencies:
-- [scikit-learn](https://scikit-learn.org/stable/) 0.22.1+
-- [sentence-transformers](https://sbert.net/) 0.3.6+
+- [pandas](https://pandas.pydata.org/) 1.0.0+
+- [scikit-learn](https://scikit-learn.org/stable/) 1.1.0+
+- [sentence-transformers](https://sbert.net/) 0.3.8+
+- [torch](https://pytorch.org/) 1.6.0+ [optional]
 - [spaCy](https://spacy.io/) 2.2.4+
-- [pandas](https://pandas.pydata.org/) 1.0.3+
 - [numpy](https://numpy.org/) 1.18.1+
+- [umap-learn](https://umap-learn.readthedocs.io/en/latest/) 0.4.6+
 - [scipy](https://www.scipy.org/) 1.4.1+
-- [matplotlib](https://matplotlib.org/) 3.1.3+
-- [seaborn](https://seaborn.pydata.org/) 0.10.0+
+- [simplejson](https://simplejson.readthedocs.io/en/latest/) 3.17.2+
+- [num2words](https://pypi.org/project/num2words/) 0.5.10+
+- [matplotlib](https://matplotlib.org/) 3.2.1+
+- [seaborn](https://seaborn.pydata.org/) 0.10.1+
+- [statsmodels](https://www.statsmodels.org/stable/index.html) 0.12.0+
+
 
 ### Features
 
@@ -55,12 +58,21 @@ iQual requires Python 3.7+ and the following dependencies:
 ### Notebooks
 Please refer to the [notebooks](notebooks) folder for a detailed description of the iQual package. These notebooks provide examples of how to use the package and demonstrate its capabilities.
 
-### Citation & Authors
+## Citation & Authors
 If you use this package, please cite the following paper:
 
-```bibtex
+[A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996)
+
+```
 Ashwin,Julian; Rao,Vijayendra; Biradavolu,Monica Rao; Chhabra,Aditya; Haque,Arshia; Khan,Afsana Iffat; Krishnan,Nandini.
 A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh (English). (Policy Research Working Paper No. WPS 10046)
 Paper is funded by the Knowledge for Change Program (KCP) Washington, D.C. : World Bank Group.
 http://documents.worldbank.org/curated/en/099759305162210822/IDU0a357362e00b6004c580966006b1c2f2e3996
 ```
+
+## Maintainers
+
+Please contact the following people for any queries regarding the package:
+
+- [Aditya Karan Chhabra](email:aditya0chhabra@gmail.com)
+- [Julian Ashwin](email:julianashwin@googlemail.com)

@@ -1,8 +1,12 @@
 pandas>=1.0.0
+numpy>=1.18.1
 scikit-learn>=1.1.0
-torch>=1.6.0
 sentence-transformers>=0.3.8
 umap-learn>=0.4.6
 num2words>=0.5.10
 simplejson>=3.17.2
 statsmodels>=0.12.0
+spacy>=2.2.4
+matplotlib>=3.2.1
+seaborn>=0.10.1
+scipy>=1.4.1

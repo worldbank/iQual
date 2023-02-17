@@ -2,16 +2,21 @@ from setuptools import setup, find_packages
 # Read requirements.txt
 with open('requirements.txt') as f:
     required = f.read().splitlines()
+# Read README.md
+with open('README.md', encoding='utf-8') as f:
+    long_description = f.read()
 
 # Setup
 setup(
     name='iQual',
     version='0.1.0',
     description='Iterative Qualitative Analysis - with Human Coding',
-    long_description='A Python package that allows qualitative analysis of open-ended interviews at scale, by extending a small set of interpretative human-codes to a much larger set of documents using natural language processing.',    
+    long_description=long_description,
     author='Aditya Karan Chhabra',
     author_email='aditya0chhabra@gmail.com',
     url='https://github.com/worldbank/iQual',
+    maintainer='Aditya Karan Chhabra',
+    maintainer_email='aditya0chhabra@gmail.com',
     packages=find_packages(where='src'),
     exclude_package_data={'': ['data','notebooks','docs','tests']},
     package_dir={'': 'src'},
@@ -21,11 +26,11 @@ setup(
    classifiers=[
         'Development Status :: 3 - Alpha',
         "Intended Audience :: Science/Research",
-        "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Sociology",
         "Topic :: Economics",
-        "Topic :: Text Processing :: Linguistic",
         "Topic :: Utilities",
+        "Topic :: Text Processing :: Linguistic",
+        "Topic :: Scientific/Engineering :: Information Analysis",
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',

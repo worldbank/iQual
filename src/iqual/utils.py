@@ -191,10 +191,10 @@ def merge_dataframes(dataframes, on="uid", how='inner'):
     return functools.reduce(lambda left, right: pd.merge(left, right, on=on, how=how), dataframes)
 
 
-# TODO:
-###  Deprecated functions. Will have to revisit these.
-
 '''
+# TODO:
+###  Deprecated functions. To be revisited
+
 
 def uid_aggregate_with_relevance(
     data,
