@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
 
+# TODO: Add support for statsmodels - parent class
 class Bias:
     
     models = smf.__all__ # List of statsapiformula models
@@ -33,7 +34,7 @@ class Bias:
         Returns:
             bias_test (Bias): Bias test object
         """
-        # TODO: Add support for statsmodels - parent class
+        
         if model not in self.models:
             raise ValueError(f"Model must be one of {', '.join(self.models)}")
         self.model     = model
@@ -131,36 +132,6 @@ class Bias:
             model_fit_summary_all += f"{var}: {self.model_fits[var].summary()}"
         return model_fit_summary_all
             
-
-"""
-- model error (i.e. the sampling errors in the model)
-- idiosyncratic error (i.e. the prediction error) 
-
-- Model Error:
-
-- To approximate the model error, we bootstrap the model by sampling the interviews with replacement B times. This gives us an empirical distribution over the predictions based on the sampled distribution.
-- The variance of the machine annotations, taking model error into account, can then be approximated by the variance across all of these bootstrap samples.
-
-
- This can be calculated either - 
- - in the training set only, 
- - or also in the out-of-sample predictions
- - but we find that the estimates are virtually identical in each
-
-("bootstrap_run", "annotation", "annotation_name","fstat_annot", "pval_annot", "fstat_enh", "pval_enh")
-
-
-"""
-
-### Interpretability
-
-"""
-Assuming text-based variables should be related to household characteristics, if our enhanced sample has improved the
-interpretability of our analysis it should give stronger evidence of a relationship between the annotations and household
-characteristics.12 We can therefore compare F statistics for regression of annotations on household characteristics
-in the human and enhanced samples. If the enhanced sample increases this F statistic relative to the human sample it
-suggests that the larger sample leads to more interpretable results in spite of the greater measurement error.
-"""
 
 class StatsModel:
     models = smf.__all__ # List of statsapiformula models
@@ -514,7 +485,29 @@ class Interpretability:
             pvals (dict): dictionary of p-values
         """
         return self.get_pvals(self.annotation_vars)
-    
+
+    def get_model_std_errors_all(self):
+        """
+        Get the model standard errors for all annotation variables
+        Returns:
+            model_std_errors_all (pandas dataframe): dataframe containing the model standard errors
+        """
+        model_std_errors_all = {}
+        for var in self.annotation_vars:
+            model_std_errors_all[var] = self.model_fits[var].bse
+        return model_std_errors_all
+
+    def get_model_std_error(self, annotation_var, regressor):
+        """
+        Get the model standard error for a particular annotation variable and regressor
+        Args:
+            annotation_var (str): annotation variable
+            regressor (str): regressor
+        Returns:
+            model_std_error (float): model standard error
+        """
+        return self.model_fits[annotation_var].bse[regressor]
+
     def get_results(self):
         """
         Get the results for all annotation variables
