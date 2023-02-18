@@ -11,14 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: conda-incubator/setup-miniconda@v2
-        with:
-          environment-file: environment.yml
-          auto-activate-base: false
       - name: Dependencies
         shell: bash -l {0}
         run: |
           conda install pip
-          if [ -f docs/requirements.txt ]; then pip install -r docs/requirements.txt; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build
         shell: bash -l {0}
         run: |
