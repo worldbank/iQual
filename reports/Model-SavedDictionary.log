@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import os
+import pandas as pd
+from iqual import iqualnlp, evaluation, crossval, vectorizers
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[1], line 3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+[0;32m----> 3[0m [38;5;28;01mfrom[39;00m [38;5;21;01miqual[39;00m [38;5;28;01mimport[39;00m iqualnlp, evaluation, crossval, vectorizers
+
+File [0;32m<frozen zipimport>:259[0m, in [0;36mload_module[0;34m(self, fullname)[0m
+
+File [0;32m~/pyaudio/lib/python3.9/site-packages/iQual-0.1.0-py3.9.egg/iqual/iqualnlp.py:13[0m
+[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpipeline[39;00m [38;5;28;01mimport[39;00m Pipeline, FeatureUnion
+[1;32m     12[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mvectorizers[39;00m [38;5;28;01mimport[39;00m Vectorizer
+[0;32m---> 13[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mestimation[39;00m [38;5;28;01mimport[39;00m Classifier, BinaryThresholder
+[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mfeature_transform[39;00m [38;5;28;01mimport[39;00m FeatureScaler, DimensionalityReduction
+[1;32m     15[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mcrossval[39;00m [38;5;28;01mimport[39;00m CrossValidator, count_hyperparameters
+
+File [0;32m<frozen zipimport>:259[0m, in [0;36mload_module[0;34m(self, fullname)[0m
+
+File [0;32m~/pyaudio/lib/python3.9/site-packages/iQual-0.1.0-py3.9.egg/iqual/estimation.py:16[0m
+[1;32m     14[0m [38;5;28;01mimport[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mensemble[39;00m
+[1;32m     15[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m [38;5;28;01mimport[39;00m BaseEstimator, TransformerMixin
+[0;32m---> 16[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mevaluation[39;00m [38;5;28;01mimport[39;00m EvaluationScorer
+[1;32m     18[0m module_options [38;5;241m=[39m {
+[1;32m     19[0m     [38;5;124m"[39m[38;5;124mnaive_bayes[39m[38;5;124m"[39m: sklearn[38;5;241m.[39mnaive_bayes[38;5;241m.[39m__all__,
+[1;32m     20[0m     [38;5;124m"[39m[38;5;124mlinear_model[39m[38;5;124m"[39m: sklearn[38;5;241m.[39mlinear_model[38;5;241m.[39m__all__,
+[0;32m   (...)[0m
+[1;32m     27[0m     [38;5;124m"[39m[38;5;124mneural_network[39m[38;5;124m"[39m: sklearn[38;5;241m.[39mneural_network[38;5;241m.[39m__all__,
+[1;32m     28[0m }
+[1;32m     29[0m module_dict_list [38;5;241m=[39m [
+[1;32m     30[0m     {f: module [38;5;28;01mfor[39;00m f [38;5;129;01min[39;00m funcmethods} [38;5;28;01mfor[39;00m module, funcmethods [38;5;129;01min[39;00m module_options[38;5;241m.[39mitems()
+[1;32m     31[0m ]
+
+[0;31mImportError[0m: cannot import name 'EvaluationScorer' from 'iqual.evaluation' (/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/iQual-0.1.0-py3.9.egg/iqual/evaluation.py)
+ImportError: cannot import name 'EvaluationScorer' from 'iqual.evaluation' (/Users/adityachhabra/pyaudio/lib/python3.9/site-packages/iQual-0.1.0-py3.9.egg/iqual/evaluation.py)
+

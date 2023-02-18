@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interpretability Test &#8212; iQual</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://worldbank.github.io/iQual/notebooks/interpretability/InterpretabilityTest.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distribution of Regression Coefficients" href="RegressionCoefficientTest.html" />
+    <link rel="prev" title="Interpretability" href="README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">iQual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    iQual
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Examples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic/README.html">
+   Basic Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-Sklearn.html">
+     Vectorize with scikit-learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SpaCy.html">
+     Vectorize with SpaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SentenceTransformers.html">
+     Vectorize with Sentence Transformers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SavedDictionary.html">
+     Vectorize with a Saved Dictionary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../advanced/README.html">
+   Advanced Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleVectorizers.html">
+     Multiple Vectorizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleClassifiers.html">
+     Multiple Classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleAnnotations.html">
+     Multiple Annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-Bootstrap.html">
+     Bootstrap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Interpretability
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Interpretability Test
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RegressionCoefficientTest.html">
+     Regression Coefficients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Interpretability_Increasing_N_h.html">
+     Interpretability Increases with Human Annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../efficiency/README.html">
+   Efficiency
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../efficiency/EfficiencyTest.html">
+     Efficiency Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bias/README.html">
+   Bias
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bias/BiasTest.html">
+     Bias Test
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/worldbank/iQual/main?urlpath=tree/docs/notebooks/interpretability/InterpretabilityTest.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/worldbank/iQual"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/interpretability/InterpretabilityTest.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-datasets">
+   Load datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables">
+   Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables-to-groupby">
+   Variables to Groupby
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#human-annotated-dataframe-merged-with-quantiative-data">
+   Human Annotated Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-dataframe-merged-with-quantiative-data">
+   Enhanced Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hh-characteristic-variables-for-interpretability">
+   HH characteristic variables for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Interpretability
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretability-tests-on-human-data">
+   Interpretability tests on Human Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretability-tests-on-enhanced-data-looping-over-bootstrap-runs">
+   Interpretability tests on Enhanced Data (Looping over Bootstrap runs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-differences">
+   Calculate Differences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   Visualize
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Interpretability Test</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-datasets">
+   Load datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables">
+   Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables-to-groupby">
+   Variables to Groupby
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#human-annotated-dataframe-merged-with-quantiative-data">
+   Human Annotated Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-dataframe-merged-with-quantiative-data">
+   Enhanced Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hh-characteristic-variables-for-interpretability">
+   HH characteristic variables for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Interpretability
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretability-tests-on-human-data">
+   Interpretability tests on Human Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretability-tests-on-enhanced-data-looping-over-bootstrap-runs">
+   Interpretability tests on Enhanced Data (Looping over Bootstrap runs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-differences">
+   Calculate Differences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   Visualize
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="interpretability-test">
+<h1>Interpretability Test<a class="headerlink" href="#interpretability-test" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div></div></blockquote>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pandas as pd
+from iqual import tests
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="load-datasets">
+<h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
+
+### Enhanced qualitative data
+enhanced_data = pd.read_csv(os.path.join(data_dir,&quot;kfold_enh_pred_mean.csv&quot;))
+
+### Quantitative data
+quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [
+     &quot;ability_high&quot;,
+     &quot;ability_low&quot;,
+     &quot;awareness_information_high&quot;,
+     &quot;awareness_information_low&quot;,
+     &quot;budget_high&quot;,
+     &quot;budget_low&quot;,
+     &quot;covid_impacts&quot;,
+     &quot;education_high&quot;,
+     &quot;education_low&quot;,
+     &quot;education_neutral&quot;,
+     &quot;education_religious&quot;,
+     &quot;entrepreneur&quot;,
+     &quot;job_secular&quot;,
+     &quot;marriage&quot;,
+     &quot;migration&quot;,
+     &quot;no_ambition&quot;,
+     &quot;public_assistance&quot;,
+     &quot;reliance_on_god&quot;,
+     &quot;religious&quot;,
+     &quot;secular&quot;,
+     &quot;vague_job&quot;,
+     &quot;vague_non_specific&quot;,
+     &quot;vocational_training&quot;,
+     &quot;worries_anxieties&quot;,
+    ]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="variables-to-groupby">
+<h2>Variables to Groupby<a class="headerlink" href="#variables-to-groupby" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>id_vars_human    = [&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;annotated&#39;]
+id_vars_enhanced = [&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;annotated&#39;,&#39;bootstrap_run&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="human-annotated-dataframe-merged-with-quantiative-data">
+<h2>Human Annotated Dataframe (Merged with quantiative data)<a class="headerlink" href="#human-annotated-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>human_df = enhanced_data.loc[enhanced_data.annotated==1,[*id_vars_human,*human_annotation_vars]].copy()
+human_df = human_df.rename(columns={c+&quot;_act&quot;:c for c in annotation_vars}).drop_duplicates()
+human_df = pd.merge(human_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;],how=&#39;left&#39;)
+
+human_df[&#39;sample_type&#39;] = &#39;Human&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="enhanced-dataframe-merged-with-quantiative-data">
+<h2>Enhanced Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_df = enhanced_data[[*id_vars_enhanced,*annotation_vars]].copy()
+enhanced_df = pd.merge(enhanced_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;],how=&#39;left&#39;)
+
+enhanced_df[&#39;sample_type&#39;] = &#39;Enhanced&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="hh-characteristic-variables-for-interpretability">
+<h2>HH characteristic variables for <code class="docutils literal notranslate"><span class="pre">Interpretability</span></code><a class="headerlink" href="#hh-characteristic-variables-for-interpretability" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Numerical regressors
+numerical_vars = [
+     &#39;hh_head_sex&#39;,
+     &#39;eld_sex&#39;,
+     &#39;parent_reledu&#39;,
+     &#39;num_child&#39;,
+     &#39;hh_head_age&#39;,
+     &#39;parent_eduyears&#39;,
+     &#39;eld_age&#39;,
+     &#39;hh_asset_index&#39;,
+     &#39;hh_income&#39;,
+     &#39;int_trauma_exp&#39;,
+]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="interpretability-tests-on-human-data">
+<h2>Interpretability tests on Human Data<a class="headerlink" href="#interpretability-tests-on-human-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>interpreter = tests.Interpretability(human_df,
+                                     annotation_vars=annotation_vars,
+                                     numerical_regressors=numerical_vars,
+                ).fit_all()
+
+human_interp_df = interpreter.get_results()
+human_interp_df[&#39;sample_type&#39;] = &#39;Human&#39;
+
+human_interp_df.head(5)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>annotation</th>
+      <th>fstat</th>
+      <th>log_fstat</th>
+      <th>pval</th>
+      <th>sample_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ability_high</td>
+      <td>4.092906</td>
+      <td>1.409255</td>
+      <td>1.705786e-05</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ability_low</td>
+      <td>2.220586</td>
+      <td>0.797771</td>
+      <td>1.520367e-02</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>awareness_information_high</td>
+      <td>4.439502</td>
+      <td>1.490542</td>
+      <td>4.458398e-06</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>awareness_information_low</td>
+      <td>1.594255</td>
+      <td>0.466406</td>
+      <td>1.039609e-01</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>budget_high</td>
+      <td>5.604002</td>
+      <td>1.723481</td>
+      <td>4.496422e-08</td>
+      <td>Human</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="interpretability-tests-on-enhanced-data-looping-over-bootstrap-runs">
+<h2>Interpretability tests on Enhanced Data (Looping over Bootstrap runs)<a class="headerlink" href="#interpretability-tests-on-enhanced-data-looping-over-bootstrap-runs" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enh_interp_dfs = []
+
+bootstrap_runs = enhanced_df[&#39;bootstrap_run&#39;].unique()
+
+for b in bootstrap_runs:
+    interpreter = tests.Interpretability(enhanced_df[enhanced_df[&#39;bootstrap_run&#39;]==b],
+                                         annotation_vars=annotation_vars,
+                                    #     categorical_regressors=categorical_vars,
+                                         numerical_regressors=numerical_vars,
+                    ).fit_all()
+    
+    interp_df = interpreter.get_results()
+    interp_df[&#39;bootstrap_run&#39;] = b
+    
+    enh_interp_dfs.append(interp_df)
+    
+enhanced_interp_df = pd.concat(enh_interp_dfs)    
+enhanced_interp_df[&#39;sample_type&#39;] = &#39;Enhanced&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>interpret_data = pd.concat([human_interp_df,enhanced_interp_df],axis=0)
+interpret_data = interpret_data.sort_values(&#39;annotation&#39;,ascending=False,ignore_index=True)
+interpret_data.head(5)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>annotation</th>
+      <th>fstat</th>
+      <th>log_fstat</th>
+      <th>pval</th>
+      <th>sample_type</th>
+      <th>bootstrap_run</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>worries_anxieties</td>
+      <td>9.836116</td>
+      <td>2.286061</td>
+      <td>2.895519e-16</td>
+      <td>Enhanced</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>worries_anxieties</td>
+      <td>10.534363</td>
+      <td>2.354643</td>
+      <td>1.333396e-17</td>
+      <td>Enhanced</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>worries_anxieties</td>
+      <td>10.886772</td>
+      <td>2.387548</td>
+      <td>2.812771e-18</td>
+      <td>Enhanced</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>worries_anxieties</td>
+      <td>8.596269</td>
+      <td>2.151328</td>
+      <td>6.682446e-14</td>
+      <td>Enhanced</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>worries_anxieties</td>
+      <td>5.055125</td>
+      <td>1.620403</td>
+      <td>3.978705e-07</td>
+      <td>Human</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="calculate-differences">
+<h2>Calculate Differences<a class="headerlink" href="#calculate-differences" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_avg_df = enhanced_interp_df.groupby(&#39;annotation&#39;)[&#39;log_fstat&#39;].mean().reset_index()
+enhanced_avg_df[&#39;sample_type&#39;] = &#39;Enhanced&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_avg_dict =  dict(enhanced_avg_df[[&#39;annotation&#39;,&#39;log_fstat&#39;]].values)
+human_avg_dict    =  dict(human_interp_df[[&#39;annotation&#39;,&#39;log_fstat&#39;]].values)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize">
+<h2>Visualize<a class="headerlink" href="#visualize" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10,10))
+
+# Difference in F-statistic (Logarithmic) averages 
+for annotation in annotation_vars:
+    enh_value, human_value = enhanced_avg_dict[annotation], human_avg_dict[annotation]
+    line_color = &#39;lightgreen&#39; if enh_value &gt;= human_value else &#39;red&#39;
+    ax.plot([enh_value, human_value], [annotation, annotation], color=line_color, linewidth=2)
+
+# Enhanced Data Log F-statistic values for all bootstrap runs
+enhanced_x = interpret_data.loc[interpret_data[&#39;sample_type&#39;] == &#39;Enhanced&#39;, &#39;log_fstat&#39;].tolist()
+enhanced_y = interpret_data.loc[interpret_data[&#39;sample_type&#39;] == &#39;Enhanced&#39;, &#39;annotation&#39;].tolist()
+ax.scatter(enhanced_x, enhanced_y, fc=(0,0,0, 0.1), marker=&#39;o&#39;, s=50, ec=&#39;k&#39;, lw=1, label=&#39;Enhanced&#39;)
+    
+# Human Data F-statistic (Logarithmic) values
+human_x = interpret_data.loc[interpret_data[&#39;sample_type&#39;] == &#39;Human&#39;, &#39;log_fstat&#39;].tolist()
+human_y = interpret_data.loc[interpret_data[&#39;sample_type&#39;] == &#39;Human&#39;, &#39;annotation&#39;].tolist()
+ax.scatter(human_x, human_y, c=&#39;black&#39;, marker=&#39;x&#39;, s=50, label=&#39;Human&#39;,)
+
+# Titles, Labels, Legends and formatting
+ax.set_xlabel(&#39;log F statistic&#39;,fontsize=12)
+ax.set_ylabel(&#39;Annotation&#39;, fontsize=12)
+ax.legend(title=&#39;Sample&#39;,fontsize=12,loc=&#39;best&#39;)
+ax.set_title(&#39;Figure 9: Interpretability test&#39;,fontsize=18, pad=25)
+ax.grid(True, color=&#39;lightgray&#39;)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/InterpretabilityTest_24_0.png" src="../../_images/InterpretabilityTest_24_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/interpretability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Interpretability</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="RegressionCoefficientTest.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distribution of Regression Coefficients</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Aditya Karan Chhabra<br/>
+  
+      &copy; Copyright 2023, World Bank Group.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

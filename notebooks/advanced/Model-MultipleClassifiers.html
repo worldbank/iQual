@@ -1,0 +1,1146 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Model - Multiple Classifiers &#8212; iQual</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://worldbank.github.io/iQual/notebooks/advanced/Model-MultipleClassifiers.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Model - Multiple Annotations" href="Model-MultipleAnnotations.html" />
+    <link rel="prev" title="Model - Multiple Vectorizers" href="Model-MultipleVectorizers.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">iQual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    iQual
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Examples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic/README.html">
+   Basic Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-Sklearn.html">
+     Vectorize with scikit-learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SpaCy.html">
+     Vectorize with SpaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SentenceTransformers.html">
+     Vectorize with Sentence Transformers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SavedDictionary.html">
+     Vectorize with a Saved Dictionary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Advanced Usage
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-MultipleVectorizers.html">
+     Multiple Vectorizers
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Multiple Classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-MultipleAnnotations.html">
+     Multiple Annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-Bootstrap.html">
+     Bootstrap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../interpretability/README.html">
+   Interpretability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/InterpretabilityTest.html">
+     Interpretability Test
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/RegressionCoefficientTest.html">
+     Regression Coefficients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Interpretability_Increasing_N_h.html">
+     Interpretability Increases with Human Annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../efficiency/README.html">
+   Efficiency
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../efficiency/EfficiencyTest.html">
+     Efficiency Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bias/README.html">
+   Bias
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bias/BiasTest.html">
+     Bias Test
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/worldbank/iQual/main?urlpath=tree/docs/notebooks/advanced/Model-MultipleClassifiers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/worldbank/iQual"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/advanced/Model-MultipleClassifiers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-annotated-human-coded-and-unannotated-datasets">
+   Load
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     annotated
+    </span>
+    <span class="pre">
+     (human-coded)
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     unannotated
+    </span>
+   </code>
+   datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-the-data-into-training-and-test-sets">
+   Split the data into training and test sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-training-data">
+   Configure training data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initiate-model">
+   Initiate model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting">
+   Configure a Hyperparameter Grid for cross-validation + fitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-training">
+   Model training:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+     Evaluate model using out sample data (Held out human-coded data)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+     Predict labels for unannotated data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model - Multiple Classifiers</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-annotated-human-coded-and-unannotated-datasets">
+   Load
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     annotated
+    </span>
+    <span class="pre">
+     (human-coded)
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     unannotated
+    </span>
+   </code>
+   datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#split-the-data-into-training-and-test-sets">
+   Split the data into training and test sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-training-data">
+   Configure training data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initiate-model">
+   Initiate model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting">
+   Configure a Hyperparameter Grid for cross-validation + fitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-training">
+   Model training:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+     Evaluate model using out sample data (Held out human-coded data)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+     Predict labels for unannotated data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="model-multiple-classifiers">
+<h1>Model - Multiple Classifiers<a class="headerlink" href="#model-multiple-classifiers" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div></div></blockquote>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pandas as pd
+from iqual import iqualnlp, evaluation, crossval
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="load-annotated-human-coded-and-unannotated-datasets">
+<h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
+human_coded_df   = pd.read_csv(os.path.join(data_dir,&quot;annotated.csv&quot;))
+uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;))
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="split-the-data-into-training-and-test-sets">
+<h2>Split the data into training and test sets<a class="headerlink" href="#split-the-data-into-training-and-test-sets" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
+train_df, test_df = train_test_split(human_coded_df,test_size=0.25)
+print(f&quot;Train Size: {len(train_df)}\nTest Size: {len(test_df)}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train Size: 7470
+Test Size: 2490
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="configure-training-data">
+<h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
+question_col = &#39;Q_en&#39;
+answer_col   = &#39;A_en&#39;
+
+### Select a code
+code_variable = &#39;marriage&#39;
+
+### Create X and y
+X = train_df[[question_col,answer_col]]
+y = train_df[code_variable]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="initiate-model">
+<h2>Initiate model<a class="headerlink" href="#initiate-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Step 1: Initiate the model class
+iqual_model = iqualnlp.Model()
+
+# Step 2: Add layers to the model
+#  Add text columns, and choose a feature extraction model (Available options: scikit-learn, spacy, sentence-transformers, saved-dictionary (picklized dictionary))
+iqual_model.add_text_features(question_col,answer_col,model=&#39;TfidfVectorizer&#39;,env=&#39;scikit-learn&#39;)
+
+# Step 3: Add a feature transforming layer (optional)
+# A. Choose a feature-scaler. Available options: 
+# any scikit-learn scaler from `sklearn.preprocessing`
+### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;FeatureScaler&quot;)
+# OR
+# B. Choose a dimensionality reduction model. Available options:
+# - Any scikit-learn dimensionality reduction model from `sklearn.decomposition`
+# - Uniform Manifold Approximation and Projection (UMAP) using umap.UMAP (https://umap-learn.readthedocs.io/en/latest/)
+
+### iqual_model.add_feature_transformer(name=&#39;PCA&#39;, transformation=&quot;DimensionalityReduction&quot;)
+
+# Step 4: Add a classifier layer
+# Choose a primary classifier model  (Available options: any scikit-learn classifier)
+iqual_model.add_classifier(name=&quot;LogisticRegression&quot;)
+
+# Step 5: Add a threshold layer. This is optional, but recommended for binary classification
+iqual_model.add_threshold()
+
+# Step 6: Compile the model
+iqual_model.compile()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+                 FeatureUnion(transformer_list=[(&#x27;question&#x27;,
+                                                 Pipeline(steps=[(&#x27;selector&#x27;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x000002554169D1F0&gt;,
+                                                                                      kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
+                                                                 (&#x27;vectorizer&#x27;,
+                                                                  Vectorizer(analyzer=&#x27;word&#x27;,
+                                                                             binary=False,
+                                                                             decode_error=&#x27;strict&#x27;,
+                                                                             dtype=&lt;class &#x27;numpy.float64&#x27;&gt;,
+                                                                             encoding=&#x27;utf-8&#x27;,
+                                                                             env=&#x27;scikit-learn&#x27;,
+                                                                             input=&#x27;co...
+                                                                             tokenizer=None,
+                                                                             use_idf=True,
+                                                                             vocabulary=None))]))])),
+                (&#x27;Classifier&#x27;,
+                 Classifier(C=1.0, class_weight=None, dual=False,
+                            fit_intercept=True, intercept_scaling=1,
+                            l1_ratio=None, max_iter=100,
+                            model=&#x27;LogisticRegression&#x27;, multi_class=&#x27;auto&#x27;,
+                            n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
+                            solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
+                            warm_start=False)),
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+                 FeatureUnion(transformer_list=[(&#x27;question&#x27;,
+                                                 Pipeline(steps=[(&#x27;selector&#x27;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x000002554169D1F0&gt;,
+                                                                                      kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
+                                                                 (&#x27;vectorizer&#x27;,
+                                                                  Vectorizer(analyzer=&#x27;word&#x27;,
+                                                                             binary=False,
+                                                                             decode_error=&#x27;strict&#x27;,
+                                                                             dtype=&lt;class &#x27;numpy.float64&#x27;&gt;,
+                                                                             encoding=&#x27;utf-8&#x27;,
+                                                                             env=&#x27;scikit-learn&#x27;,
+                                                                             input=&#x27;co...
+                                                                             tokenizer=None,
+                                                                             use_idf=True,
+                                                                             vocabulary=None))]))])),
+                (&#x27;Classifier&#x27;,
+                 Classifier(C=1.0, class_weight=None, dual=False,
+                            fit_intercept=True, intercept_scaling=1,
+                            l1_ratio=None, max_iter=100,
+                            model=&#x27;LogisticRegression&#x27;, multi_class=&#x27;auto&#x27;,
+                            n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
+                            solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
+                            warm_start=False)),
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">Input: FeatureUnion</label><div class="sk-toggleable__content"><pre>FeatureUnion(transformer_list=[(&#x27;question&#x27;,
+                                Pipeline(steps=[(&#x27;selector&#x27;,
+                                                 FunctionTransformer(func=&lt;function column_selector at 0x000002554169D1F0&gt;,
+                                                                     kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
+                                                (&#x27;vectorizer&#x27;,
+                                                 Vectorizer(analyzer=&#x27;word&#x27;,
+                                                            binary=False,
+                                                            decode_error=&#x27;strict&#x27;,
+                                                            dtype=&lt;class &#x27;numpy.float64&#x27;&gt;,
+                                                            encoding=&#x27;utf-8&#x27;,
+                                                            env=&#x27;scikit-learn&#x27;,
+                                                            input=&#x27;content&#x27;,
+                                                            lowercase=True,
+                                                            max...
+                                                            dtype=&lt;class &#x27;numpy.float64&#x27;&gt;,
+                                                            encoding=&#x27;utf-8&#x27;,
+                                                            env=&#x27;scikit-learn&#x27;,
+                                                            input=&#x27;content&#x27;,
+                                                            lowercase=True,
+                                                            max_df=1.0,
+                                                            max_features=None,
+                                                            min_df=1,
+                                                            model=&#x27;TfidfVectorizer&#x27;,
+                                                            ngram_range=(1, 1),
+                                                            norm=&#x27;l2&#x27;,
+                                                            preprocessor=None,
+                                                            smooth_idf=True,
+                                                            stop_words=None,
+                                                            strip_accents=None,
+                                                            sublinear_tf=False,
+                                                            token_pattern=&#x27;(?u)\\b\\w\\w+\\b&#x27;,
+                                                            tokenizer=None,
+                                                            use_idf=True,
+                                                            vocabulary=None))]))])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>question</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x000002554169D1F0&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(analyzer=&#x27;word&#x27;, binary=False, decode_error=&#x27;strict&#x27;,
+           dtype=&lt;class &#x27;numpy.float64&#x27;&gt;, encoding=&#x27;utf-8&#x27;, env=&#x27;scikit-learn&#x27;,
+           input=&#x27;content&#x27;, lowercase=True, max_df=1.0, max_features=None,
+           min_df=1, model=&#x27;TfidfVectorizer&#x27;, ngram_range=(1, 1), norm=&#x27;l2&#x27;,
+           preprocessor=None, smooth_idf=True, stop_words=None,
+           strip_accents=None, sublinear_tf=False,
+           token_pattern=&#x27;(?u)\\b\\w\\w+\\b&#x27;, tokenizer=None, use_idf=True,
+           vocabulary=None)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>answer</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x000002554169D1F0&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(analyzer=&#x27;word&#x27;, binary=False, decode_error=&#x27;strict&#x27;,
+           dtype=&lt;class &#x27;numpy.float64&#x27;&gt;, encoding=&#x27;utf-8&#x27;, env=&#x27;scikit-learn&#x27;,
+           input=&#x27;content&#x27;, lowercase=True, max_df=1.0, max_features=None,
+           min_df=1, model=&#x27;TfidfVectorizer&#x27;, ngram_range=(1, 1), norm=&#x27;l2&#x27;,
+           preprocessor=None, smooth_idf=True, stop_words=None,
+           strip_accents=None, sublinear_tf=False,
+           token_pattern=&#x27;(?u)\\b\\w\\w+\\b&#x27;, tokenizer=None, use_idf=True,
+           vocabulary=None)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label sk-toggleable__label-arrow">Classifier</label><div class="sk-toggleable__content"><pre>Classifier(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+           intercept_scaling=1, l1_ratio=None, max_iter=100,
+           model=&#x27;LogisticRegression&#x27;, multi_class=&#x27;auto&#x27;, n_jobs=None,
+           penalty=&#x27;l2&#x27;, random_state=None, solver=&#x27;lbfgs&#x27;, tol=0.0001,
+           verbose=0, warm_start=False)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label sk-toggleable__label-arrow">BinaryThresholder</label><div class="sk-toggleable__content"><pre>BinaryThresholder()</pre></div></div></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
+scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
+dict_dir          = &quot;../dictionaries&quot;
+sbert_models      = [&quot;all-mpnet-base-v2&quot;, &quot;distiluse-base-multilingual-cased-v2&quot;]
+sbert_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in sbert_models]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>SBERT_QA_PARAMS = {
+    &quot;Input&quot;:{
+        &quot;question&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:sbert_model_paths,
+                        &quot;env&quot;:[&quot;saved-dictionary&quot;],               
+                         },
+        },
+        &quot;answer&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:sbert_model_paths,
+                        &quot;env&quot;:[&quot;saved-dictionary&quot;],                
+                         },                        
+        },
+    }
+}
+SBERT_A_PARAMS = {
+    &quot;Input&quot;:{
+        &quot;question&quot;:[&quot;drop&quot;],
+        &quot;answer&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:sbert_model_paths,
+                        &quot;env&quot;:[&quot;saved-dictionary&quot;],
+                        },
+        }
+}
+}
+
+SKLEARN_QA_PARAMS =     {
+    &quot;Input&quot;:{
+        &quot;question&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
+                        &quot;max_features&quot;:[500,1000,1500,2500,],
+                        &quot;env&quot;:[&quot;scikit-learn&quot;],               
+                         },
+        },
+        &quot;answer&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
+                        &quot;max_features&quot;:[1500,2500,4000,],
+                        &quot;env&quot;:[&quot;scikit-learn&quot;],                
+                         },                        
+        },
+    }
+}
+
+SKLEARN_A_PARAMS = {
+    &quot;Input&quot;:{
+        &quot;question&quot;:[&quot;drop&quot;],
+        &quot;answer&quot;:{
+            &quot;vectorizer&quot;:{
+                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
+                        &quot;max_features&quot;:[1500,2500,4000,],
+                        &quot;env&quot;:[&quot;scikit-learn&quot;],
+                            },
+        }   
+    }
+}
+
+LOGISTIC_PARAMS = {       
+    &quot;Classifier&quot;:{
+            &quot;model&quot;:[&quot;LogisticRegression&quot;],
+            &quot;C&quot;:[0.01,0.1],
+        },
+}
+
+RANDOM_FOREST_params = {
+    &quot;Classifier&quot;:{
+            &quot;model&quot;:[&quot;RandomForestClassifier&quot;],
+            &quot;n_estimators&quot;:[100,200],
+            &quot;max_depth&quot;:[5,10,15],
+        },
+}
+
+SGD_PARAMS = {
+    &quot;Classifier&quot;:{
+            &quot;model&quot;:[&quot;SGDClassifier&quot;],
+            &quot;loss&quot;:[&quot;hinge&quot;,&quot;log&quot;],
+            &quot;alpha&quot;:[0.0001,0.001],
+        },
+}
+
+### Combine a Vectorizer and Classifier
+VECTORIZATION_PARAMS = [SKLEARN_QA_PARAMS,SKLEARN_A_PARAMS,SBERT_QA_PARAMS,SBERT_A_PARAMS]
+CLASSIFIER_PARAMS    = [LOGISTIC_PARAMS,RANDOM_FOREST_PARAMS,SGD_PARAMS]
+
+params_all = [{**vect_params, **clf_params} for vect_params in VECTORIZATION_PARAMS for clf_params in CLASSIFIER_PARAMS]
+CV_SEARCH_PARAMS = [crossval.convert_nested_params(params) for params in params_all]
+
+CV_SEARCH_PARAMS        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
+  &#39;Classifier__C&#39;: [0.01, 0.1]},
+ {&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;],
+  &#39;Classifier__n_estimators&#39;: [100, 200],
+  &#39;Classifier__max_depth&#39;: [5, 10, 15]},
+ {&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;],
+  &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;],
+  &#39;Classifier__alpha&#39;: [0.0001, 0.001]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
+  &#39;Classifier__C&#39;: [0.01, 0.1]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;],
+  &#39;Classifier__n_estimators&#39;: [100, 200],
+  &#39;Classifier__max_depth&#39;: [5, 10, 15]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;],
+  &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;],
+  &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;],
+  &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;],
+  &#39;Classifier__alpha&#39;: [0.0001, 0.001]},
+ {&#39;Input__question__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
+  &#39;Classifier__C&#39;: [0.01, 0.1]},
+ {&#39;Input__question__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;],
+  &#39;Classifier__n_estimators&#39;: [100, 200],
+  &#39;Classifier__max_depth&#39;: [5, 10, 15]},
+ {&#39;Input__question__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;],
+  &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;],
+  &#39;Classifier__alpha&#39;: [0.0001, 0.001]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
+  &#39;Classifier__C&#39;: [0.01, 0.1]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;],
+  &#39;Classifier__n_estimators&#39;: [100, 200],
+  &#39;Classifier__max_depth&#39;: [5, 10, 15]},
+ {&#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
+   &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
+  &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
+  &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;],
+  &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;],
+  &#39;Classifier__alpha&#39;: [0.0001, 0.001]}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cv_dict = iqual_model.cross_validate_fit(
+    X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
+    search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
+    cv_method=&#39;RandomizedSearchCV&#39;,     # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
+    n_iter=30,                          # n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;
+    scoring=scoring_dict,               # scoring: Scoring metric to use for cross-validation    
+    refit=&#39;f1&#39;,                         # refit: Metric to use for refitting the model
+    n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
+    cv_splits=3,                        # cv_splits: Number of cross-validation splits
+)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.......720 hyperparameters configurations possible.....
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average F1 score: 0.821
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
+<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="model-training">
+<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
+<p>Cross-validate over hyperparameters and select the best model</p>
+<section id="evaluate-model-using-out-sample-data-held-out-human-coded-data">
+<h3>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_pred = iqual_model.predict(test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
+test_act  = test_df[code_variable].tolist()
+
+f1_score = evaluation.calc_f1_score_from_labels(test_pred,test_act,)
+print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score: 0.855
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predict-labels-for-unannotated-data">
+<h3>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>uncoded_df[code_variable+&#39;_pred&#39;] = iqual_model.predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for idx, row in uncoded_df.loc[(uncoded_df[code_variable+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(3).iterrows():
+    print(&quot;Q: &quot;,row[&#39;Q_en&#39;],&quot;\n&quot;,&quot;A: &quot;, row[&#39;A_en&#39;],sep=&#39;&#39;)
+    print()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q: Do you want to do any job other than marriage?
+A: Yes employed. If I get money by doing a job, I will marry beautifully. I have this hope.
+
+Q: What are you doing to fulfill these dreams of the girl?
+A: what else to do Making do with what I have. Now I am saving some money, with which I can get my daughter educated and married.
+
+Q: Brother, how have you thought about the day ahead? I mean, how will your daughter&#39;s life improve, can you teach her or get her a job? Have you thought about it?
+A: I have thoughts of studying for future life, if I get a job, I will get married.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/advanced"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Model-MultipleVectorizers.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Model - Multiple Vectorizers</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Model-MultipleAnnotations.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model - Multiple Annotations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Aditya Karan Chhabra<br/>
+  
+      &copy; Copyright 2023, World Bank Group.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

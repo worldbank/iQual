@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Model - Bootstrap &#8212; iQual</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://worldbank.github.io/iQual/notebooks/advanced/Model-Bootstrap.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Interpretability" href="../interpretability/README.html" />
+    <link rel="prev" title="Model - Multiple Annotations" href="Model-MultipleAnnotations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">iQual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    iQual
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Examples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic/README.html">
+   Basic Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-Sklearn.html">
+     Vectorize with scikit-learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SpaCy.html">
+     Vectorize with SpaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SentenceTransformers.html">
+     Vectorize with Sentence Transformers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SavedDictionary.html">
+     Vectorize with a Saved Dictionary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Advanced Usage
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-MultipleVectorizers.html">
+     Multiple Vectorizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-MultipleClassifiers.html">
+     Multiple Classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Model-MultipleAnnotations.html">
+     Multiple Annotations
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Bootstrap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../interpretability/README.html">
+   Interpretability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/InterpretabilityTest.html">
+     Interpretability Test
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/RegressionCoefficientTest.html">
+     Regression Coefficients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Interpretability_Increasing_N_h.html">
+     Interpretability Increases with Human Annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../efficiency/README.html">
+   Efficiency
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../efficiency/EfficiencyTest.html">
+     Efficiency Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bias/README.html">
+   Bias
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bias/BiasTest.html">
+     Bias Test
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/worldbank/iQual/main?urlpath=tree/docs/notebooks/advanced/Model-Bootstrap.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/worldbank/iQual"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/advanced/Model-Bootstrap.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-annotated-human-coded-and-unannotated-datasets">
+   Load
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     annotated
+    </span>
+    <span class="pre">
+     (human-coded)
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     unannotated
+    </span>
+   </code>
+   datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-training-data">
+   Configure training data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting">
+   Configure a Hyperparameter Grid for cross-validation + fitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-training">
+   Model training:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selected-model-parameters">
+   Selected model parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-parameter-selections-for-each-annotation-across">
+   Plot
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     parameter
+    </span>
+    <span class="pre">
+     selections
+    </span>
+   </code>
+   for each annotation across:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-validation-set-performance">
+     Plot
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Validation
+      </span>
+      <span class="pre">
+       set
+      </span>
+      <span class="pre">
+       performance
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model - Bootstrap</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-annotated-human-coded-and-unannotated-datasets">
+   Load
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     annotated
+    </span>
+    <span class="pre">
+     (human-coded)
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     unannotated
+    </span>
+   </code>
+   datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-training-data">
+   Configure training data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting">
+   Configure a Hyperparameter Grid for cross-validation + fitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-training">
+   Model training:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selected-model-parameters">
+   Selected model parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-parameter-selections-for-each-annotation-across">
+   Plot
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     parameter
+    </span>
+    <span class="pre">
+     selections
+    </span>
+   </code>
+   for each annotation across:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-validation-set-performance">
+     Plot
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Validation
+      </span>
+      <span class="pre">
+       set
+      </span>
+      <span class="pre">
+       performance
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="model-bootstrap">
+<h1>Model - Bootstrap<a class="headerlink" href="#model-bootstrap" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div></div></blockquote>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from iqual import iqualnlp, evaluation, crossval
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="load-annotated-human-coded-and-unannotated-datasets">
+<h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
+human_coded_df   = pd.read_csv(os.path.join(data_dir,&quot;annotated.csv&quot;))
+uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;))
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="configure-training-data">
+<h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
+question_col = &#39;Q_en&#39;
+answer_col   = &#39;A_en&#39;
+
+### Select a code
+code_variables = [&#39;religious&#39;, &#39;secular&#39;, &#39;no_ambition&#39;, &#39;vague_job&#39;,
+                  &#39;job_secular&#39;,&#39;vocational_training&#39;, &#39;entrepreneur&#39;,
+                  &#39;education_low&#39;,&#39;education_neutral&#39;, &#39;education_high&#39;,
+                  &#39;education_religious&#39;, &#39;marriage&#39;, &#39;migration&#39;,
+                  &#39;vague_non_specific&#39;, &#39;reliance_on_god&#39;, &#39;ability_high&#39;,
+                  &#39;ability_low&#39;, &#39;budget_high&#39;, &#39;budget_low&#39;,
+                  &#39;awareness_information_high&#39;,&#39;awareness_information_low&#39;,
+                  &#39;camp_regulations&#39;, &#39;covid_impacts&#39;, &#39;public_assistance&#39;,
+                  &#39;worries_anxieties&#39;,
+                 ]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
+scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
+<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
+dict_dir          = &quot;../dictionaries&quot;
+
+### Sentence-Transformers precomputed vectors
+sbert_models      = [&quot;all-mpnet-base-v2&quot;,&#39;all-roberta-large-v1&#39;,&quot;distiluse-base-multilingual-cased-v2&quot;]
+sbert_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in sbert_models]
+
+### Spacy precomputed vectors
+spacy_models      = [&quot;en_core_web_sm&quot;]
+spacy_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in spacy_models]
+
+### All precomputed vectors
+model_paths = [*sbert_model_paths,*spacy_model_paths]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>PRETRAINED_QA_PARAMS = {
+    &quot;Input&quot;:{&quot;question&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}},&quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}}},
+}
+PRETRAINED_A_PARAMS = {
+    &quot;Input&quot;:{&quot;question&quot;:[&quot;drop&quot;],&quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}}},
+}
+SKLEARN_QA_PARAMS  = {
+    &quot;Input&quot;:{
+        &quot;question&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1000,6500,1000)}},
+        &quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1500,8500,500)}}
+    },    
+}
+SKLEARN_A_PARAMS  = {
+    &quot;Input&quot;:{
+        &quot;question&quot;:[&quot;drop&quot;],
+        &quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1500,8500,1000)}}
+    },    
+}
+LOGISTIC_PARAMS      = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;LogisticRegression&quot;],&quot;C&quot;:[0.001,0.01,0.1,0.1,1,10],&#39;penalty&#39;:[&#39;l1&#39;,&#39;l2&#39;],&#39;solver&#39;:[&#39;saga&#39;]}}
+RANDOM_FOREST_PARAMS = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;RandomForestClassifier&quot;],&quot;n_estimators&quot;:[100,200,400],&#39;max_depth&#39;:[5,10,25]}}
+SGD_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;SGDClassifier&quot;],&quot;loss&quot;:[&quot;modified_huber&quot;],&quot;penalty&quot;:[&quot;l2&quot;,&quot;l1&quot;]}}
+SVC_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;SVC&quot;],&quot;C&quot;:[0.001,0.01,0.1,0.1,1,10],&#39;kernel&#39;:[&#39;linear&#39;,&#39;rbf&#39;]}}
+KNN_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;KNeighborsClassifier&quot;],&quot;n_neighbors&quot;:[5,10,15,25],&#39;weights&#39;:[&#39;uniform&#39;],}}
+
+VECTORIZATION_PARAMS   = [PRETRAINED_QA_PARAMS,PRETRAINED_A_PARAMS,SKLEARN_QA_PARAMS,SKLEARN_A_PARAMS]
+CLASSIFIER_PARAMS      = [LOGISTIC_PARAMS,RANDOM_FOREST_PARAMS,SGD_PARAMS,SVC_PARAMS,KNN_PARAMS]
+ALL_PARAM_COMBINATIONS = [{**vect_params, **clf_params} for vect_params in VECTORIZATION_PARAMS for clf_params in CLASSIFIER_PARAMS]
+
+CV_SEARCH_PARAMS = [crossval.convert_nested_params(p) for p in ALL_PARAM_COMBINATIONS]
+print(f&quot;Number of hyperparameter configurations: {crossval.count_hyperparameters(CV_SEARCH_PARAMS)}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of hyperparameter configurations: 1014
+</pre></div>
+</div>
+</div>
+</div>
+<section id="model-training">
+<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
+<p>Cross-validate over hyperparameters and select the best model</p>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>NUM_BOOTSTRAP_RUNS = 25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bootstrap_dfs = []
+cv_dfs        = []
+param_dfs     = []
+
+for bootstrap_run in range(1,NUM_BOOTSTRAP_RUNS+1,1):
+    
+    
+    train_df, test_df   = train_test_split(human_coded_df,test_size=0.25)
+    
+    train_df[&#39;split&#39;]   = &#39;train&#39;
+    test_df[&#39;split&#39;]    = &#39;test&#39;
+    uncoded_df[&#39;split&#39;] = &#39;unannotated&#39;
+    
+    boot_df = pd.concat([train_df,test_df,uncoded_df])
+    boot_df[&#39;bootstrap_run&#39;] = bootstrap_run
+    
+    for code_var in code_variables:
+        
+        print(f&quot;Bootstrap {bootstrap_run} | Annotation: {code_var}&quot;)
+        
+        ## Create X and y
+        X = train_df[[question_col,answer_col]]
+        y = train_df[code_var]
+
+        iqual_model = iqualnlp.Model()
+        iqual_model.add_text_features(question_col,answer_col)
+        iqual_model.add_classifier()
+        iqual_model.add_threshold()
+        iqual_model.compile()
+        
+        cv_dict = iqual_model.cross_validate_fit(
+            X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
+            search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
+            cv_method=&#39;GridSearchCV&#39;,     # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
+            # n_iter=5,                           # n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;
+            scoring=scoring_dict,               # scoring: Scoring metric to use for cross-validation    
+            refit=&#39;f1&#39;,                         # refit: Metric to use for refitting the model
+            n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
+            cv_splits=3,                        # cv_splits: Number of cross-validation splits
+        )
+        
+        
+        ## Selected Best parameters
+        selected_param_df = pd.DataFrame.from_dict(iqual_model.cv.get_best_params(),orient=&#39;index&#39;).T
+        selected_param_df[&#39;annotation&#39;]    = code_var
+        selected_param_df[&#39;bootstrap_run&#39;] = bootstrap_run        
+        param_dfs.append(selected_param_df)
+        
+        # `NOTE`: Use `iqual_model.cv.get_cv_results()` to get more detailed cross-validation results.
+        
+        ## Cross-Validation data
+        print(&quot;\n\nAverage F1 score for {code_var}: {score:.3f}&quot;.format(code_var=code_var,score=cv_dict[&#39;avg_test_score&#39;]),end=&#39;\n\n&#39;)
+        
+        cv_df = pd.DataFrame([cv_dict])
+        cv_df[&#39;annotation&#39;]    = code_var
+        cv_df[&#39;bootstrap_run&#39;] = bootstrap_run
+        cv_dfs.append(cv_df)
+
+        
+        # Predict on both `test` (held-out human annotated data) and on (uncoded/machine data) using the dataframe:
+        boot_df[code_var+&quot;_pred&quot;]  = iqual_model.predict(boot_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])        
+    
+    # Append after each bootstrap run
+    bootstrap_dfs.append(boot_df)
+
+param_data     = pd.concat(param_dfs)    
+bootstrap_data = pd.concat(bootstrap_dfs,axis=0)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="selected-model-parameters">
+<h2>Selected model parameters<a class="headerlink" href="#selected-model-parameters" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>param_data     = pd.concat(param_dfs)    
+
+# Best Parameters
+param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;Input__question__vectorizer__model&#39;,&#39;Input__answer__vectorizer__model&#39;,&#39;Classifier__model&#39;]]
+
+# Question: Drop | Keep
+param_data.loc[param_data[&#39;Input__question__vectorizer__model&#39;].isna(),&#39;question&#39;]  = &#39;Answer only&#39;
+param_data.loc[param_data[&#39;Input__question__vectorizer__model&#39;].notna(),&#39;question&#39;] = &#39;Question + Answer&#39;
+
+# Rename columns
+param_data = param_data.rename(columns={&#39;Input__answer__vectorizer__model&#39;:&#39;vectorization&#39;,&#39;Classifier__model&#39;:&#39;classifier&#39;})
+
+# Replace Dictionary paths of precomputed pkl files 
+param_data[&#39;vectorization&#39;] = param_data[&#39;vectorization&#39;].apply(lambda x: os.path.basename(x).replace(&#39;.pkl&#39;,&#39;&#39;))
+param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;question&#39;,&#39;vectorization&#39;,&#39;classifier&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>question_options      = param_data[&#39;question&#39;].unique()
+vectorizer_options    = param_data[&#39;vectorization&#39;].unique()
+classifier_options    = param_data[&#39;classifier&#39;].unique()
+all_options = [*question_options,*vectorizer_options,*classifier_options]
+
+colors = [
+    &#39;#00425A&#39;,&#39;#A4BE7B&#39;,
+    &#39;#9C2C77&#39;,&#39;#CD104D&#39;,&#39;#E14D2A&#39;,&#39;#FD841F&#39;,&#39;#FFD384&#39;,
+    &#39;#0C084C&#39;,&#39;#096386&#39;,&#39;#00B7A8&#39;, &#39;#544179&#39;, &#39;#BFEAF5&#39;,
+]
+
+color_dict = {option:colors[o] for o, option in enumerate(all_options)}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="plot-parameter-selections-for-each-annotation-across">
+<h2>Plot <code class="docutils literal notranslate"><span class="pre">parameter</span> <span class="pre">selections</span></code> for each annotation across:<a class="headerlink" href="#plot-parameter-selections-for-each-annotation-across" title="Permalink to this headline">#</a></h2>
+<section id="plot-validation-set-performance">
+<h3>Plot <code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">set</span> <span class="pre">performance</span></code><a class="headerlink" href="#plot-validation-set-performance" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<ul class="simple">
+<li><p>Question/ Question + Answer</p></li>
+<li><p>Vectorizer</p></li>
+<li><p>Classifier</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import numpy as np
+
+# Subplots
+fig, axs = plt.subplots(1, 3, sharey=True, figsize=(18,18))
+
+# Title
+fig.suptitle(&quot;Choices of text representation and classifier&quot;,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+
+# Empty lists - handles/labels for adding common legend later.
+handles = []
+labels  = []
+
+for i, (ax, col) in enumerate(zip(axs, [&#39;question&#39;, &#39;vectorization&#39;, &#39;classifier&#39;])):
+    param_df = param_data.groupby(&#39;annotation&#39;)[col].value_counts().unstack().fillna(0) / param_data.bootstrap_run.nunique()
+    bottom   = np.zeros(len(param_df.index))
+    
+    for j, key in enumerate(param_data[col].unique()):
+        values = param_df[key].values
+        h      = ax.barh(param_df.index, 
+                         values, 
+                         color=color_dict[key], 
+                         alpha=0.75,ec=&#39;k&#39;,lw=1, 
+                         left=bottom
+                        )
+        
+        bottom += values
+        
+        handles.append(h)
+        labels.append(key)      
+    
+    ax.grid(False)
+    ax.margins(0, 0, tight=True)
+    
+    ax.set_title(col.capitalize(),fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
+                                            &#39;fontsize&#39;:24,
+                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
+                                            &#39;fontweight&#39;:800
+                                           },
+                 pad=15)    
+    
+    # Optional: Create a line at the boundary of each subplot
+    for pos in [&#39;top&#39;,&#39;right&#39;,&#39;bottom&#39;,&#39;left&#39;]:
+        ax.spines[pos].set(lw=1,ec=&#39;k&#39;) 
+                
+    # X-axis
+    ax.set_xticks([0,0.5,1],labels=[0,0.5,1], fontsize=16, fontweight=&#39;light&#39;)
+    
+    # Y-axis
+    ax.tick_params(axis=&#39;y&#39;,labelsize=16, labelcolor=&#39;#4e4e4e&#39;)
+
+# X-axis label
+fig.text(0.4, 0.07, &#39;Selected&#39;,fontdict={&quot;fontsize&quot;:18,
+                                         &#39;color&#39;:&quot;#4e4e4e&quot;,
+                                         &#39;weight&#39;:&#39;bold&#39;},)
+
+# Y-axis label
+fig.text(-0.05, 0.5,&#39;Annotation&#39;,rotation=&#39;vertical&#39;,fontdict={&quot;fontsize&quot;:18,
+                                                               &#39;color&#39;:&quot;#4e4e4e&quot;,
+                                                               &#39;weight&#39;:&#39;bold&#39;},
+        )
+
+# Legend
+fig.legend(handles, labels, ncol=1, loc=&#39;center right&#39;, 
+           frameon=False, labelspacing=0.5, 
+           handlelength=2,handleheight=5,
+           fontsize=&#39;x-large&#39;)
+
+# Plot
+plt.subplots_adjust(top=0.92,wspace=0.1,right=0.7)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Model-Bootstrap_18_0.png" src="../../_images/Model-Bootstrap_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### F1 score using random predictions --&gt; sparsity of variable
+random_f1_dict = dict(human_coded_df[code_variables].mean())
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.patches as mpatches
+fig, ax = plt.subplots(figsize=(10,12))
+
+# Title
+fig.suptitle(&quot;Validation set performance&quot;, x=0.4, y=0.95, fontfamily=&#39;Times New Roman&#39;,fontsize=24,)
+
+# X-axis
+ax.scatter(y=cv_df[&#39;annotation&#39;],
+           x=cv_df[&#39;mean_test_f1&#39;],
+           marker=&#39;o&#39;, s=100, ec=&#39;k&#39;,lw=2,color=&#39;g&#39;, alpha=0.1,
+           label=&#39;Validation Set&#39;
+           
+          )
+ax.scatter(y=list(random_f1_dict.keys()),
+           x=list(random_f1_dict.values()),
+           marker=&#39;o&#39;,s=100,ec=&#39;k&#39;,lw=1,color=&#39;r&#39;,alpha=1,
+           label=&#39;Random&#39;
+          )
+
+# Y-axis
+ax.set_yticks(cv_df[&#39;annotation&#39;].unique())
+ax.set_yticklabels(cv_df[&#39;annotation&#39;].unique(), fontsize=16, fontweight=&#39;light&#39;)
+ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+
+# X-axis
+ax.tick_params(axis=&#39;x&#39;,labelsize=15, length=5, width=2)
+# Y-axis
+ax.tick_params(axis=&#39;y&#39;,labelsize=15, labelcolor=&#39;#4e4e4e&#39;)
+
+# X-axis label
+fig.text(0.35, 0.05, &quot;F1-Score&quot;,fontsize=18)
+# Y-axis label
+fig.text(-0.2, 0.5,&#39;Annotation&#39;,rotation=&#39;vertical&#39;,fontsize=18)
+
+# Legend
+patches = [
+    mpatches.Patch(color=&#39;green&#39;, label=&#39;Validation Set&#39;),
+    mpatches.Patch(color=&#39;red&#39;, label=&#39;Random&#39;),    
+          ]
+
+fig.legend(handles=patches, 
+          title=&#39;F1 Score&#39;,
+          title_fontsize=20,
+          ncol=1,labelspacing=1,handlelength=1,
+          loc=&#39;center right&#39;,frameon=False,
+          fontsize=&#39;x-large&#39;,
+         )
+
+# Figure
+plt.subplots_adjust(top=0.9,right=0.75)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Model-Bootstrap_21_0.png" src="../../_images/Model-Bootstrap_21_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/advanced"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Model-MultipleAnnotations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Model - Multiple Annotations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../interpretability/README.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interpretability</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Aditya Karan Chhabra<br/>
+  
+      &copy; Copyright 2023, World Bank Group.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1159 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Distribution of Regression Coefficients &#8212; iQual</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://worldbank.github.io/iQual/notebooks/interpretability/RegressionCoefficientTest.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Interpretability increases with Nh" href="Interpretability_Increasing_N_h.html" />
+    <link rel="prev" title="Interpretability Test" href="InterpretabilityTest.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">iQual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    iQual
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Examples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basic/README.html">
+   Basic Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-Sklearn.html">
+     Vectorize with scikit-learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SpaCy.html">
+     Vectorize with SpaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SentenceTransformers.html">
+     Vectorize with Sentence Transformers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basic/Model-SavedDictionary.html">
+     Vectorize with a Saved Dictionary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../advanced/README.html">
+   Advanced Usage
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleVectorizers.html">
+     Multiple Vectorizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleClassifiers.html">
+     Multiple Classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-MultipleAnnotations.html">
+     Multiple Annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/Model-Bootstrap.html">
+     Bootstrap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Interpretability
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="InterpretabilityTest.html">
+     Interpretability Test
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Regression Coefficients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Interpretability_Increasing_N_h.html">
+     Interpretability Increases with Human Annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../efficiency/README.html">
+   Efficiency
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../efficiency/EfficiencyTest.html">
+     Efficiency Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bias/README.html">
+   Bias
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bias/BiasTest.html">
+     Bias Test
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/worldbank/iQual/main?urlpath=tree/docs/notebooks/interpretability/RegressionCoefficientTest.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/worldbank/iQual"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/interpretability/RegressionCoefficientTest.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-datasets">
+   Load datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables">
+   Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-bootstrap-dataframe-merged-with-quantiative-data">
+   Enhanced Bootstrap Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-configuration">
+   Regression Configuration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-coefficient-plots">
+   Regression Coefficient Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#low-ability-coefficient-on-refugee">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Low
+      </span>
+      <span class="pre">
+       Ability
+      </span>
+     </code>
+     (Coefficient on
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Refugee
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#secular-aspirations-coefficient-on-female-eldest-child">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Secular
+      </span>
+      <span class="pre">
+       Aspirations
+      </span>
+     </code>
+     (Coefficient on
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Female
+      </span>
+      <span class="pre">
+       eldest
+      </span>
+      <span class="pre">
+       child
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Distribution of Regression Coefficients</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-datasets">
+   Load datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variables">
+   Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhanced-bootstrap-dataframe-merged-with-quantiative-data">
+   Enhanced Bootstrap Dataframe (Merged with quantiative data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-configuration">
+   Regression Configuration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-coefficient-plots">
+   Regression Coefficient Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#low-ability-coefficient-on-refugee">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Low
+      </span>
+      <span class="pre">
+       Ability
+      </span>
+     </code>
+     (Coefficient on
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Refugee
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#secular-aspirations-coefficient-on-female-eldest-child">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Secular
+      </span>
+      <span class="pre">
+       Aspirations
+      </span>
+     </code>
+     (Coefficient on
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Female
+      </span>
+      <span class="pre">
+       eldest
+      </span>
+      <span class="pre">
+       child
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="distribution-of-regression-coefficients">
+<h1>Distribution of Regression Coefficients<a class="headerlink" href="#distribution-of-regression-coefficients" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div></div></blockquote>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import numpy as np
+import pandas as pd
+from iqual import tests
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="load-datasets">
+<h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir    = &quot;../../data&quot;
+
+### Qualitative data (Enhanced Data with progressive k-fold bootstrap)
+bootstrap_df  = pd.read_csv(os.path.join(data_dir,&quot;enhanced_bootstrap_kfold.csv&quot;))
+
+### Quantitative data
+quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [&quot;ability_low&quot;,&quot;job_secular&quot;]
+
+id_vars         = [&#39;uid&#39;,&#39;split&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;bootstrap_run&#39;,&#39;train_sample_size&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="enhanced-bootstrap-dataframe-merged-with-quantiative-data">
+<h2>Enhanced Bootstrap Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-bootstrap-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bootstrap_df = bootstrap_df[[*id_vars,*annotation_vars]].copy()
+bootstrap_df = pd.merge(bootstrap_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;],how=&#39;left&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+<section id="regression-configuration">
+<h2>Regression Configuration<a class="headerlink" href="#regression-configuration" title="Permalink to this headline">#</a></h2>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Numerical regressors (Continuous/Dummy variables)
+numerical_vars = [
+     &#39;refugee&#39;,&quot;int_sex&quot;, &quot;int_age&quot;,
+     &#39;hh_head_sex&#39;,
+     &#39;eld_sex&#39;,
+     &#39;parent_reledu&#39;,
+     &#39;num_child&#39;,
+     &#39;hh_head_age&#39;,
+     &#39;parent_eduyears&#39;,
+     &#39;eld_age&#39;,
+     &#39;hh_asset_index&#39;,
+     &#39;hh_income&#39;,
+     &#39;int_trauma_exp&#39;,
+]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import itertools
+HUMAN_SIZES    = [100, 200, 400, 700]
+MACHINE_SIZES  = [200, 400, 600, 800, 1000, 1200, 1400]
+BOOTSTRAP_RUNS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>N_DRAWS        = 5000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coefs        = []
+random_draws = np.random.normal(size=N_DRAWS)
+
+
+for ANNOTATION, REGRESSOR in [(&#39;job_secular&#39;,&#39;eld_sex&#39;),(&#39;ability_low&#39;,&#39;refugee&#39;)]:
+
+    for h, r, m in itertools.product(HUMAN_SIZES, BOOTSTRAP_RUNS, MACHINE_SIZES):
+        
+        print(&quot;\r...| &quot;,&quot;Bootstrap Run:&quot;,r,&quot;Human:&quot;,h,&quot;Machine:&quot;,m,sep=&#39; &#39;,end=&#39; | ...&#39;)
+        
+        df = bootstrap_df[(bootstrap_df[&#39;train_sample_size&#39;]==h) &amp; (bootstrap_df[&#39;bootstrap_run&#39;]==r)]
+        
+        # Separate human and machine data
+        human_df   = df[df.split == &#39;train&#39;]
+        # Sample machine data
+        machine_df = df[df.split != &#39;train&#39;].sample(m)
+        # Concatenate human and machine data for enhanced data
+        enh_df     = pd.concat([human_df, machine_df])
+
+        # Run regression on human 
+        human_model = tests.Interpretability(human_df,annotation_vars=[ANNOTATION],numerical_regressors=numerical_vars).fit_all()
+        # Human model coefficient and standard error
+        human_coef = human_model.get_model_coefficient(ANNOTATION,REGRESSOR)
+        human_se   = human_model.get_model_std_error(ANNOTATION,REGRESSOR)
+
+        
+        # Run regression on enhanced data
+        enh_model  = tests.Interpretability(enh_df,annotation_vars=[ANNOTATION],numerical_regressors=numerical_vars).fit_all()
+        # Enhanced model coefficient and standard error
+        enh_coef = enh_model.get_model_coefficient(ANNOTATION,REGRESSOR)
+        enh_se   = enh_model.get_model_std_error(ANNOTATION,REGRESSOR)
+        
+        
+        # Random draws from normal distribution
+        for random_draw in random_draws:
+            # Bootstrap (Human) coefficient
+            human_boot_coef = human_coef + random_draw*human_se
+            
+            # Bootstrap (Enhanced) coefficient
+            enh_boot_coef = enh_coef + random_draw*enh_se
+            
+            coefs.append({
+                &#39;annotation&#39;: ANNOTATION,&#39;regressor&#39;: REGRESSOR,
+                &#39;human_coef&#39;: human_coef,&#39;human_se&#39;:human_se,
+                &#39;enh_coef&#39;: enh_coef,&#39;enh_se&#39;:enh_se,
+                &#39;human_boot_coef&#39;: human_boot_coef,
+                &#39;enh_boot_coef&#39;: enh_boot_coef,
+                &#39;bootstrap_run&#39;:r,&#39;n_h&#39;: h,&#39;n_m&#39;: m,
+        })
+
+coef_data = pd.DataFrame(coefs)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>...|  Bootstrap Run: 10 Human: 700 Machine: 1400 | ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coef_data.head()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>annotation</th>
+      <th>regressor</th>
+      <th>human_coef</th>
+      <th>human_se</th>
+      <th>enh_coef</th>
+      <th>enh_se</th>
+      <th>human_boot_coef</th>
+      <th>enh_boot_coef</th>
+      <th>bootstrap_run</th>
+      <th>n_h</th>
+      <th>n_m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>job_secular</td>
+      <td>eld_sex</td>
+      <td>-0.067084</td>
+      <td>0.030005</td>
+      <td>-0.048006</td>
+      <td>0.020084</td>
+      <td>-0.066507</td>
+      <td>-0.047620</td>
+      <td>1</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>job_secular</td>
+      <td>eld_sex</td>
+      <td>-0.067084</td>
+      <td>0.030005</td>
+      <td>-0.048006</td>
+      <td>0.020084</td>
+      <td>-0.076772</td>
+      <td>-0.054491</td>
+      <td>1</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>job_secular</td>
+      <td>eld_sex</td>
+      <td>-0.067084</td>
+      <td>0.030005</td>
+      <td>-0.048006</td>
+      <td>0.020084</td>
+      <td>-0.088352</td>
+      <td>-0.062242</td>
+      <td>1</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>job_secular</td>
+      <td>eld_sex</td>
+      <td>-0.067084</td>
+      <td>0.030005</td>
+      <td>-0.048006</td>
+      <td>0.020084</td>
+      <td>-0.081301</td>
+      <td>-0.057523</td>
+      <td>1</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>job_secular</td>
+      <td>eld_sex</td>
+      <td>-0.067084</td>
+      <td>0.030005</td>
+      <td>-0.048006</td>
+      <td>0.020084</td>
+      <td>-0.116851</td>
+      <td>-0.081319</td>
+      <td>1</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="regression-coefficient-plots">
+<h2>Regression Coefficient Plots<a class="headerlink" href="#regression-coefficient-plots" title="Permalink to this headline">#</a></h2>
+<section id="low-ability-coefficient-on-refugee">
+<h3><code class="docutils literal notranslate"><span class="pre">Low</span> <span class="pre">Ability</span></code> (Coefficient on <code class="docutils literal notranslate"><span class="pre">Refugee</span></code>)<a class="headerlink" href="#low-ability-coefficient-on-refugee" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="secular-aspirations-coefficient-on-female-eldest-child">
+<h3><code class="docutils literal notranslate"><span class="pre">Secular</span> <span class="pre">Aspirations</span></code> (Coefficient on <code class="docutils literal notranslate"><span class="pre">Female</span> <span class="pre">eldest</span> <span class="pre">child</span></code>)<a class="headerlink" href="#secular-aspirations-coefficient-on-female-eldest-child" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import seaborn as sns
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>keep_cols = [&#39;annotation&#39;,&#39;regressor&#39;,&#39;human_boot_coef&#39;,&#39;enh_boot_coef&#39;,&#39;bootstrap_run&#39;,&#39;n_h&#39;,&#39;n_m&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ANNOTATION, REGRESSOR = &#39;ability_low&#39;,&#39;refugee&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coef_df = coef_data.loc[(coef_data[&#39;annotation&#39;]==ANNOTATION),keep_cols]
+
+fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(16,8), sharey=True, sharex=False)
+
+fig.suptitle(ANNOTATION,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+
+# Iterate over N(h) 
+for i, human_size in enumerate(HUMAN_SIZES):  
+    # Get axis
+    ax = axs[i]
+    
+    # Select subset [n_h = human_size]
+    
+    df = coef_df[(coef_df[&#39;n_h&#39;]==human_size)]    
+    
+    # Zeroline (dashed)    
+    ax.axhline(y=0, ls=&#39;--&#39;,color=&#39;black&#39;,alpha=0.5, lw=2)
+    
+    # Human sample
+    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;human_boot_coef&#39;],
+                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;cornflowerblue&#39;,
+                   name=None
+                  )
+    
+    # Enhanced sample
+    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;enh_boot_coef&#39;],
+                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;firebrick&#39;,
+                   name=None
+                  )
+        
+    # Removing redundant xy axis labels
+    ax.set(ylabel=None,xlabel=None)
+    ax.tick_params(axis=&#39;y&#39;,labelsize=11, labelcolor=&#39;#4e4e4e&#39;)
+    ax.tick_params(axis=&#39;x&#39;,labelsize=10, labelcolor=&#39;#4e4e4e&#39;)
+    
+    ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+    
+    # Subplot title    
+    ax.set_title(f&quot;N[h] = {human_size}&quot;,fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
+                                            &#39;fontsize&#39;:18,
+                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
+                                            &#39;fontweight&#39;:800
+                                           },
+                 pad=15
+                )    
+
+    
+# Add legends
+human_patch = plt.plot([], [], color=&#39;cornflowerblue&#39;, marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
+enhanced_patch = plt.plot([], [], color=&#39;firebrick&#39;,  marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
+fig.legend(handles=[human_patch, enhanced_patch], loc=&#39;upper right&#39;, ncol=2)
+
+# Y-axis label
+fig.text(-0.02, 0.3,f&quot;Coefficient on {REGRESSOR.title()}&quot;,rotation=&#39;vertical&#39;,
+         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
+        )
+# X-axis label
+fig.text(0.3, 0.02,f&quot;Machine annotated sample size (N[m])&quot;,
+         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
+        )
+
+# Layout
+
+# Legend
+patches = [
+    mpatches.Patch(color=&#39;firebrick&#39;, label=&#39;Enhanced&#39;),
+    mpatches.Patch(color=&#39;cornflowerblue&#39;, label=&#39;Human&#39;),    
+          ]
+fig.legend(handles=patches,
+           title=&#39;Sample&#39;,
+           title_fontsize=16,
+           fontsize=15,
+           ncol=1,labelspacing=0.5,           
+           handlelength=1,handleheight=2,        
+           loc=&#39;center right&#39;,frameon=False,
+         )
+plt.subplots_adjust(top=0.85,wspace=0.05,right=0.88,left=0.05)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/RegressionCoefficientTest_20_0.png" src="../../_images/RegressionCoefficientTest_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ANNOTATION, REGRESSOR = &#39;job_secular&#39;,&#39;eld_child_sex&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coef_df = coef_data.loc[(coef_data[&#39;annotation&#39;]==ANNOTATION),keep_cols]
+
+fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(16,8), sharey=True, sharex=False)
+
+fig.suptitle(ANNOTATION,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+
+# Iterate over N(h) 
+for i, human_size in enumerate(HUMAN_SIZES):  
+    # Get axis
+    ax = axs[i]
+    
+    # Select subset [n_h = human_size]
+    
+    df = coef_df[(coef_df[&#39;n_h&#39;]==human_size)]    
+    
+    # Zeroline (dashed)    
+    ax.axhline(y=0, ls=&#39;--&#39;,color=&#39;black&#39;,alpha=0.5, lw=2)
+    
+    # Human sample
+    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;human_boot_coef&#39;],
+                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;cornflowerblue&#39;,
+                   name=None
+                  )
+    
+    # Enhanced sample
+    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;enh_boot_coef&#39;],
+                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;firebrick&#39;,
+                   name=None
+                  )
+        
+    # Removing redundant xy axis labels
+    ax.set(ylabel=None,xlabel=None)
+    ax.tick_params(axis=&#39;y&#39;,labelsize=11, labelcolor=&#39;#4e4e4e&#39;)
+    ax.tick_params(axis=&#39;x&#39;,labelsize=10, labelcolor=&#39;#4e4e4e&#39;)
+    
+    ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+    
+    # Subplot title    
+    ax.set_title(f&quot;N[h] = {human_size}&quot;,fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
+                                            &#39;fontsize&#39;:18,
+                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
+                                            &#39;fontweight&#39;:800
+                                           },
+                 pad=15
+                )    
+
+    
+# Add legends
+human_patch = plt.plot([], [], color=&#39;cornflowerblue&#39;, marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
+enhanced_patch = plt.plot([], [], color=&#39;firebrick&#39;,  marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
+fig.legend(handles=[human_patch, enhanced_patch], loc=&#39;upper right&#39;, ncol=2)
+
+# Y-axis label
+fig.text(-0.02, 0.3,f&quot;Coefficient on {REGRESSOR.title()}&quot;,rotation=&#39;vertical&#39;,
+         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
+        )
+# X-axis label
+fig.text(0.3, 0.02,f&quot;Machine annotated sample size (N[m])&quot;,
+         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
+        )
+
+# Layout
+
+# Legend
+patches = [
+    mpatches.Patch(color=&#39;firebrick&#39;, label=&#39;Enhanced&#39;),
+    mpatches.Patch(color=&#39;cornflowerblue&#39;, label=&#39;Human&#39;),    
+          ]
+fig.legend(handles=patches,
+           title=&#39;Sample&#39;,
+           title_fontsize=16,
+           fontsize=15,
+           ncol=1,labelspacing=0.5,           
+           handlelength=1,handleheight=2,        
+           loc=&#39;center right&#39;,frameon=False,
+         )
+plt.subplots_adjust(top=0.85,wspace=0.05,right=0.88,left=0.05)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/RegressionCoefficientTest_23_0.png" src="../../_images/RegressionCoefficientTest_23_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/interpretability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="InterpretabilityTest.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Interpretability Test</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Interpretability_Increasing_N_h.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interpretability increases with N<sub>h</sub></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Aditya Karan Chhabra<br/>
+  
+      &copy; Copyright 2023, World Bank Group.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
