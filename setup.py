@@ -12,8 +12,9 @@ with open('README.md', encoding='utf-8') as f:
 setup(
     name='iQual',
     version='0.1.0',
-    description='Iterative Qualitative Analysis - with Human Coding',
+    description='iQual is a package that leverages natural language processing to scale up interpretative qualitative analysis. It also provides methods to assess the bias, interpretability and efficiency of the machine-enhanced codes.',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     author='Aditya Karan Chhabra',
     author_email='aditya0chhabra@gmail.com',
     url='https://github.com/worldbank/iQual',
@@ -31,7 +32,6 @@ setup(
         'Development Status :: 3 - Alpha',
         "Intended Audience :: Science/Research",
         "Topic :: Sociology",
-        "Topic :: Economics",
         "Topic :: Utilities",
         "Topic :: Text Processing :: Linguistic",
         "Topic :: Scientific/Engineering :: Information Analysis",
