@@ -508,6 +508,28 @@ class Interpretability:
         """
         return self.model_fits[annotation_var].bse[regressor]
 
+    def get_model_coefficient(self, annotation_var, regressor):
+        """
+        Get the model coefficient for a particular annotation variable and regressor
+        Args:
+            annotation_var (str): annotation variable
+            regressor (str): regressor
+        Returns:
+            model_coefficient (float): model coefficient
+        """
+        return self.model_fits[annotation_var].params[regressor]
+    
+    def get_model_coefficients_all(self):
+        """
+        Get the model coefficients for all annotation variables
+        Returns:
+            model_coefficients_all (pandas dataframe): dataframe containing the model coefficients
+        """
+        model_coefficients_all = {}
+        for var in self.annotation_vars:
+            model_coefficients_all[var] = self.model_fits[var].params
+        return model_coefficients_all
+    
     def get_results(self):
         """
         Get the results for all annotation variables
