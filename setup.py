@@ -19,11 +19,13 @@ setup(
     maintainer_email='aditya0chhabra@gmail.com',
     packages=find_packages(where='src'),
     exclude_package_data={'': ['data','notebooks','docs','tests']},
+    license='MIT',
+    license_files=('LICENSE.md',),
     package_dir={'': 'src'},
     install_requires=required,
     python_requires='>=3.7',
     keywords='natural-language-processing qualitative-analysis world-bank human-coding interpretative-coding qualitative-data-analysis qualitative-research nlp',
-   classifiers=[
+    classifiers=[
         'Development Status :: 3 - Alpha',
         "Intended Audience :: Science/Research",
         "Topic :: Sociology",
