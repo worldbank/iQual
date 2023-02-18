@@ -1,0 +1,48 @@
+format: jb-book
+root: README
+parts:
+  - caption: Examples
+    chapters:
+    - file: notebooks/README
+      title: Notebooks
+    - file: notebooks/basic/README
+      title: Basic Usage
+      sections:
+      - file: notebooks/basic/Model-Sklearn
+        title: Vectorize with scikit-learn
+      - file: notebooks/basic/Model-SpaCy
+        title: Vectorize with SpaCy
+      - file: notebooks/basic/Model-SentenceTransformers
+        title: Vectorize with Sentence Transformers
+      - file: notebooks/basic/Model-SavedDictionary
+        title: Vectorize with a Saved Dictionary
+    - file: notebooks/advanced/README
+      title: Advanced Usage
+      sections:
+      - file: notebooks/advanced/Model-MultipleVectorizers
+        title: Multiple Vectorizers
+      - file: notebooks/advanced/Model-MultipleClassifiers
+        title: Multiple Classifiers
+      - file: notebooks/advanced/Model-MultipleAnnotations
+        title: Multiple Annotations
+      - file: notebooks/advanced/Model-Bootstrap
+        title: Bootstrap
+    - file: notebooks/interpretability/README
+      title: Interpretability
+      sections:
+      - file: notebooks/interpretability/InterpretabilityTest
+        title: Interpretability Test
+      - file: notebooks/interpretability/RegressionCoefficientTest
+        title: Regression Coefficients
+      - file: notebooks/interpretability/Interpretability_Increasing_N_h
+        title: Interpretability Increases with Human Annotations
+    - file: notebooks/efficiency/README
+      title: Efficiency
+      sections:
+      - file: notebooks/efficiency/EfficiencyTest
+        title: Efficiency Test
+    - file: notebooks/bias/README
+      title: Bias
+      sections:
+      - file: notebooks/bias/BiasTest
+        title: Bias Test

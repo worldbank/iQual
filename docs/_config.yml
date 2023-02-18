@@ -1,0 +1,57 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+title: iQual
+author: Aditya Karan Chhabra
+email: aditya0chhabra@gmail.com
+copyright: "2023, World Bank Group"
+logo                        : ""  # A path to the book logo
+only_build_toc_files        : false
+exclude_patterns            : ["_build", "Thumbs.db", ".DS_Store", "**.ipynb_checkpoints"]
+
+repository:
+    url: https://github.com/worldbank/iQual
+    branch: main
+    path_to_book: docs
+
+# Force re-execution of notebooks on each build.
+execute:
+  execute_notebooks         : cache  # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")
+
+
+#######################################################################################
+# Parse and render settings
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    # - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+    - tasklist
+  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognised as external URLs in Markdown links
+  myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
+
+#######################################################################################
+# HTML-specific settings
+
+html:
+  favicon                   : ""  # A path to a favicon image
+  use_edit_page_button      : false  # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
+  use_repository_button     : true  # Whether to add a link to your repository button
+  use_issues_button         : false  # Whether to add an "open an issue" button
+  use_fullscreen_button     : true  # Whether to add a fullscreen button
+  use_download_button       : true  # Whether to add a download button
+  use_multitoc_numbering    : false   # Continuous numbering across parts/chapters
+  extra_navbar              : ""  # Will be displayed underneath the navbar.
+  extra_footer              : ""  # Will be displayed underneath the footer.
+  google_analytics_id       : ""  # A GA id that can be used to track book views.
+  baseurl                   : "https://worldbank.github.io/iQual"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  comments:
+    hypothesis              : false
+    utterances              : false
+  announcement              : "" # A banner announcement at the top of the site.
