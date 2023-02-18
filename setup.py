@@ -1,7 +1,9 @@
 from setuptools import setup, find_packages
+
 # Read requirements.txt
 with open('requirements.txt') as f:
     required = f.read().splitlines()
+
 # Read README.md
 with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
@@ -24,7 +26,7 @@ setup(
     package_dir={'': 'src'},
     install_requires=required,
     python_requires='>=3.7',
-    keywords='natural-language-processing qualitative-analysis world-bank human-coding interpretative-coding qualitative-data-analysis qualitative-research nlp',
+    keywords='nlp natural-language-processing qualitative-analysis human-coding qualitative-research',
     classifiers=[
         'Development Status :: 3 - Alpha',
         "Intended Audience :: Science/Research",
@@ -38,5 +40,6 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
 )

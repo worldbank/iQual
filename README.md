@@ -58,35 +58,30 @@ pip install -e .
     - Dimensionality reduction using any [scikit-learn](https://scikit-learn.org/stable/modules/) `decomposition` method, or UMAP using [umap-learn](https://umap-learn.readthedocs.io/en/latest/).
 
     - Feature scaling using any [scikit-learn](https://scikit-learn.org/stable/modules/) `preprocessing` method.
-- Model selection using [scikit-learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection) methods.
+- Model selection and performance evaluation using [scikit-learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection) methods.
 - Model performance evaluation using [scikit-learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) metrics.
 - Tests for bias and interpretability, with [statsmodels](https://www.statsmodels.org/stable/index.html).
 
 ---
 
 ## Basic Usage
+### The following code demonstrates the basic usage of the `iQual` package. It shows how to construct a pipeline, fit it to the data, and use it to classify new data.
 
-The following code demonstrates the basic usage of the `iQual` package. It shows how to construct a pipeline, fit it to the data, and use it to classify new data.
-
-#### Import the `iqual` package and initiate the model class.
+1. ### Import the `iqual` package and initiate the model class.
 
 ```python
-from iqual import iqualnlp
-```
-    
-```python
-# Initiate the model class
-iqual_model = iqualnlp.Model() 
+from iqual import iqualnlp     # Import `iqualnlp` from the `iqual` package
+
+iqual_model = iqualnlp.Model() # Initiate the model class
 ```
 
-#### Add text features to the model. The `add_text_features` method takes the following arguments:
+2. ### Add text features to the model. The `add_text_features` method takes the following arguments:
 - `question_col`: The name of the column containing the question text.
 - `answer_col`: The name of the column containing the answer text.
 - `model`: Name of a scikit-learn, spaCy, sentence-transformers, or a precomputed vector (picklized dictionary) model. The default is `TfidfVectorizer`.
 - `env`: The environment or package which is being used. The default is `scikit-learn`. Available options are `scikit-learn`, `spacy`, `sentence-transformers`, and `saved-dict`.
 - `**kwargs`: Additional keyword arguments to pass to the model.
 
- 
 ```python
 # Use a scikit-learn feature extraction method
 iqual_model.add_text_features(question_col,answer_col,model='TfidfVectorizer',env='scikit-learn') 
@@ -98,50 +93,48 @@ iqual_model.add_text_features(question_col,answer_col,model='en_core_web_lg',env
 iqual_model.add_text_features(question_col,answer_col,model='qa_precomputed.pkl',env='saved-dict') 
 ```
 
-#### OPTIONAL: Add a feature transformation layer. The `add_feature_transformer` method takes the following arguments:
+3. ### **OPTIONAL**: Add a feature transformation layer. The `add_feature_transformer` method takes the following arguments:
 - `name`: The name of the feature transformation layer.
 - `transformation`: The type of transformation. Available options are `FeatureScaler` and `DimensionalityReduction`.
 
-To add a feature scaling layer, use the following code:
+- #### To add a **feature scaling** layer, use the following code:
 ```python
 iqual_model.add_feature_transformer(name='StandardScaler', transformation="FeatureScaler") # or any other scikit-learn scaler
 ```
-To add a dimensionality reduction layer, use the following code:
+- #### To add a **dimensionality reduction** layer, use the following code:
 ```python
 iqual_model.add_feature_transformer(name='UMAP', transformation="DimensionalityReduction") # supports UMAP or any other scikit-learn decomposition method
 ```
-#### Add a classifier layer. The `add_classifier` method takes the following arguments:
+4. ###  Add a classifier layer. The `add_classifier` method takes the following arguments:
 - `name`: The name of the classifier layer. The default is `LogisticRegression`. 
 - `**kwargs`: Additional keyword arguments to pass to the classifier.
 
 ```python
 iqual_model.add_classifier(name = "LogisticRegression") #  Add a classifier layer from scikit-learn
 ```
-#### OPTIONAL: Add a threshold layer for the classifier using `add_threshold` 
+5. ### **OPTIONAL**: Add a threshold layer for the classifier using `add_threshold` 
 ```python
 iqual_model.add_threshold() # Add a threshold layer for the classifier, recommended for imbalanced data
 ```
-#### Compile the model with `compile`.
+6. ### Compile the model with `compile`.
 ```python
 iqual_model.compile() # Compile the model
 ```
-#### Fit the model to the data using `fit`. The `fit` method takes the following arguments:
+7. ### Fit the model to the data using `fit`. The `fit` method takes the following arguments:
 - `X_train`: The training data. (pandas dataframe)
 - `y_train`: The training labels. (pandas series)
 
 ```python
-# Fit the model to the data
-iqual_model.fit(X_train,y_train)
+iqual_model.fit(X_train,y_train) # Fit the model to the data
 ```
 
-#### Predict the labels for new data using `predict`. The `predict` method takes the following arguments:
+8. ### Predict the labels for new data using `predict`. The `predict` method takes the following arguments:
 - `X_test`: The test data. (pandas dataframe)
 
 ```python
-# Predict the labels for new data
-y_pred = iqual_model.predict(X_test)
+y_pred = iqual_model.predict(X_test) # Predict the labels for new data
 ```
-### For more details, including cross-validation fitting, model selection, performance evaluation, bias, interpretability and measurement tests, refer to the [notebooks](notebooks) folder.
+### For examples on cross-validation fitting, model selection & performance evaluation, bias, interpretability and measurement tests, refer to the [notebooks](notebooks) folder.
 
 ---
 
@@ -171,9 +164,9 @@ http://documents.worldbank.org/curated/en/099759305162210822/IDU0a357362e00b6004
 
 ---
 
-## Maintainers
 
-Please contact the following people for any queries regarding the package:
+## Maintainers
+### Please contact the following people for any queries regarding the package:
 
 - [Aditya Karan Chhabra](mailto:aditya0chhabra@gmail.com)
 - [Julian Ashwin](mailto:julianashwin@googlemail.com)
