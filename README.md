@@ -12,7 +12,7 @@ With `iQual`, researchers can efficiently analyze large amounts of qualitative d
 ## Installation
 - To install `iQual` using pip, use the following command:
 ```sh
-pip install -U iQual
+pip install iQual
 ```
 - Alternatively, you can install `iQual` from source. To do so, use the following commands:
 ```sh
@@ -88,13 +88,13 @@ iqual_model = iqualnlp.Model()
 
  
 ```python
-# Configure a sentence-transformers model
-iqual_model.add_text_features(question_col,answer_col,model='all-mpnet-base-v2',env='sentence-transformers') 
-# OR configure a scikit-learn feature extraction model
+# Use a scikit-learn feature extraction method
 iqual_model.add_text_features(question_col,answer_col,model='TfidfVectorizer',env='scikit-learn') 
-# OR configure a spaCy model
+# OR - Use a sentence-transformers model
+iqual_model.add_text_features(question_col,answer_col,model='all-mpnet-base-v2',env='sentence-transformers') 
+# OR - Use a spaCy model
 iqual_model.add_text_features(question_col,answer_col,model='en_core_web_lg',env='spacy') 
-# OR configure a precomputed vector model (picklized dictionary)
+# OR - Use a precomputed vector (picklized dictionary)
 iqual_model.add_text_features(question_col,answer_col,model='qa_precomputed.pkl',env='saved-dict') 
 ```
 
@@ -126,8 +126,8 @@ iqual_model.add_threshold() # Add a threshold layer for the classifier, recommen
 iqual_model.compile() # Compile the model
 ```
 #### Fit the model to the data using `fit`. The `fit` method takes the following arguments:
-- `X_train`: The training data.
-- `y_train`: The training labels.
+- `X_train`: The training data. (pandas dataframe)
+- `y_train`: The training labels. (pandas series)
 
 ```python
 # Fit the model to the data
@@ -135,13 +135,13 @@ iqual_model.fit(X_train,y_train)
 ```
 
 #### Predict the labels for new data using `predict`. The `predict` method takes the following arguments:
-- `X_test`: The test data.
+- `X_test`: The test data. (pandas dataframe)
 
 ```python
 # Predict the labels for new data
 y_pred = iqual_model.predict(X_test)
 ```
-### For more details, including cross-validation fitting, model selection, and performance evaluation, refer to the [notebooks](notebooks) folder.
+### For more details, including cross-validation fitting, model selection, performance evaluation, bias, interpretability and measurement tests, refer to the [notebooks](notebooks) folder.
 
 ---
 
