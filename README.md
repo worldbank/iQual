@@ -2,6 +2,7 @@
 
 [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/worldbank/iQual/blob/main/LICENSE.md)
 [![PyPI version](https://badge.fury.io/py/iQual.svg?kill_cache=1)](https://badge.fury.io/py/iQual)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://worldbank.github.io/iQual/)
 
 This repository contains the code and resources necessary to implement the techniques described in the paper [A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996). The `iQual` package is designed for qualitative analysis of open-ended interviews and aims to extend a small set of interpretative human-codes to a much larger set of documents using natural language processing. The package provides a method for assessing the robustness and reliability of this approach. The `iQual` package has been applied to analyze 2,200 open-ended interviews on parent’s aspirations for children from Rohingya refugees and their Bangladeshi hosts in Cox’s Bazaar, Bangladesh. It draws on work in anthropology and philosophy to expand conceptions of aspirations in economics to distinguish between material goals, moral and religious values, and navigational capacity—the ability to achieve goals and aspirations, showing that they have very different correlates. 
 
