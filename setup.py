@@ -11,7 +11,7 @@ with open('README.md', encoding='utf-8') as f:
 # Setup
 setup(
     name='iQual',
-    version='0.1.1',
+    version='0.1.2',
     description='iQual is a package that leverages natural language processing to scale up interpretative qualitative analysis. It also provides methods to assess the bias, interpretability and efficiency of the machine-enhanced codes.',
     long_description=long_description,
     long_description_content_type='text/markdown',
