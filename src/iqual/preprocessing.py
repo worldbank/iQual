@@ -1,32 +1,8 @@
 import re
 import unicodedata
 import numpy as np
-import num2words
+from nltk.stem import WordNetLemmatizer
 
-# List all functions
-__all__ = [
-    "remove_accents",
-    "remove_extra_whitespaces",
-    "remove_extra_newlines",
-    "remove_extra_tabs",
-    "remove_extra_spaces",
-    "split_after_colon",
-    "lowercase",
-    "remove_quotes",
-    "remove_special_chars",
-    "remove_space_between_numbers",
-    "remove_dashes",
-    "remove_commas_between_numbers",
-    "replace_numbers",
-    "keep_alnum_only",
-    "keep_whitespace_alnum",
-    "count_words",
-    "replace_contractions",
-    "mask_digits",
-    "remove_stopwords",
-    "remove_short_words",
-    "replace_whole_words",
-]
 
 
 def remove_accents(text):
@@ -126,17 +102,9 @@ def remove_commas_between_numbers(text):
     return text
 
 
-def replace_numbers(text):
-    """
-    Replaces all numbers with a given string
-    """
-    return re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), text)
-
-
 def keep_alnum_only(text):
     """
     Removes all non-alphanumeric characters from strings
-    NOTE: This function will remove whitespaces as well.
     """
     return "".join([a for a in text if a.isalnum()])
 
@@ -191,14 +159,9 @@ def remove_short_words(text: str, min_length=2):
     """
     return " ".join([t for t in text.split() if len(t) >= min_length])
 
-
-def replace_whole_words(text, replace_words: dict):
+def lemmatize(text: str):
     """
-    Replaces certain words with a given string
-    For example:
-        'Yes' is often incorrectly tagged as 'G' in the dataset
-    So we replace all 'G'/'G.' with 'Yes'
+    Lemmatizes the text
     """
-    return " ".join(
-        [replace_words[t] if t in replace_words else t for t in text.split()]
-    )
+    wordnet_lemmatizer = WordNetLemmatizer()
+    return " ".join([wordnet_lemmatizer.lemmatize(w) for w in text.split()])

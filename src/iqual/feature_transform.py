@@ -2,7 +2,6 @@
 """Feature Scaling & Dimensionality Reduction Classes"""
 
 import umap
-import sklearn.cluster
 import sklearn.preprocessing
 import sklearn.decomposition
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -13,12 +12,12 @@ class FeatureScaler(BaseEstimator, TransformerMixin):
     Feature Scaling Methods
     """
 
-    def __init__(self, name="StandardScaler", **kwargs):
+    def __init__(self, name="Normalizer", **kwargs):
         """
         Feature Scaling Methods
 
         Args:
-            name (str, optional): Name of the Scaler. Defaults to 'StandardScaler'.
+            name (str, optional): Name of the Scaler. Defaults to 'Normalizer'.
             **kwargs: Keyword arguments to pass to the Scaler.
         """
         self.name = name
@@ -37,7 +36,7 @@ class FeatureScaler(BaseEstimator, TransformerMixin):
             return {"name": None}
 
     def set_params(self, **kwargs):
-        self.name = kwargs.get("name", "StandardScaler")
+        self.name = kwargs.get("name", "Normalizer")
         if isinstance(self.name, str):
             self.scaler = getattr(sklearn.preprocessing, self.name)()
             self.scaler.set_params(
@@ -46,12 +45,19 @@ class FeatureScaler(BaseEstimator, TransformerMixin):
         else:
             self.scaler = None
 
-    def fit(self, *args, **kwargs):
+    def fit(self, X, y=None, **kwargs):
         """
         Fit the scaler to the data.
+
+        Args:
+            X (np.array): Data to fit the scaler to.
+            y (np.array, optional): Target data. Defaults to None.
+            **kwargs: Keyword arguments to pass to the Scaler.
+        Returns:
+            self            
         """
         if self.scaler is not None:
-            self.scaler.fit(*args, **kwargs)
+            self.scaler.fit(X,y, **kwargs)
             return self
         else:
             return self
@@ -75,7 +81,7 @@ class FeatureScaler(BaseEstimator, TransformerMixin):
             return X
 
 
-def apply_feature_scaling(X, name="StandardScaler", **kwargs):
+def apply_feature_scaling(X, name="Normalizer", **kwargs):
     """
     Callable function to apply a `stateless` scaler to a matrix. For use with FunctionTransformer.
     """
@@ -125,3 +131,26 @@ class DimensionalityReduction(BaseEstimator, TransformerMixin):
         Fit the Dimensionality Reduction Method to the data and transform it.
         """
         return self.method.fit_transform(X, **kwargs)
+
+
+class DenseTransformer(BaseEstimator, TransformerMixin):
+    """
+    Convert sparse matrix to dense matrix
+    """
+    def __init__(self):
+        pass
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X, y=None):
+        return X.toarray()
+    
+class SparseTransformer(BaseEstimator, TransformerMixin):
+    """
+    Convert dense matrix to sparse matrix
+    """
+    def __init__(self):
+        pass
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X, y=None):
+        return X.tocsr()

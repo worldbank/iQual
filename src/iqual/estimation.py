@@ -4,16 +4,16 @@ import sklearn
 import warnings
 import numpy as np
 import sklearn.svm
-import sklearn.isotonic
-import sklearn.linear_model
-import sklearn.semi_supervised
-import sklearn.neural_network
-import sklearn.naive_bayes
 import sklearn.tree
-import sklearn.neighbors
 import sklearn.ensemble
+import sklearn.isotonic
+import sklearn.neighbors
+import sklearn.naive_bayes
+import sklearn.linear_model
+import sklearn.neural_network
+import sklearn.semi_supervised
 from sklearn.base import BaseEstimator, TransformerMixin
-from .evaluation import EvaluationScorer
+from .evaluation import get_scorer
 
 module_options = {
     "naive_bayes": sklearn.naive_bayes.__all__,
@@ -25,6 +25,7 @@ module_options = {
     "ensemble": sklearn.ensemble.__all__,
     "neighbors": sklearn.neighbors.__all__,
     "neural_network": sklearn.neural_network.__all__,
+    
 }
 module_dict_list = [
     {f: module for f in funcmethods} for module, funcmethods in module_options.items()
@@ -67,7 +68,7 @@ class BinaryThresholder(BaseEstimator):
         threshold_range=(0.001, 0.999),
         steps=100,
         threshold=0.5,
-        scoring_metric="f1_score",
+        scoring_metric="f1",
     ):
         """
         Args:
@@ -75,7 +76,7 @@ class BinaryThresholder(BaseEstimator):
             threshold_range (tuple): Range of thresholds to search over. Defaults to (0.001, 0.999).
             steps (int): Number of steps to search over. Defaults to 100.
             threshold (float): Threshold to use. Defaults to 0.5.
-            scoring_metric (str): Scoring metric to use. Defaults to "f1_score".
+            scoring_metric (str): Scoring metric to use. Defaults to "f1".
         """
         self.use_threshold = use_threshold
         self.steps = steps
@@ -84,7 +85,7 @@ class BinaryThresholder(BaseEstimator):
             self.threshold_range[0], self.threshold_range[1], self.steps
         )
         self.scoring_metric = scoring_metric
-        self.scorer = EvaluationScorer(metrics=[self.scoring_metric])
+        self.scorer = get_scorer(self.scoring_metric)
         self.threshold = threshold
         self.params = {
             "use_threshold": self.use_threshold,
@@ -106,7 +107,7 @@ class BinaryThresholder(BaseEstimator):
             self.threshold_range[0], self.threshold_range[1], self.steps
         )
         self.scoring_metric = kwargs.get("scoring_metric", self.scoring_metric)
-        self.scorer = EvaluationScorer(metrics=[self.scoring_metric])
+        self.scorer = get_scorer(self.scoring_metric)
         self.threshold = kwargs.get("threshold", self.threshold)
         self.params = {
             "use_threshold": self.use_threshold,
@@ -128,17 +129,14 @@ class BinaryThresholder(BaseEstimator):
         if self.use_threshold is True:
             t0, t1 = min(X[:, 1]), max(X[:, 1])
             self.threshold_range = (t0, t1)
-            self.thresholds = np.linspace(t0, t1, self.steps)
-            y_pred_array = [self.predict(X, thresh=t) for t in self.thresholds]
-            scores = [
-                self.scorer.calc_scores(Y, y_preds)[self.scoring_metric].values[0]
-                for y_preds in y_pred_array
-            ]
+            self.thresholds      = np.linspace(t0, t1, self.steps)
+            y_pred_array         = [self.predict(X, thresh=t) for t in self.thresholds]
+            scores               = [self.scorer._score_func(Y, y_preds) for y_preds in y_pred_array]
             self.threshold = self.thresholds[np.argmax(scores)]
         else:
             self.threshold = None
             self.thresholds = []
-            self.steps = 0
+            self.steps      = 0
             self.threshold_range = None
         self.set_params(threshold=self.threshold, use_threshold=self.use_threshold)
         return self
@@ -208,7 +206,7 @@ class Classifier(BaseEstimator, TransformerMixin):
         return params
 
     def set_params(self, **kwargs):
-        self.model = kwargs.get("model", "LogisticRegression")
+        self.model    = kwargs.get("model", "LogisticRegression")
         self.is_final = kwargs.get("is_final", False)
         self.classifier = load_estimator(model=str(self.model))()
         self.classifier.set_params(
@@ -239,7 +237,8 @@ class Classifier(BaseEstimator, TransformerMixin):
         return np.vstack((negative_proba, positive_proba)).T
 
     def get_coefficient(self, X, **kwargs):
-        """ """
+        """
+        """
         if hasattr(self.classifier, "coef_"):
             return self.classifier.coef_
         else:
@@ -247,8 +246,12 @@ class Classifier(BaseEstimator, TransformerMixin):
             return None
 
     def transform(self, X, **kwargs):
-        """ """
-        return self.predict_proba(X, **kwargs)
+        """ 
+        """
+        if self.is_final is True:
+            return self.predict(X, **kwargs)
+        else:
+            return self.predict_proba(X, **kwargs)
 
     def predict_proba(self, X, **kwargs):
         """

@@ -88,6 +88,7 @@ class SentenceTransformerVectorizer(BaseEstimator, TransformerMixin):
              X                   : list of sentences to encode                  (List[str])
              convert_to_numpy    : whether to convert output to numpy array     (Bool)
              normalize_embeddings : whether to normalize embeddings              (Bool)
+             device              : device to use for encoding                   (str)
         Returns:
             Encoded embeddings of sentences
 

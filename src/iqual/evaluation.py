@@ -1,7 +1,10 @@
-# /usr/bin/env python
 """This script contains common metrics for measuring the classification performance."""
 
 import sklearn.metrics
+
+SKLEARN_SCORERS = sklearn.metrics.get_scorer_names()
+CUSTOM_SCORERS  = ['count_' + c for c in ['true_negatives', 'false_positives', 'false_negatives', 'true_positives']]
+ALL_SCORERS     = [*SKLEARN_SCORERS, *CUSTOM_SCORERS]
 
 def count_outcomes(y_true, y_pred, outcome_type="true_positives"):
     """
@@ -21,25 +24,11 @@ def count_outcomes(y_true, y_pred, outcome_type="true_positives"):
     outcome_values = sklearn.metrics.confusion_matrix(y_true, y_pred).ravel()
     return outcome_values[outcomes.index(outcome_type.lower())]
 
-
-def calc_f1_score_from_outcomes(
-    true_positives, false_positives, false_negatives, true_negatives=None
-):
+def list_scorers():
     """
-    Calculates the F1 score from a
-        True-Positives, False-Postives, and False-Negatives.
+    List all available scoring functions.
     """
-    return (2 * true_positives) / (
-        2 * true_positives + false_positives + false_negatives
-    )
-
-
-def calc_f1_score_from_labels(y_true, y_pred):
-    """
-    Calculates the F1 score from true-labels and predicted-labels.
-    """
-    return sklearn.metrics.f1_score(y_true, y_pred)
-
+    return ALL_SCORERS
 
 def get_scoring_dict(
     keys=[
@@ -58,28 +47,51 @@ def get_scoring_dict(
     Args:
         keys: list of scoring functions to return.
 
+    Returns:
+        scoring_dict: a dictionary of scoring functions.
+    """        
+    scoring_dict = {}
+    for key in keys:
+        if key in SKLEARN_SCORERS:
+            scoring_dict[key] = sklearn.metrics.get_scorer(key)
+        elif key in CUSTOM_SCORERS:
+            scoring_dict[key] = sklearn.metrics.make_scorer(count_outcomes, needs_proba=False, needs_threshold=False, outcome_type=key.split("count_")[-1])  
+        else:
+            raise ValueError(f"Invalid scorer: {key}")
+    return scoring_dict
+
+def get_scorer(scorer_name):
     """
-    return {key: ALL_SCORERS[key] for key in keys}
+    Returns a scorer function from a string.
 
+    Args:
+        scorer_name: name of the scorer to return. See `list_scorers()` for a list of valid scorers.
 
-def list_scoring_functions():
+    Returns:
+        scorer: a scorer function.
     """
-    List all available scoring functions.
+    assert scorer_name in list_scorers(), f"{scorer_name} is not a valid scorer. See `list_scorers()` for a list of valid scorers."
+    if scorer_name in SKLEARN_SCORERS:
+        return sklearn.metrics.get_scorer(scorer_name)
+    elif scorer_name in CUSTOM_SCORERS:
+        return sklearn.metrics.make_scorer(count_outcomes, needs_proba=False, needs_threshold=False, outcome_type=scorer_name.split("count_")[-1])
+    else:
+        raise ValueError(f"Invalid scorer: {scorer_name}")
+    
+
+def calc_f1_score_from_outcomes(
+    true_positives, false_positives, false_negatives, true_negatives=None):
     """
-    return list(ALL_SCORERS.keys())
-
-
-SKLEARN_SCORERS = sklearn.metrics.SCORERS.copy()
-MORE_SCORERS = {
-    "count_"
-    + outcome: sklearn.metrics.make_scorer(
-        count_outcomes, needs_proba=False, needs_threshold=False, outcome_type=outcome
+    Calculates the F1 score from a
+        True-Positives, False-Postives, and False-Negatives.
+    """
+    return (2 * true_positives) / (
+        2 * true_positives + false_positives + false_negatives
     )
-    for outcome in [
-        "true_negatives",
-        "false_positives",
-        "false_negatives",
-        "true_positives",
-    ]
-}
-ALL_SCORERS = {**SKLEARN_SCORERS, **MORE_SCORERS}
+
+def get_metric(metric_name='f1_score'):
+    """
+    Returns a metric function from a string.
+    See sklearn.metrics for a list of valid metrics.
+    """
+    return getattr(sklearn.metrics, metric_name)

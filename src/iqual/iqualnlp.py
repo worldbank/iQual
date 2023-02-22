@@ -11,7 +11,7 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.pipeline import Pipeline, FeatureUnion
 from .vectorizers import Vectorizer
 from .estimation import Classifier, BinaryThresholder
-from .feature_transform import FeatureScaler, DimensionalityReduction
+from .feature_transform import FeatureScaler, DimensionalityReduction, DenseTransformer, SparseTransformer
 from .crossval import CrossValidator, count_hyperparameters
 
 
@@ -109,7 +109,7 @@ class Model:
             self.cache_dir = mkdtemp(prefix="iqual_")
         else:
             self.cache_dir = None
-        self.diagram = diagram
+        self.diagram          = diagram
         self.text_vector_pipe = None
         self.transformation_steps = []
         self.estimation_steps = []
@@ -133,11 +133,20 @@ class Model:
             q_col, a_col, env=env, model=model, **kwargs
         )
         self.input_steps = [("Input", self.text_vector_pipe)]
-        self.vect_kwargs = kwargs
-        self.env = env
-        self.model = model
 
-    def add_feature_scaler(self, name="StandardScaler", **kwargs):
+    def add_densifier(self):
+        """
+        Add a densifier to the pipeline
+        """
+        self.transformation_steps.append(("Densifier", DenseTransformer()))
+    
+    def add_sparsifier(self):
+        """
+        Add a sparsifier to the pipeline
+        """
+        self.transformation_steps.append(("Sparsifier", SparseTransformer()))
+
+    def add_feature_scaler(self, name="Normalizer", **kwargs):
         """
         Scale the features
         Args:
@@ -150,7 +159,7 @@ class Model:
             ("FeatureTransformation", FeatureScaler(name=name, **kwargs))
         )
 
-    def add_dimensionality_reducer(self, name="PCA", **kwargs):
+    def add_dimensionality_reducer(self, name="TruncatedSVD", **kwargs):
         """
         Reduce the features
         Args:
@@ -162,7 +171,7 @@ class Model:
         )
 
     def add_feature_transformer(
-        self, name="StandardScaler", transformation="DimensionalityReduction", **kwargs
+        self, name="Normalizer", transformation="DimensionalityReduction", **kwargs
     ):
         """ """
         if transformation == "DimensionalityReduction":
@@ -178,34 +187,37 @@ class Model:
         """
         Add a classifier to the pipeline
         Args:
-            name (str): Name of the classifier
+            name (str): Name of the classifier method. Any classifier from sklearn can be used
             **kwargs: Keyword arguments for the classifier
-
         """
-        self.estimators = name
-        self.kwargs = kwargs
         self.estimation_steps.append(("Classifier", Classifier(name, **kwargs)))
 
-    def add_threshold(self, **kwargs):
+    def add_threshold(self, scoring_metric='f1',**kwargs):
         """
         Add a custom threshold to the pipeline
+        Args:
+            **kwargs: Keyword arguments for the threshold
+
         """
-        self.post_estimation_steps.append(("Threshold", BinaryThresholder(**kwargs)))
+        self.post_estimation_steps.append(("Threshold", BinaryThresholder(scoring_metric=scoring_metric,**kwargs)))
 
     def compile(self):
         """
         Compile the model
         """
-        ### List of pipeline Steps
         self.steps = [
-            *self.input_steps,  # Input (Text Columns)
-            *self.transformation_steps,  # Post Vectorization Steps, Feature Scaling
-            *self.estimation_steps,  # Estimation Steps
+            *self.input_steps,            # Input (Text Columns)
+            *self.transformation_steps,   # Post Vectorization Steps, Densify/Sparsify, Feature Scaling, Dimensionality Reduction
+            *self.estimation_steps,       # Classifier
             *self.post_estimation_steps,  # Post Estimation Steps, Custom Threshold
         ]
 
         #### Create the pipeline
         self.model = Pipeline(self.steps, memory=self.cache_dir)
+        if len(self.post_estimation_steps)==0:
+            self.model.set_params(Classifier__is_final=True)
+        else:
+            self.model.set_params(Classifier__is_final=False)
 
         if self.diagram is True:
             set_config(display="diagram")
@@ -230,10 +242,13 @@ class Model:
             cv_method (str): Cross validation method
             search_parameters (dict): Search parameters for GridSearchCV
             scoring (str): Scoring method for GridSearchCV
-            num_folds (int): Number of folds for GridSearchCV
+            cv (int): Number of folds for GridSearchCV
             n_iter (int): Number of iterations for RandomizedSearchCV
             refit (bool): Whether to refit the model
             **kwargs: Keyword arguments for the model
+        
+        Returns:
+            cv_scores (dict): Cross validation scores
         """
         print(
             f".......{count_hyperparameters(search_parameters)} hyperparameters configurations possible.....\r",
@@ -305,31 +320,31 @@ class Model:
             y_true (pandas.Series): The true labels
             scoring_function (function): The scoring function to use
 
+        Returns:
+            score (float): The score of the model
         """
         y_pred = self.model.predict(x)
         return scoring_function(y_true, y_pred)
 
-    def load_model(self, model_dir, filename):
+    def load_model(self, model_path):
         """
         Load the model from a pickle file
+        
         Args:
-            model_dir (str): Directory where the model is saved
-            filename (str): Name of the model file
-        """
-        model_fp = os.path.join(model_dir, filename + ".pkl")
-        self.model = joblib.load(model_fp)
+            model_path (str): Path to the model file
 
-    def save_model(self, model_dir, filename):
+        """
+        self.model = joblib.load(model_path)
+
+    def save_model(self, model_path):
         """
         Save the model to disk as a pickle file
+        
         Args:
-            model_dir (str): Directory to save the model
-            filename (str): Name of the file to save the model
+            model_path (str): Path to the model file
         """
-        model_fp = os.path.join(model_dir, filename + ".pkl")
-        os.makedirs(model_dir, exist_ok=True)
-        joblib.dump(self.model, model_fp)
-        print(f"Model saved to {model_fp}")
+        joblib.dump(self.model, model_path)
+        print(f"Model saved to {model_path}")
 
     def clear_cache(self):
         """
