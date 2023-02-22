@@ -542,11 +542,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="efficiency-test">
 <h1>Efficiency - Test<a class="headerlink" href="#efficiency-test" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -557,11 +554,9 @@ from iqual import  tests
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-datasets">
 <h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -740,11 +735,9 @@ bootstrap_df.head()
 <p>5 rows × 80 columns</p>
 </div></div></div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="annotations">
 <h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [
@@ -761,11 +754,9 @@ bootstrap_df.head()
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="separate-datasets">
 <h2>Separate Datasets<a class="headerlink" href="#separate-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Create three datasets
@@ -787,11 +778,9 @@ med_df     = bootstrap_df[bootstrap_df.annotated==1].groupby([&#39;uid&#39;,&#39
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="use-tests-efficiency-from-iqual-to-get-measurement-error-variances">
 <h2>Use <code class="docutils literal notranslate"><span class="pre">tests.Efficiency</span></code> from <code class="docutils literal notranslate"><span class="pre">iQual</span></code> to get <code class="docutils literal notranslate"><span class="pre">Measurement</span> <span class="pre">Error</span> <span class="pre">Variances</span></code><a class="headerlink" href="#use-tests-efficiency-from-iqual-to-get-measurement-error-variances" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.options.display.float_format = &#39;{:.4f}&#39;.format
@@ -1053,6 +1042,7 @@ efficiency_df[[&#39;annotation&#39;,&#39;sig2_h&#39;,&#39;sig2_y&#39;,&#39;sig2_
 </table>
 </div></div></div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

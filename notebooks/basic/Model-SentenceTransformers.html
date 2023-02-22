@@ -464,18 +464,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#model-training">
    Model training:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
-     Evaluate model using out sample data (Held out human-coded data)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
-     Predict labels for unannotated data
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+   Evaluate model using out sample data (Held out human-coded data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+   Predict labels for unannotated data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-for-positive-predictions">
+   Examples for positive predictions
+  </a>
  </li>
 </ul>
 
@@ -545,18 +548,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#model-training">
    Model training:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
-     Evaluate model using out sample data (Held out human-coded data)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
-     Predict labels for unannotated data
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+   Evaluate model using out sample data (Held out human-coded data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+   Predict labels for unannotated data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-for-positive-predictions">
+   Examples for positive predictions
+  </a>
  </li>
 </ul>
 
@@ -570,11 +576,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-sentencetransformers">
 <h1>Model - SentenceTransformers<a class="headerlink" href="#model-sentencetransformers" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -584,11 +587,9 @@ from iqual import iqualnlp, evaluation, crossval
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-annotated-human-coded-and-unannotated-datasets">
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -598,11 +599,9 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="split-the-data-into-training-and-test-sets">
 <h2>Split the data into training and test sets<a class="headerlink" href="#split-the-data-into-training-and-test-sets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
@@ -618,11 +617,9 @@ Test Size: 2490
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-training-data">
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
@@ -639,45 +636,46 @@ y = train_df[code_variable]
 </div>
 </div>
 </div>
+</section>
 <section id="initiate-model">
 <h2>Initiate model<a class="headerlink" href="#initiate-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Step 1: Initiate the model class
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import torch
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Initiate the model class
 iqual_model = iqualnlp.Model()
 
-# Step 2: Add layers to the model
+#  Add layers to the model
 #  Add text columns, and choose a feature extraction model (Available options: scikit-learn, spacy, sentence-transformers, precomputed (picklized dictionary))
-iqual_model.add_text_features(question_col,answer_col,model=&#39;all-MiniLM-L6-v2&#39;,env=&#39;sentence-transformers&#39;)
+iqual_model.add_text_features(question_col,answer_col,
+                              model=&#39;all-MiniLM-L6-v2&#39;,
+                              env=&#39;sentence-transformers&#39;,
+                              device=&#39;cuda&#39;
+                             )
 
-# Step 3: Add a feature transforming layer (optional)
-# A. Choose a feature-scaler. Available options: 
-# any scikit-learn scaler from `sklearn.preprocessing`
-### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;FeatureScaler&quot;)
-# OR
-# B. Choose a dimensionality reduction model. Available options:
-# - Any scikit-learn dimensionality reduction model from `sklearn.decomposition`
-# - Uniform Manifold Approximation and Projection (UMAP) using umap.UMAP (https://umap-learn.readthedocs.io/en/latest/)
-
-### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;DimensionalityReduction&quot;)
-
-# Step 4: Add a classifier layer
+# Add a classifier layer
 # Choose a primary classifier model  (Available options: any scikit-learn classifier)
 iqual_model.add_classifier(name=&quot;LogisticRegression&quot;)
 
-# Step 5: Add a threshold layer. This is optional, but recommended for binary classification
-iqual_model.add_threshold()
+# Add a threshold layer. This is optional, but recommended for binary classification
+iqual_model.add_threshold(scoring_metric=&#39;f1&#39;)
 
-# Step 6: Compile the model
+# Compile the model
 iqual_model.compile()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+<div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
                  FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
-                                                                  FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
                                                                                       kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                                  (&#x27;vectorizer&#x27;,
                                                                   Vectorizer(env=&#x27;sentence-transformers&#x27;,
@@ -695,10 +693,10 @@ iqual_model.compile()
                             n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
                             solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
                             warm_start=False)),
-                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
                  FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
-                                                                  FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
                                                                                       kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                                  (&#x27;vectorizer&#x27;,
                                                                   Vectorizer(env=&#x27;sentence-transformers&#x27;,
@@ -716,37 +714,30 @@ iqual_model.compile()
                             n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
                             solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
                             warm_start=False)),
-                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">Input: FeatureUnion</label><div class="sk-toggleable__content"><pre>FeatureUnion(transformer_list=[(&#x27;question&#x27;,
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">Input: FeatureUnion</label><div class="sk-toggleable__content"><pre>FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                 Pipeline(steps=[(&#x27;selector&#x27;,
-                                                 FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
+                                                 FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
                                                                      kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                 (&#x27;vectorizer&#x27;,
                                                  Vectorizer(env=&#x27;sentence-transformers&#x27;,
                                                             model=&#x27;all-MiniLM-L6-v2&#x27;))])),
                                (&#x27;answer&#x27;,
                                 Pipeline(steps=[(&#x27;selector&#x27;,
-                                                 FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
+                                                 FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
                                                                      kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})),
                                                 (&#x27;vectorizer&#x27;,
                                                  Vectorizer(env=&#x27;sentence-transformers&#x27;,
-                                                            model=&#x27;all-MiniLM-L6-v2&#x27;))]))])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>question</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
-                    kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;sentence-transformers&#x27;, model=&#x27;all-MiniLM-L6-v2&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>answer</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x0000022F2C567670&gt;,
-                    kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;sentence-transformers&#x27;, model=&#x27;all-MiniLM-L6-v2&#x27;)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">Classifier</label><div class="sk-toggleable__content"><pre>Classifier(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+                                                            model=&#x27;all-MiniLM-L6-v2&#x27;))]))])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>question</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;sentence-transformers&#x27;, model=&#x27;all-MiniLM-L6-v2&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>answer</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x00000254018E8820&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;sentence-transformers&#x27;, model=&#x27;all-MiniLM-L6-v2&#x27;)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label sk-toggleable__label-arrow">Classifier</label><div class="sk-toggleable__content"><pre>Classifier(C=1.0, class_weight=None, dual=False, fit_intercept=True,
            intercept_scaling=1, l1_ratio=None, max_iter=100,
            model=&#x27;LogisticRegression&#x27;, multi_class=&#x27;auto&#x27;, n_jobs=None,
            penalty=&#x27;l2&#x27;, random_state=None, solver=&#x27;lbfgs&#x27;, tol=0.0001,
-           verbose=0, warm_start=False)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">BinaryThresholder</label><div class="sk-toggleable__content"><pre>BinaryThresholder()</pre></div></div></div></div></div></div></div></div></div>
+           verbose=0, warm_start=False)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label sk-toggleable__label-arrow">BinaryThresholder</label><div class="sk-toggleable__content"><pre>BinaryThresholder()</pre></div></div></div></div></div></div></div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
-scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
-</pre></div>
-</div>
-</div>
-</div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
+<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>search_param_config = {
@@ -754,151 +745,133 @@ scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
         &quot;question&quot;:{
             &quot;vectorizer&quot;:{
                         &quot;model&quot;:[&quot;all-MiniLM-L6-v2&quot;],
-                         &quot;env&quot;:[&quot;sentence-transformers&quot;],               
+                         &quot;env&quot;:[&quot;sentence-transformers&quot;],
+                         &quot;device&quot;:[&#39;cuda&#39;] 
                          },
         },
         &quot;answer&quot;:{
             &quot;vectorizer&quot;:{
                         &quot;model&quot;:[&quot;all-MiniLM-L6-v2&quot;],
-                        &quot;env&quot;:[&quot;sentence-transformers&quot;],                
+                         &quot;env&quot;:[&quot;sentence-transformers&quot;],
+                         &quot;device&quot;:[&#39;cuda&#39;] # If `cuda` is available
                          },                        
         },
     },
         &quot;Classifier&quot;:{
             &quot;model&quot;:[&quot;LogisticRegression&quot;],
-            &quot;C&quot;:[0.001, 0.1],
+            &quot;C&quot;:[0.001, 0.01, 0.1],
         },
 }
 
 CV_SEARCH_PARAMS = crossval.convert_nested_params(search_param_config)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>CV_SEARCH_PARAMS
+
+print(CV_SEARCH_PARAMS)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Input__question__vectorizer__model&#39;: [&#39;all-MiniLM-L6-v2&#39;],
- &#39;Input__question__vectorizer__env&#39;: [&#39;sentence-transformers&#39;],
- &#39;Input__answer__vectorizer__model&#39;: [&#39;all-MiniLM-L6-v2&#39;],
- &#39;Input__answer__vectorizer__env&#39;: [&#39;sentence-transformers&#39;],
- &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
- &#39;Classifier__C&#39;: [0.001, 0.1]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Input__question__vectorizer__model&#39;: [&#39;all-MiniLM-L6-v2&#39;], &#39;Input__question__vectorizer__env&#39;: [&#39;sentence-transformers&#39;], &#39;Input__question__vectorizer__device&#39;: [&#39;cuda&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;all-MiniLM-L6-v2&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;sentence-transformers&#39;], &#39;Input__answer__vectorizer__device&#39;: [&#39;cuda&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.001, 0.01, 0.1]}
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="model-training">
+<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
+<p>Cross-validate over hyperparameters and select the best model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cv_dict = iqual_model.cross_validate_fit(
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
+scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
+
+cv_dict = iqual_model.cross_validate_fit(
     X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
     search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
     cv_method=&#39;GridSearchCV&#39;,           # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
     scoring=scoring_dict,               # scoring: Scoring metric to use for cross-validation
     refit=&#39;f1&#39;,                         # refit: Metric to use for refitting the model
-    n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
+    n_jobs=-1,                           # n_jobs: Number of parallel threads to use  
     cv_splits=3,                        # cv_splits: Number of cross-validation splits
 )
+print()
+print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.......2 hyperparameters configurations possible.....
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average F1 score: 0.811
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.......3 hyperparameters configurations possible.....
+Average F1 score: 0.791
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
-<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="model-training">
-<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
-<p>Cross-validate over hyperparameters and select the best model</p>
 <section id="evaluate-model-using-out-sample-data-held-out-human-coded-data">
-<h3>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h3>
+<h2>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_pred = iqual_model.predict(test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-test_act  = test_df[code_variable].tolist()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_X = test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]]
+test_y = test_df[code_variable]
 
-f1_score = evaluation.calc_f1_score_from_labels(test_pred,test_act,)
+f1_score  = iqual_model.score(test_X,test_y,
+                              scoring_function=evaluation.get_metric(&#39;f1_score&#39;))
 print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
+
+accuracy  = iqual_model.score(test_X,test_y,
+                              scoring_function=evaluation.get_metric(&#39;accuracy_score&#39;))
+print(f&quot;Out-sample accuracy-score: {accuracy:.3f}&quot;)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score: 0.797
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score: 0.825
+Out-sample accuracy-score: 0.981
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="predict-labels-for-unannotated-data">
-<h3>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h3>
+<h2>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>uncoded_df[code_variable+&#39;_pred&#39;] = iqual_model.predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dict(uncoded_df[code_variable+&quot;_pred&quot;].value_counts())
+
+uncoded_df[code_variable+&quot;_pred&quot;].hist(figsize=(3,3),bins=3)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 21522, 1: 981}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
+<img alt="../../_images/Model-SentenceTransformers_19_1.png" src="../../_images/Model-SentenceTransformers_19_1.png" />
 </div>
 </div>
+</section>
+<section id="examples-for-positive-predictions">
+<h2>Examples for positive predictions<a class="headerlink" href="#examples-for-positive-predictions" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for idx, row in uncoded_df.loc[(uncoded_df[code_variable+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(5).iterrows():
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for idx, row in uncoded_df.loc[(uncoded_df[code_variable+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(3).iterrows():
     print(&quot;Q: &quot;,row[&#39;Q_en&#39;],&quot;\n&quot;,&quot;A: &quot;, row[&#39;A_en&#39;],sep=&#39;&#39;)
     print()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q: Well, getting married. What else is there to hope for?
-A: After marriage I will have to myself. That is the hope.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q: If you want to get married?
+A: Yes, I want to get married. But the proposal actually says that people have to pay 1 lakh rupees. I don&#39;t mean without money.
 
-Q: What would you be happy to do when you grow up?
-A: Girls cannot do any work. When it&#39;s time to get married, I want to get married.
+Q: What other dreams about him?
+A: My dream is to study while I&#39;m alive and get married soon.
 
-Q: which boy
-A: The boy with whom she is going to marry.
-
-Q: And how much do you expect to teach?
-A: I will marry him if I get the chance. If the facilities are not the same, I will study as much as I can! He is now fit for marriage.
-
-Q: Apu, tell us about the dreams you have about your children.
-A: I want to get my daughter educated and get her married and I want my son to get a job.
+Q: How do you plan to achieve these?
+A: I have saved some money for them. I will borrow some money from people and marry the girls.
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 

@@ -566,11 +566,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="interpretability-test">
 <h1>Interpretability Test<a class="headerlink" href="#interpretability-test" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -580,11 +577,9 @@ from iqual import tests
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-datasets">
 <h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -598,11 +593,9 @@ quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="variables">
 <h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [
@@ -635,11 +628,9 @@ quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="variables-to-groupby">
 <h2>Variables to Groupby<a class="headerlink" href="#variables-to-groupby" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>id_vars_human    = [&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;annotated&#39;]
@@ -648,11 +639,9 @@ id_vars_enhanced = [&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;an
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="human-annotated-dataframe-merged-with-quantiative-data">
 <h2>Human Annotated Dataframe (Merged with quantiative data)<a class="headerlink" href="#human-annotated-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>human_df = enhanced_data.loc[enhanced_data.annotated==1,[*id_vars_human,*human_annotation_vars]].copy()
@@ -664,11 +653,9 @@ human_df[&#39;sample_type&#39;] = &#39;Human&#39;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="enhanced-dataframe-merged-with-quantiative-data">
 <h2>Enhanced Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_df = enhanced_data[[*id_vars_enhanced,*annotation_vars]].copy()
@@ -679,11 +666,9 @@ enhanced_df[&#39;sample_type&#39;] = &#39;Enhanced&#39;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="hh-characteristic-variables-for-interpretability">
 <h2>HH characteristic variables for <code class="docutils literal notranslate"><span class="pre">Interpretability</span></code><a class="headerlink" href="#hh-characteristic-variables-for-interpretability" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Numerical regressors
@@ -703,6 +688,7 @@ numerical_vars = [
 </div>
 </div>
 </div>
+</section>
 <section id="interpretability-tests-on-human-data">
 <h2>Interpretability tests on Human Data<a class="headerlink" href="#interpretability-tests-on-human-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">

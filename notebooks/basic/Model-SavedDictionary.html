@@ -514,6 +514,11 @@ title="Print to PDF"
      Predict labels for unannotated data
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-for-positive-predictions">
+     Examples for positive predictions
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -634,6 +639,11 @@ title="Print to PDF"
      Predict labels for unannotated data
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-for-positive-predictions">
+     Examples for positive predictions
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -648,11 +658,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-saved-dictionary">
 <h1>Model - Saved Dictionary<a class="headerlink" href="#model-saved-dictionary" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -662,11 +669,9 @@ from iqual import iqualnlp, evaluation, crossval, vectorizers
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-annotated-human-coded-and-unannotated-datasets">
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -676,14 +681,12 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="create-vectors-using-spacy-or-sentence-transformers-and-save-them-as-a-pickle-file">
 <h2>Create vectors using <code class="docutils literal notranslate"><span class="pre">spacy</span></code> or <code class="docutils literal notranslate"><span class="pre">sentence-transformers</span></code> and save them as a pickle file<a class="headerlink" href="#create-vectors-using-spacy-or-sentence-transformers-and-save-them-as-a-pickle-file" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dict_dir        = &quot;../dictionaries&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dict_dir        = &quot;../../dictionaries&quot;
 os.makedirs(dict_dir,exist_ok=True)
 </pre></div>
 </div>
@@ -703,20 +706,19 @@ print(f&quot;{len(sentences)} unique sentences&quot;)
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="create-a-precomputed-dictionary-using-the-sentence-transformer-package">
 <h2>Create a precomputed dictionary using the <code class="docutils literal notranslate"><span class="pre">sentence-transformer</span></code> package<a class="headerlink" href="#create-a-precomputed-dictionary-using-the-sentence-transformer-package" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sentence_transformer_models = [&quot;all-mpnet-base-v2&quot;, &quot;all-roberta-large-v1&quot;,&quot;distiluse-base-multilingual-cased-v2&quot;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sentence_transformer_models = [&quot;all-mpnet-base-v2&quot;, &quot;all-roberta-large-v1&quot;,&quot;distiluse-base-multilingual-cased-v2&quot;,&quot;all-MiniLM-L6-v2&quot;]
+
 for model in sentence_transformer_models:        
-    print(model)    
-    vectorizer       = vectorizers.SentenceTransformerVectorizer(model)    
+    vectorizer       = vectorizers.SentenceTransformerVectorizer(model)
     sentence_vectors = vectorizer.transform(sentences,
                                             convert_to_numpy=True,
-                                            # If cuda is available, use device=&#39;cuda&#39; for faster vectorization
+                                            batch_size=64,
+                                            device=&#39;cuda&#39; ## If cuda is available, use device=&#39;cuda&#39; for faster vectorization
                                            )
     sentence_vector_dict = dict(zip(sentences,sentence_vectors))
     dictionary_path  = os.path.join(dict_dir,model+&quot;.pkl&quot;)
@@ -724,27 +726,15 @@ for model in sentence_transformer_models:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>all-mpnet-base-v2
-Saved file in ../dictionaries\all-mpnet-base-v2.pkl
-all-roberta-large-v1
-Saved file in ../dictionaries\all-roberta-large-v1.pkl
-distiluse-base-multilingual-cased-v2
-Saved file in ../dictionaries\distiluse-base-multilingual-cased-v2.pkl
-</pre></div>
 </div>
-</div>
-</div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="create-a-precomputed-dictionary-using-the-spacy-package">
 <h2>Create a precomputed dictionary using the <code class="docutils literal notranslate"><span class="pre">spacy</span></code> package<a class="headerlink" href="#create-a-precomputed-dictionary-using-the-spacy-package" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>spacy_models = [&quot;en_core_web_sm&quot;,&quot;en_core_web_md&quot;,&quot;en_core_web_lg&quot;]
+
 for model in spacy_models:
-    print(model)
     vectorizer       = vectorizers.SpacyVectorizer(model)
     sentence_vectors = vectorizer.transform(sentences)
     sentence_vector_dict = dict(zip(sentences,sentence_vectors))
@@ -753,22 +743,10 @@ for model in spacy_models:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>en_core_web_sm
-Saved file in ../dictionaries\en_core_web_sm.pkl
-en_core_web_md
-Saved file in ../dictionaries\en_core_web_md.pkl
-en_core_web_lg
-Saved file in ../dictionaries\en_core_web_lg.pkl
-</pre></div>
 </div>
-</div>
-</div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="split-the-data-into-training-and-test-sets">
 <h2>Split the data into training and test sets<a class="headerlink" href="#split-the-data-into-training-and-test-sets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
@@ -784,11 +762,9 @@ Test Size: 2490
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-training-data">
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
@@ -805,6 +781,7 @@ y = train_df[code_variable]
 </div>
 </div>
 </div>
+</section>
 <section id="initiate-model">
 <h2>Initiate model<a class="headerlink" href="#initiate-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -819,7 +796,7 @@ iqual_model.add_text_features(question_col,answer_col,model=&#39;../dictionaries
 # Step 3: Add a feature transforming layer (optional)
 # A. Choose a feature-scaler. Available options: 
 # any scikit-learn scaler from `sklearn.preprocessing`
-### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;FeatureScaler&quot;)
+iqual_model.add_feature_transformer(name=&#39;Normalizer&#39;, transformation=&quot;FeatureScaler&quot;)
 # OR
 # B. Choose a dimensionality reduction model. Available options:
 # - Any scikit-learn dimensionality reduction model from `sklearn.decomposition`
@@ -832,7 +809,7 @@ iqual_model.add_text_features(question_col,answer_col,model=&#39;../dictionaries
 iqual_model.add_classifier(name=&quot;LogisticRegression&quot;)
 
 # Step 5: Add a threshold layer. This is optional, but recommended for binary classification
-iqual_model.add_threshold()
+iqual_model.add_threshold(scoring_metric=&#39;f1&#39;)
 
 # Step 6: Compile the model
 iqual_model.compile()
@@ -840,10 +817,10 @@ iqual_model.compile()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
                  FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
-                                                                  FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
                                                                                       kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                                  (&#x27;vectorizer&#x27;,
                                                                   Vectorizer(env=&#x27;saved-dictionary&#x27;,
@@ -851,7 +828,7 @@ iqual_model.compile()
                                                 (&#x27;answer&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
                                                                   FunctionTrans...
-                                                                             model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;))]))])),
+                (&#x27;FeatureTransformation&#x27;, FeatureScaler(copy=True, norm=&#x27;l2&#x27;)),
                 (&#x27;Classifier&#x27;,
                  Classifier(C=1.0, class_weight=None, dual=False,
                             fit_intercept=True, intercept_scaling=1,
@@ -860,10 +837,10 @@ iqual_model.compile()
                             n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
                             solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
                             warm_start=False)),
-                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;Input&#x27;,
                  FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
-                                                                  FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
+                                                                  FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
                                                                                       kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                                  (&#x27;vectorizer&#x27;,
                                                                   Vectorizer(env=&#x27;saved-dictionary&#x27;,
@@ -871,7 +848,7 @@ iqual_model.compile()
                                                 (&#x27;answer&#x27;,
                                                  Pipeline(steps=[(&#x27;selector&#x27;,
                                                                   FunctionTrans...
-                                                                             model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;))]))])),
+                (&#x27;FeatureTransformation&#x27;, FeatureScaler(copy=True, norm=&#x27;l2&#x27;)),
                 (&#x27;Classifier&#x27;,
                  Classifier(C=1.0, class_weight=None, dual=False,
                             fit_intercept=True, intercept_scaling=1,
@@ -880,49 +857,37 @@ iqual_model.compile()
                             n_jobs=None, penalty=&#x27;l2&#x27;, random_state=None,
                             solver=&#x27;lbfgs&#x27;, tol=0.0001, verbose=0,
                             warm_start=False)),
-                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label sk-toggleable__label-arrow">Input: FeatureUnion</label><div class="sk-toggleable__content"><pre>FeatureUnion(transformer_list=[(&#x27;question&#x27;,
+                (&#x27;Threshold&#x27;, BinaryThresholder())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">Input: FeatureUnion</label><div class="sk-toggleable__content"><pre>FeatureUnion(transformer_list=[(&#x27;question&#x27;,
                                 Pipeline(steps=[(&#x27;selector&#x27;,
-                                                 FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
+                                                 FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
                                                                      kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})),
                                                 (&#x27;vectorizer&#x27;,
                                                  Vectorizer(env=&#x27;saved-dictionary&#x27;,
                                                             model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;))])),
                                (&#x27;answer&#x27;,
                                 Pipeline(steps=[(&#x27;selector&#x27;,
-                                                 FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
+                                                 FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
                                                                      kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})),
                                                 (&#x27;vectorizer&#x27;,
                                                  Vectorizer(env=&#x27;saved-dictionary&#x27;,
-                                                            model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;))]))])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>question</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
-                    kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;saved-dictionary&#x27;,
-           model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>answer</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x000002331C723DC0&gt;,
-                    kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;saved-dictionary&#x27;,
-           model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label sk-toggleable__label-arrow">Classifier</label><div class="sk-toggleable__content"><pre>Classifier(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+                                                            model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;))]))])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>question</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;Q_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;saved-dictionary&#x27;,
+           model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><label>answer</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_selector at 0x00000192AFF18A60&gt;,
+                    kw_args={&#x27;column_name&#x27;: &#x27;A_en&#x27;})</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">Vectorizer</label><div class="sk-toggleable__content"><pre>Vectorizer(env=&#x27;saved-dictionary&#x27;,
+           model=&#x27;../dictionaries/all-mpnet-base-v2.pkl&#x27;)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">FeatureScaler</label><div class="sk-toggleable__content"><pre>FeatureScaler(copy=True, norm=&#x27;l2&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">Classifier</label><div class="sk-toggleable__content"><pre>Classifier(C=1.0, class_weight=None, dual=False, fit_intercept=True,
            intercept_scaling=1, l1_ratio=None, max_iter=100,
            model=&#x27;LogisticRegression&#x27;, multi_class=&#x27;auto&#x27;, n_jobs=None,
            penalty=&#x27;l2&#x27;, random_state=None, solver=&#x27;lbfgs&#x27;, tol=0.0001,
-           verbose=0, warm_start=False)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label sk-toggleable__label-arrow">BinaryThresholder</label><div class="sk-toggleable__content"><pre>BinaryThresholder()</pre></div></div></div></div></div></div></div></div></div>
+           verbose=0, warm_start=False)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">BinaryThresholder</label><div class="sk-toggleable__content"><pre>BinaryThresholder()</pre></div></div></div></div></div></div></div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
-scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
-</pre></div>
-</div>
-</div>
-</div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
+<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_paths = [os.path.join(dict_dir,model+&#39;.pkl&#39;) for model in [*spacy_models,*sentence_transformer_models]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>search_param_config = {
+
+search_param_config = {
     &quot;Input&quot;:{
         &quot;question&quot;:{
             &quot;vectorizer&quot;:{
@@ -939,45 +904,32 @@ scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
     },
         &quot;Classifier&quot;:{
             &quot;model&quot;:[&quot;LogisticRegression&quot;],
-            &quot;C&quot;:[0.01],
+            &quot;C&quot;:[0.01,0.1],
         },
 }
 
 CV_SEARCH_PARAMS = crossval.convert_nested_params(search_param_config)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>CV_SEARCH_PARAMS
+
+print(CV_SEARCH_PARAMS)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Input__question__vectorizer__model&#39;: [&#39;../dictionaries\\en_core_web_sm.pkl&#39;,
-  &#39;../dictionaries\\en_core_web_md.pkl&#39;,
-  &#39;../dictionaries\\en_core_web_lg.pkl&#39;,
-  &#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
-  &#39;../dictionaries\\all-roberta-large-v1.pkl&#39;,
-  &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
- &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
- &#39;Input__answer__vectorizer__model&#39;: [&#39;../dictionaries\\en_core_web_sm.pkl&#39;,
-  &#39;../dictionaries\\en_core_web_md.pkl&#39;,
-  &#39;../dictionaries\\en_core_web_lg.pkl&#39;,
-  &#39;../dictionaries\\all-mpnet-base-v2.pkl&#39;,
-  &#39;../dictionaries\\all-roberta-large-v1.pkl&#39;,
-  &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;],
- &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;],
- &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;],
- &#39;Classifier__C&#39;: [0.01]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Input__question__vectorizer__model&#39;: [&#39;../../dictionaries\\en_core_web_sm.pkl&#39;, &#39;../../dictionaries\\en_core_web_md.pkl&#39;, &#39;../../dictionaries\\en_core_web_lg.pkl&#39;, &#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\all-roberta-large-v1.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;, &#39;../../dictionaries\\all-MiniLM-L6-v2.pkl&#39;], &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\en_core_web_sm.pkl&#39;, &#39;../../dictionaries\\en_core_web_md.pkl&#39;, &#39;../../dictionaries\\en_core_web_lg.pkl&#39;, &#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\all-roberta-large-v1.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;, &#39;../../dictionaries\\all-MiniLM-L6-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.01, 0.1]}
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="model-training">
+<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
+<p>Cross-validate over hyperparameters and select the best model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cv_dict = iqual_model.cross_validate_fit(
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
+scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
+
+cv_dict = iqual_model.cross_validate_fit(
     X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
     search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
     cv_method=&#39;GridSearchCV&#39;,           # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
@@ -986,48 +938,38 @@ CV_SEARCH_PARAMS = crossval.convert_nested_params(search_param_config)
     n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
     cv_splits=3,                        # cv_splits: Number of cross-validation splits
 )
+print()
+print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.......36 hyperparameters configurations possible.....
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.......98 hyperparameters configurations possible.....
+Average F1 score: 0.837
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average F1 score: 0.751
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
-<h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="model-training">
-<h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
-<p>Cross-validate over hyperparameters and select the best model</p>
 <section id="evaluate-model-using-out-sample-data-held-out-human-coded-data">
 <h3>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_pred = iqual_model.predict(test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-test_act  = test_df[code_variable].tolist()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_X = test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]]
+test_y = test_df[code_variable]
 
-f1_score = evaluation.calc_f1_score_from_labels(test_pred,test_act,)
+f1_score  = iqual_model.score(test_X,test_y,
+                              scoring_function=evaluation.get_metric(&#39;f1_score&#39;))
 print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
+
+accuracy  = iqual_model.score(test_X,test_y,
+                              scoring_function=evaluation.get_metric(&#39;accuracy_score&#39;))
+print(f&quot;Out-sample accuracy-score: {accuracy:.3f}&quot;)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score: 0.770
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score: 0.785
+Out-sample accuracy-score: 0.980
 </pre></div>
 </div>
 </div>
@@ -1038,22 +980,21 @@ print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>uncoded_df[code_variable+&#39;_pred&#39;] = iqual_model.predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dict(uncoded_df[code_variable+&quot;_pred&quot;].value_counts())
+
+uncoded_df[code_variable+&quot;_pred&quot;].hist(figsize=(3,3),bins=3)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 21592, 1: 911}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
+<img alt="../../_images/Model-SavedDictionary_26_1.png" src="../../_images/Model-SavedDictionary_26_1.png" />
 </div>
 </div>
+</section>
+<section id="examples-for-positive-predictions">
+<h3>Examples for positive predictions<a class="headerlink" href="#examples-for-positive-predictions" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for idx, row in uncoded_df.loc[(uncoded_df[code_variable+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(3).iterrows():
@@ -1063,14 +1004,14 @@ print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q: Brother, do you have a dream about your eldest daughter?
-A: If you get a job after completing your education, otherwise I will marry you.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q: What are your dreams and hopes for your daughter?
+A: There is hope, I will study, study, become a doctor, then find a good boy and get married.
 
-Q: Apart from these, what other dreams do you have about your daughter?
-A: Study and work. Then I will marry her and she will have a family.
+Q: Yes, yes. When the girl grows up, don&#39;t you have such a dream about the girl? I want to know if there is any other dream like this?
+A: I will see my daughter and marry her. I will try to make a doctor.
 
-Q: Well, then you want to keep the environment right by reading and writing.
-A: Now everyone is looking for education even in marriage. Everyone shows interest in marriage if there is education. This is more.
+Q: I mean what have you done for your daughter?
+A: How to dress my daughter, how to get her married, how to keep the children happy, that is my problem.
 </pre></div>
 </div>
 </div>

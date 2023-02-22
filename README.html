@@ -501,7 +501,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="iqual">
 <h1>iQual<a class="headerlink" href="#iqual" title="Permalink to this headline">#</a></h1>
 <p><a class="reference external" href="https://github.com/worldbank/iQual/blob/main/LICENSE.md"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-green.svg" /></a>
-<a class="reference external" href="https://badge.fury.io/py/iQual"><img alt="PyPI version" src="https://badge.fury.io/py/iQual.svg" /></a></p>
+<a class="reference external" href="https://badge.fury.io/py/iQual"><img alt="PyPI version" src="https://badge.fury.io/py/iQual.svg?kill_cache=1" /></a>
+<a class="reference external" href="https://worldbank.github.io/iQual/"><img alt="Docs - GitHub.io" src="https://img.shields.io/static/v1?logo=github&amp;style=flat&amp;color=blue&amp;label=docs&amp;message=iQual" /></a></p>
 <p>This repository contains the code and resources necessary to implement the techniques described in the paper <a class="reference external" href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996">A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh</a>. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package is designed for qualitative analysis of open-ended interviews and aims to extend a small set of interpretative human-codes to a much larger set of documents using natural language processing. The package provides a method for assessing the robustness and reliability of this approach. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package has been applied to analyze 2,200 open-ended interviews on parent’s aspirations for children from Rohingya refugees and their Bangladeshi hosts in Cox’s Bazaar, Bangladesh. It draws on work in anthropology and philosophy to expand conceptions of aspirations in economics to distinguish between material goals, moral and religious values, and navigational capacity—the ability to achieve goals and aspirations, showing that they have very different correlates.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">iQual</span></code>, researchers can efficiently analyze large amounts of qualitative data while maintaining the nuance and accuracy of human interpretation.</p>
 <hr class="docutils" />
@@ -510,7 +511,7 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>To install <code class="docutils literal notranslate"><span class="pre">iQual</span></code> using pip, use the following command:</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>iQual
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>iQual
 </pre></div>
 </div>
 <ul class="simple">
@@ -537,7 +538,6 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <li><p><a class="reference external" href="https://www.scipy.org/">scipy</a></p></li>
 <li><p><a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a></p></li>
 <li><p><a class="reference external" href="https://simplejson.readthedocs.io/en/latest/">simplejson</a></p></li>
-<li><p><a class="reference external" href="https://pypi.org/project/num2words/">num2words</a></p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
 <li><p><a class="reference external" href="https://seaborn.pydata.org/">seaborn</a></p></li>
 </ul>
@@ -605,7 +605,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <li><p><code class="docutils literal notranslate"><span class="pre">transformation</span></code>: The type of transformation. Available options are <code class="docutils literal notranslate"><span class="pre">FeatureScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">DimensionalityReduction</span></code>.</p></li>
 </ul>
 <p>To add a <strong>feature scaling</strong> layer, use the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_feature_transformer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;StandardScaler&#39;</span><span class="p">,</span> <span class="n">transformation</span><span class="o">=</span><span class="s2">&quot;FeatureScaler&quot;</span><span class="p">)</span> <span class="c1"># or any other scikit-learn scaler</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_feature_transformer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Normalizer&#39;</span><span class="p">,</span> <span class="n">transformation</span><span class="o">=</span><span class="s2">&quot;FeatureScaler&quot;</span><span class="p">)</span> <span class="c1"># or any other scikit-learn scaler</span>
 </pre></div>
 </div>
 <p>To add a <strong>dimensionality reduction</strong> layer, use the following code:</p>

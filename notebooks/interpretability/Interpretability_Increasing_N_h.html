@@ -454,13 +454,11 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#enhanced">
    Enhanced
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed">
-     F-statistic test for interpretability increases with Nh (holding N fixed)
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed">
+   F-statistic test for interpretability increases with Nh (holding N fixed)
+  </a>
  </li>
 </ul>
 
@@ -520,13 +518,11 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#enhanced">
    Enhanced
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed">
-     F-statistic test for interpretability increases with Nh (holding N fixed)
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed">
+   F-statistic test for interpretability increases with Nh (holding N fixed)
+  </a>
  </li>
 </ul>
 
@@ -551,8 +547,9 @@ from iqual import tests
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="load-datasets">
+<h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir    = &quot;../../data/&quot;
@@ -566,8 +563,9 @@ quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [
@@ -602,8 +600,9 @@ id_vars    = [&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;bootstra
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="human-annotated-data-merged-with-quantiative-data">
+<h2>Human Annotated Data (Merged with quantiative data)<a class="headerlink" href="#human-annotated-data-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>human_df = bootstrap_df.loc[bootstrap_df.split==&#39;train&#39;,[*id_vars,*annotation_vars]].copy()
@@ -614,8 +613,9 @@ human_df = pd.merge(human_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;,&#3
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="enhanced-dataframe-merged-with-quantiative-data">
+<h2>Enhanced Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_df = bootstrap_df[[*id_vars,*annotation_vars]].copy()
@@ -624,8 +624,9 @@ enhanced_df = pd.merge(enhanced_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#3
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
+<section id="interpretability-tests-on-human-data">
+<h2>Interpretability tests on Human Data<a class="headerlink" href="#interpretability-tests-on-human-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Numerical regressors
@@ -644,6 +645,9 @@ numerical_vars = [
 </div>
 </div>
 </div>
+</section>
+<section id="human">
+<h2>Human<a class="headerlink" href="#human" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>human_int_dfs = []
@@ -666,6 +670,9 @@ human_interp_data = pd.concat(human_int_dfs,axis=0)
 </div>
 </div>
 </div>
+</section>
+<section id="enhanced">
+<h2>Enhanced<a class="headerlink" href="#enhanced" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enhanced_int_dfs = []
@@ -687,28 +694,8 @@ enhanced_interp_data = pd.concat(enhanced_int_dfs,axis=0)
 </div>
 </div>
 </section>
-<section id="load-datasets">
-<h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="variables">
-<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="human-annotated-data-merged-with-quantiative-data">
-<h2>Human Annotated Data (Merged with quantiative data)<a class="headerlink" href="#human-annotated-data-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="enhanced-dataframe-merged-with-quantiative-data">
-<h2>Enhanced Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="interpretability-tests-on-human-data">
-<h2>Interpretability tests on Human Data<a class="headerlink" href="#interpretability-tests-on-human-data" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="human">
-<h2>Human<a class="headerlink" href="#human" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="enhanced">
-<h2>Enhanced<a class="headerlink" href="#enhanced" title="Permalink to this headline">#</a></h2>
 <section id="f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed">
-<h3>F-statistic test for interpretability increases with Nh (holding N fixed)<a class="headerlink" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed" title="Permalink to this headline">#</a></h3>
+<h2>F-statistic test for interpretability increases with Nh (holding N fixed)<a class="headerlink" href="#f-statistic-test-for-interpretability-increases-with-nh-holding-n-fixed" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
@@ -761,7 +748,6 @@ plt.show()
 <img alt="../../_images/Interpretability_Increasing_N_h_18_0.png" src="../../_images/Interpretability_Increasing_N_h_18_0.png" />
 </div>
 </div>
-</section>
 </section>
 </section>
 

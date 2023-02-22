@@ -459,18 +459,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#model-training">
    Model training:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
-     Evaluate model using out sample data (Held out human-coded data)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
-     Predict labels for unannotated data
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+   Evaluate model using out sample data (Held out human-coded data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+   Predict labels for unannotated data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-parameters-for-each-annotation">
+   Best Parameters for each annotation
+  </a>
  </li>
 </ul>
 
@@ -535,18 +538,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#model-training">
    Model training:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
-     Evaluate model using out sample data (Held out human-coded data)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
-     Predict labels for unannotated data
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data">
+   Evaluate model using out sample data (Held out human-coded data)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-labels-for-unannotated-data">
+   Predict labels for unannotated data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-parameters-for-each-annotation">
+   Best Parameters for each annotation
+  </a>
  </li>
 </ul>
 
@@ -560,11 +566,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-multiple-annotations">
 <h1>Model - Multiple Annotations<a class="headerlink" href="#model-multiple-annotations" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -574,11 +577,9 @@ from iqual import iqualnlp, evaluation, crossval
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-annotated-human-coded-and-unannotated-datasets">
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -588,11 +589,9 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="split-the-data-into-training-and-test-sets">
 <h2>Split the data into training and test sets<a class="headerlink" href="#split-the-data-into-training-and-test-sets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
@@ -608,11 +607,9 @@ Test Size: 2490
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-training-data">
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
@@ -627,21 +624,19 @@ code_variables = [&#39;religious&#39;,&#39;migration&#39;,&#39;entrepreneur&#39;
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
-scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
+scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
 </pre></div>
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
 <h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
-dict_dir          = &quot;../dictionaries&quot;
+dict_dir          = &quot;../../dictionaries&quot;
 sbert_models      = [&quot;all-mpnet-base-v2&quot;, &quot;distiluse-base-multilingual-cased-v2&quot;]
 sbert_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in sbert_models]
 </pre></div>
@@ -739,159 +734,20 @@ CLASSIFIER_PARAMS    = [LOGISTIC_PARAMS,RANDOM_FOREST_PARAMS,SGD_PARAMS]
 
 params_all = [{**vect_params, **clf_params} for vect_params in VECTORIZATION_PARAMS for clf_params in CLASSIFIER_PARAMS]
 CV_SEARCH_PARAMS = [crossval.convert_nested_params(params) for params in params_all]
+print(CV_SEARCH_PARAMS)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500], &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.01, 0.1]}, {&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500], &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;], &#39;Classifier__n_estimators&#39;: [100, 200], &#39;Classifier__max_depth&#39;: [5, 10, 15]}, {&#39;Input__question__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__question__vectorizer__max_features&#39;: [500, 1000, 1500, 2500], &#39;Input__question__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;], &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;], &#39;Classifier__alpha&#39;: [0.0001, 0.001]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.01, 0.1]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;], &#39;Classifier__n_estimators&#39;: [100, 200], &#39;Classifier__max_depth&#39;: [5, 10, 15]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;TfidfVectorizer&#39;, &#39;CountVectorizer&#39;], &#39;Input__answer__vectorizer__max_features&#39;: [1500, 2500, 4000], &#39;Input__answer__vectorizer__env&#39;: [&#39;scikit-learn&#39;], &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;], &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;], &#39;Classifier__alpha&#39;: [0.0001, 0.001]}, {&#39;Input__question__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.01, 0.1]}, {&#39;Input__question__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;], &#39;Classifier__n_estimators&#39;: [100, 200], &#39;Classifier__max_depth&#39;: [5, 10, 15]}, {&#39;Input__question__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__question__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;], &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;], &#39;Classifier__alpha&#39;: [0.0001, 0.001]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;LogisticRegression&#39;], &#39;Classifier__C&#39;: [0.01, 0.1]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;RandomForestClassifier&#39;], &#39;Classifier__n_estimators&#39;: [100, 200], &#39;Classifier__max_depth&#39;: [5, 10, 15]}, {&#39;Input__answer__vectorizer__model&#39;: [&#39;../../dictionaries\\all-mpnet-base-v2.pkl&#39;, &#39;../../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;], &#39;Input__answer__vectorizer__env&#39;: [&#39;saved-dictionary&#39;], &#39;Classifier__model&#39;: [&#39;SGDClassifier&#39;], &#39;Classifier__loss&#39;: [&#39;hinge&#39;, &#39;log&#39;], &#39;Classifier__alpha&#39;: [0.0001, 0.001]}]
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="model-training">
 <h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
 <p>Cross-validate over hyperparameters and select the best model</p>
-<section id="evaluate-model-using-out-sample-data-held-out-human-coded-data">
-<h3>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for code_var in code_variables:
-    test_pred = fitted_models[code_var].predict(test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-    test_act  = test_df[code_var].tolist()
-    f1_score  = evaluation.calc_f1_score_from_labels(test_pred,test_act)
-    print(f&quot;Out-sample F1-score for {code_var} is : {f1_score:.3f}&quot;)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score for religious is : 0.651
-Out-sample F1-score for migration is : 0.667
-Out-sample F1-score for entrepreneur is : 0.619
-Out-sample F1-score for secular is : 0.440
-Out-sample F1-score for marriage is : 0.830
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="predict-labels-for-unannotated-data">
-<h3>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for code_var in code_variables:
-    uncoded_df[code_var+&#39;_pred&#39;] = fitted_models[code_var].predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
-    print(f&quot;\tExamples of positive {code_var} predictions:\n&quot;)
-    print(&#39;\t===============================================\n\n&#39;)
-    for idx, row in uncoded_df.loc[(uncoded_df[code_var+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(3).iterrows():
-        print(&quot;Q: &quot;,row[&#39;Q_en&#39;],&quot;\n&quot;,&quot;A: &quot;, row[&#39;A_en&#39;],sep=&#39;&#39;)
-        print()
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Examples of positive religious predictions:
-
-	===============================================
-
-
-Q: Bro, what kind of work do you think Nur Arafat will do when he grows up?
-A: Maulana will grow up to serve religion.
-
-Q: If God blesses you, who will be your sons when they grow up?
-A: My son Yahya will be the Mufti of the Fatwa Department, a researcher of the Big Book (Hadith Sharif). Hafez will be in the Koran.
-
-Q: So what did you say, brother?
-A: The knowledge of the world is called the world. There is a knowledge of the hereafter. If my son can teach people about the hereafter in madrasas, mosques. I like that.
-
-	Examples of positive migration predictions:
-
-	===============================================
-
-
-Q: What other dreams do you have for him after making him master, tell me a little?
-A: Apart from that, his necessary travel documents, clothes, etc. are all these.
-
-Q: Yes, how to do that?
-A: I will send visa abroad with a relative.
-
-Q: What to send abroad for?
-A: For the good of the nation.
-
-	Examples of positive entrepreneur predictions:
-
-	===============================================
-
-
-Q: What do you dream about your child, what hope do you have? tell me
-A: I wanted to educate my younger son, I wanted to open a shop for my elder son, I couldn&#39;t, I wanted to build a house, the house broke down in monsoon, I couldn&#39;t either. I am in more trouble now.
-
-Q: yes,
-A: Sis, I already told you. If you give me a chance, maybe I can run a cloth shop or a rice shop. Sister, these are talking about capital.
-
-Q: So what do you want? Oki will work or do business.
-A: Which he likes. Whatever the job or business. We can live in peace. That&#39;s what I want
-
-	Examples of positive secular predictions:
-
-	===============================================
-
-
-Q: Brother, what are your future plans with your children?
-A: The future plan is to live with people in the society and the area with respect. And can join any job by studying for it. Then they can shape their own beautiful future.
-
-Q: Well. Do you pray to God for your son?
-A: Yes. I give thousands of thanks to Allah. To give us a beautiful life.
-
-Q: Uncle, what hope do you have for your elder daughter Roksana Begum?
-A: I hope to educate him. I will marry him after studying. He will live happily ever after.
-
-	Examples of positive marriage predictions:
-
-	===============================================
-
-
-Q: What to do for the rest of your life?
-A: I will get married when I grow up.
-
-Q: What are the plans or thoughts of the future of the brothers?
-A: Let the boys study. I will get a job after finishing my studies. If not, if any shop or business can do it, I will do it. If there are girls, I will marry them if they have money. This is my dream.
-
-Q: How have you thought about fulfilling all your dreams? How can you marry a good girl or get a job? What have you planned?
-A: As for what I am doing, I am saving some money from running the family. If my daughter gets a good job, if she doesn&#39;t get a job, I will see a good family and get her married.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for code_var in code_variables:
-    best_params = fitted_models[code_var].cv.get_best_params()
-    print(f&quot;\tBest parameters for {code_var}:\n\n&quot;,best_params,end=&#39;\n\n&#39;)
-    
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Best parameters for religious:
-
- {&#39;Input__question__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 500, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 4000, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 100, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 10}
-
-	Best parameters for migration:
-
- {&#39;Input__answer__vectorizer__model&#39;: &#39;../dictionaries\\distiluse-base-multilingual-cased-v2.pkl&#39;, &#39;Input__answer__vectorizer__env&#39;: &#39;saved-dictionary&#39;, &#39;Classifier__model&#39;: &#39;SGDClassifier&#39;, &#39;Classifier__loss&#39;: &#39;hinge&#39;, &#39;Classifier__alpha&#39;: 0.0001}
-
-	Best parameters for entrepreneur:
-
- {&#39;Input__question__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 2500, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 1500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 200, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 15}
-
-	Best parameters for secular:
-
- {&#39;Input__answer__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 2500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 200, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 10}
-
-	Best parameters for marriage:
-
- {&#39;Input__question__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 1000, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 1500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 100, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 10}
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fitted_models = {}
@@ -905,7 +761,7 @@ for code_var in code_variables:
     iqual_model = iqualnlp.Model()
     iqual_model.add_text_features(question_col,answer_col,model=&#39;TfidfVectorizer&#39;,env=&#39;scikit-learn&#39;)
     iqual_model.add_classifier(name=&quot;LogisticRegression&quot;)
-    iqual_model.add_threshold()
+    iqual_model.add_threshold(scoring_metric=&#39;f1&#39;)
     iqual_model.compile()
     cv_dict = iqual_model.cross_validate_fit(
         X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
@@ -929,23 +785,148 @@ for code_var in code_variables:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>religious
 .......720 hyperparameters configurations possible.....
-Average F1 score for religious: 0.628
+
+Average F1 score for religious: 0.605
 migration
 .......720 hyperparameters configurations possible.....
-Average F1 score for migration: 0.653
+
+Average F1 score for migration: 0.647
 entrepreneur
 .......720 hyperparameters configurations possible.....
-Average F1 score for entrepreneur: 0.680
+
+Average F1 score for entrepreneur: 0.581
 secular
 .......720 hyperparameters configurations possible.....
-Average F1 score for secular: 0.498
+
+Average F1 score for secular: 0.444
 marriage
 .......720 hyperparameters configurations possible.....
-Average F1 score for marriage: 0.810
+
+Average F1 score for marriage: 0.780
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="evaluate-model-using-out-sample-data-held-out-human-coded-data">
+<h2>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>scorer = evaluation.get_metric(&#39;f1_score&#39;)
+for code_var in code_variables:
+    f1_score = iqual_model.score(test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]],
+                                 test_df[code_var],
+                                 scoring_function=scorer
+                                )
+    print(f&quot;Out-sample F1-score for {code_var} is : {f1_score:.3f}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out-sample F1-score for religious is : 0.073
+Out-sample F1-score for migration is : 0.024
+Out-sample F1-score for entrepreneur is : 0.032
+Out-sample F1-score for secular is : 0.108
+Out-sample F1-score for marriage is : 0.846
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predict-labels-for-unannotated-data">
+<h2>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for code_var in code_variables:
+    uncoded_df[code_var+&#39;_pred&#39;] = fitted_models[code_var].predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
+    print(f&quot;\tExamples of positive {code_var} predictions:\n&quot;)
+    print(&#39;\t===============================================\n\n&#39;)
+    for idx, row in uncoded_df.loc[(uncoded_df[code_var+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(1).iterrows():
+        print(&quot;Q: &quot;,row[&#39;Q_en&#39;],&quot;\n&quot;,&quot;A: &quot;, row[&#39;A_en&#39;],sep=&#39;&#39;)
+        print()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Examples of positive religious predictions:
+
+	===============================================
+
+
+Q: What kind of job will you do in Madrasah?
+A: Madrasa teacher, mosque imam.
+
+	Examples of positive migration predictions:
+
+	===============================================
+
+
+Q: Well, what is the dream of your eldest child?
+A: What should I do? If the money is money, I will send it abroad.
+
+	Examples of positive entrepreneur predictions:
+
+	===============================================
+
+
+Q: You said that you want to study, you said that you want to go abroad, what are you doing to fulfill these dreams?
+A: I can&#39;t do anything. In the future, I will do something by doing business.
+
+	Examples of positive secular predictions:
+
+	===============================================
+
+
+Q: Well, which one will be more happy?
+A: I am happy that my son will go to school and educate other boys, it is a happiness to teach other boys, it is a happiness to buy a shop.
+
+	Examples of positive marriage predictions:
+
+	===============================================
+
+
+Q: It&#39;s your dream ok ok. What other dreams do you have besides becoming a government army officer?
+A: What other dreams can there be about a girl? Here, if the village area is a little bigger, they get married and move to the in-laws&#39; house.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="best-parameters-for-each-annotation">
+<h2>Best Parameters for each annotation<a class="headerlink" href="#best-parameters-for-each-annotation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for code_var in code_variables:
+    best_params = fitted_models[code_var].cv.get_best_params()
+    print(f&quot;\tBest parameters for {code_var}:\n\n&quot;,best_params,end=&#39;\n\n&#39;)    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Best parameters for religious:
+
+ {&#39;Input__question__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 500, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 4000, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 200, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 15}
+
+	Best parameters for migration:
+
+ {&#39;Input__answer__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 2500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__model&#39;: &#39;SGDClassifier&#39;, &#39;Classifier__loss&#39;: &#39;hinge&#39;, &#39;Classifier__alpha&#39;: 0.001}
+
+	Best parameters for entrepreneur:
+
+ {&#39;Input__question__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 1500, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 2500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__model&#39;: &#39;SGDClassifier&#39;, &#39;Classifier__loss&#39;: &#39;hinge&#39;, &#39;Classifier__alpha&#39;: 0.0001}
+
+	Best parameters for secular:
+
+ {&#39;Input__question__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__question__vectorizer__max_features&#39;: 2500, &#39;Input__question__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Input__answer__vectorizer__model&#39;: &#39;TfidfVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 4000, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 100, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 5}
+
+	Best parameters for marriage:
+
+ {&#39;Input__answer__vectorizer__model&#39;: &#39;CountVectorizer&#39;, &#39;Input__answer__vectorizer__max_features&#39;: 1500, &#39;Input__answer__vectorizer__env&#39;: &#39;scikit-learn&#39;, &#39;Classifier__n_estimators&#39;: 100, &#39;Classifier__model&#39;: &#39;RandomForestClassifier&#39;, &#39;Classifier__max_depth&#39;: 15}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

@@ -473,24 +473,22 @@ title="Print to PDF"
    </code>
    for each annotation across:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-validation-set-performance">
-     Plot
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Validation
-      </span>
-      <span class="pre">
-       set
-      </span>
-      <span class="pre">
-       performance
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-validation-set-performance">
+   Plot
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Validation
+    </span>
+    <span class="pre">
+     set
+    </span>
+    <span class="pre">
+     performance
+    </span>
+   </code>
+  </a>
  </li>
 </ul>
 
@@ -569,24 +567,22 @@ title="Print to PDF"
    </code>
    for each annotation across:
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-validation-set-performance">
-     Plot
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Validation
-      </span>
-      <span class="pre">
-       set
-      </span>
-      <span class="pre">
-       performance
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-validation-set-performance">
+   Plot
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Validation
+    </span>
+    <span class="pre">
+     set
+    </span>
+    <span class="pre">
+     performance
+    </span>
+   </code>
+  </a>
  </li>
 </ul>
 
@@ -600,11 +596,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="model-bootstrap">
 <h1>Model - Bootstrap<a class="headerlink" href="#model-bootstrap" title="Permalink to this headline">#</a></h1>
-<blockquote>
-<div></div></blockquote>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
@@ -616,11 +609,9 @@ from iqual import iqualnlp, evaluation, crossval
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="load-annotated-human-coded-and-unannotated-datasets">
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
@@ -630,11 +621,9 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-training-data">
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
@@ -658,21 +647,19 @@ code_variables = [&#39;religious&#39;, &#39;secular&#39;, &#39;no_ambition&#39;,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scorig Dict for evaluation
-scoring_dict = evaluation.get_scoring_dict([&#39;f1&#39;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
+scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
 </pre></div>
 </div>
 </div>
 </div>
-<blockquote>
-<div></div></blockquote>
+</section>
 <section id="configure-a-hyperparameter-grid-for-cross-validation-fitting">
 <h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
-dict_dir          = &quot;../dictionaries&quot;
+dict_dir          = &quot;../../dictionaries&quot;
 
 ### Sentence-Transformers precomputed vectors
 sbert_models      = [&quot;all-mpnet-base-v2&quot;,&#39;all-roberta-large-v1&#39;,&quot;distiluse-base-multilingual-cased-v2&quot;]
@@ -729,10 +716,10 @@ print(f&quot;Number of hyperparameter configurations: {crossval.count_hyperparam
 </div>
 </div>
 </div>
+</section>
 <section id="model-training">
 <h2>Model training:<a class="headerlink" href="#model-training" title="Permalink to this headline">#</a></h2>
 <p>Cross-validate over hyperparameters and select the best model</p>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>NUM_BOOTSTRAP_RUNS = 25
@@ -813,9 +800,9 @@ bootstrap_data = pd.concat(bootstrap_dfs,axis=0)
 </div>
 </div>
 </div>
+</section>
 <section id="selected-model-parameters">
 <h2>Selected model parameters<a class="headerlink" href="#selected-model-parameters" title="Permalink to this headline">#</a></h2>
-</section>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>param_data     = pd.concat(param_dfs)    
@@ -837,6 +824,14 @@ param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;quest
 </div>
 </div>
 </div>
+</section>
+<section id="plot-parameter-selections-for-each-annotation-across">
+<h2>Plot <code class="docutils literal notranslate"><span class="pre">parameter</span> <span class="pre">selections</span></code> for each annotation across:<a class="headerlink" href="#plot-parameter-selections-for-each-annotation-across" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Question/ Question + Answer</p></li>
+<li><p>Vectorizer</p></li>
+<li><p>Classifier</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>question_options      = param_data[&#39;question&#39;].unique()
@@ -855,17 +850,6 @@ color_dict = {option:colors[o] for o, option in enumerate(all_options)}
 </div>
 </div>
 </div>
-<section id="plot-parameter-selections-for-each-annotation-across">
-<h2>Plot <code class="docutils literal notranslate"><span class="pre">parameter</span> <span class="pre">selections</span></code> for each annotation across:<a class="headerlink" href="#plot-parameter-selections-for-each-annotation-across" title="Permalink to this headline">#</a></h2>
-<section id="plot-validation-set-performance">
-<h3>Plot <code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">set</span> <span class="pre">performance</span></code><a class="headerlink" href="#plot-validation-set-performance" title="Permalink to this headline">#</a></h3>
-</section>
-</section>
-<ul class="simple">
-<li><p>Question/ Question + Answer</p></li>
-<li><p>Vectorizer</p></li>
-<li><p>Classifier</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
@@ -946,6 +930,9 @@ plt.show()
 <img alt="../../_images/Model-Bootstrap_18_0.png" src="../../_images/Model-Bootstrap_18_0.png" />
 </div>
 </div>
+</section>
+<section id="plot-validation-set-performance">
+<h2>Plot <code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">set</span> <span class="pre">performance</span></code><a class="headerlink" href="#plot-validation-set-performance" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### F1 score using random predictions --&gt; sparsity of variable
@@ -1014,6 +1001,7 @@ plt.show()
 <img alt="../../_images/Model-Bootstrap_21_0.png" src="../../_images/Model-Bootstrap_21_0.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
