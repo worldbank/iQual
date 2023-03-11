@@ -1,8 +1,8 @@
 # iQual
 
 [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/worldbank/iQual/blob/main/LICENSE.md)
-[![PyPI version](https://badge.fury.io/py/iQual.svg?kill_cache=1)](https://badge.fury.io/py/iQual)
-[![Docs - GitHub.io](https://img.shields.io/static/v1?logo=github&style=flat&color=blue&label=docs&message=iQual)](https://worldbank.github.io/iQual/)
+[![PyPI version](https://img.shields.io/pypi/v/iQual?color=blue&label=pypi%20package&kill_cache=1)](https://badge.fury.io/py/iQual)
+[![Docs - GitHub.io](https://img.shields.io/static/v1?logo=github&style=flat&color=orange&label=docs&message=iQual)](https://worldbank.github.io/iQual/)
 
 This repository contains the code and resources necessary to implement the techniques described in the paper [A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996). The `iQual` package is designed for qualitative analysis of open-ended interviews and aims to extend a small set of interpretative human-codes to a much larger set of documents using natural language processing. The package provides a method for assessing the robustness and reliability of this approach. The `iQual` package has been applied to analyze 2,200 open-ended interviews on parent’s aspirations for children from Rohingya refugees and their Bangladeshi hosts in Cox’s Bazaar, Bangladesh. It draws on work in anthropology and philosophy to expand conceptions of aspirations in economics to distinguish between material goals, moral and religious values, and navigational capacity—the ability to achieve goals and aspirations, showing that they have very different correlates. 
 
@@ -145,18 +145,18 @@ For examples on cross-validation fitting, model selection & performance evaluati
 
 ## Notebooks
 
-The [notebooks](notebooks) folder contains detailed examples on using `iQual`. The notebooks are organized into the following categories:
+The [notebooks](https://github.com/worldbank/iQual/tree/main/notebooks) folder contains detailed examples on using `iQual`. The notebooks are organized into the following categories:
 
-* [Basic Modelling](notebooks/basic)
+* [Basic Modelling](https://github.com/worldbank/iQual/tree/main/notebooks/basic)
 These notebooks demonstrates the basic usage of the package, the pipeline construction, and the vectorization and classification options.
 
-* [Advanced Modelling](notebooks/advanced) 
+* [Advanced Modelling](https://github.com/worldbank/iQual/tree/main/notebooks/advanced) 
 These notebooks demonstrate advanced pipeline construction, mixing and matching of feature extraction and classification methods, and model selection.
 
-* [Interpretability](notebooks/interpretability)
+* [Interpretability](https://github.com/worldbank/iQual/tree/main/notebooks/interpretability)
 These notebooks demonstrate the interpretability and related tests for measurement and comparison of interpretability across human and enhanced (machine + human) codes.
 
-* [Bias](notebooks/bias) and [Efficiency](notebooks/efficiency)
+* [Bias](https://github.com/worldbank/iQual/tree/main/notebooks/bias) and [Efficiency](https://github.com/worldbank/iQual/tree/main/notebooks/efficiency)
 These notebooks demonstrate the bias and efficiency tests for determining the value and validity of enhanced codes.
 
 ---

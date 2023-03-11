@@ -600,11 +600,11 @@ title="Print to PDF"
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from iqual import iqualnlp, evaluation, crossval
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">iqual</span> <span class="kn">import</span> <span class="n">iqualnlp</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">crossval</span>
 </pre></div>
 </div>
 </div>
@@ -614,9 +614,9 @@ from iqual import iqualnlp, evaluation, crossval
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
-human_coded_df   = pd.read_csv(os.path.join(data_dir,&quot;annotated.csv&quot;))
-uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span>         <span class="o">=</span> <span class="s2">&quot;../../data&quot;</span>
+<span class="n">human_coded_df</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;annotated.csv&quot;</span><span class="p">))</span>
+<span class="n">uncoded_df</span>       <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;unannotated.csv&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -626,29 +626,29 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
-question_col = &#39;Q_en&#39;
-answer_col   = &#39;A_en&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Select Question and Answer Columns</span>
+<span class="n">question_col</span> <span class="o">=</span> <span class="s1">&#39;Q_en&#39;</span>
+<span class="n">answer_col</span>   <span class="o">=</span> <span class="s1">&#39;A_en&#39;</span>
 
-### Select a code
-code_variables = [&#39;religious&#39;, &#39;secular&#39;, &#39;no_ambition&#39;, &#39;vague_job&#39;,
-                  &#39;job_secular&#39;,&#39;vocational_training&#39;, &#39;entrepreneur&#39;,
-                  &#39;education_low&#39;,&#39;education_neutral&#39;, &#39;education_high&#39;,
-                  &#39;education_religious&#39;, &#39;marriage&#39;, &#39;migration&#39;,
-                  &#39;vague_non_specific&#39;, &#39;reliance_on_god&#39;, &#39;ability_high&#39;,
-                  &#39;ability_low&#39;, &#39;budget_high&#39;, &#39;budget_low&#39;,
-                  &#39;awareness_information_high&#39;,&#39;awareness_information_low&#39;,
-                  &#39;camp_regulations&#39;, &#39;covid_impacts&#39;, &#39;public_assistance&#39;,
-                  &#39;worries_anxieties&#39;,
-                 ]
+<span class="c1">### Select a code</span>
+<span class="n">code_variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;religious&#39;</span><span class="p">,</span> <span class="s1">&#39;secular&#39;</span><span class="p">,</span> <span class="s1">&#39;no_ambition&#39;</span><span class="p">,</span> <span class="s1">&#39;vague_job&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;job_secular&#39;</span><span class="p">,</span><span class="s1">&#39;vocational_training&#39;</span><span class="p">,</span> <span class="s1">&#39;entrepreneur&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;education_low&#39;</span><span class="p">,</span><span class="s1">&#39;education_neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;education_high&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;education_religious&#39;</span><span class="p">,</span> <span class="s1">&#39;marriage&#39;</span><span class="p">,</span> <span class="s1">&#39;migration&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;vague_non_specific&#39;</span><span class="p">,</span> <span class="s1">&#39;reliance_on_god&#39;</span><span class="p">,</span> <span class="s1">&#39;ability_high&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;ability_low&#39;</span><span class="p">,</span> <span class="s1">&#39;budget_high&#39;</span><span class="p">,</span> <span class="s1">&#39;budget_low&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;awareness_information_high&#39;</span><span class="p">,</span><span class="s1">&#39;awareness_information_low&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;camp_regulations&#39;</span><span class="p">,</span> <span class="s1">&#39;covid_impacts&#39;</span><span class="p">,</span> <span class="s1">&#39;public_assistance&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;worries_anxieties&#39;</span><span class="p">,</span>
+                 <span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
-scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scoring Dict for evaluation</span>
+<span class="n">scoring_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;f1&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="o">.</span><span class="n">get_scorer</span><span class="p">(</span><span class="s1">&#39;f1&#39;</span><span class="p">)}</span>
 </pre></div>
 </div>
 </div>
@@ -658,55 +658,55 @@ scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
 <h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
-dict_dir          = &quot;../../dictionaries&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Paths for precomputed vectors created using `sentence-transformers`</span>
+<span class="n">dict_dir</span>          <span class="o">=</span> <span class="s2">&quot;../../dictionaries&quot;</span>
 
-### Sentence-Transformers precomputed vectors
-sbert_models      = [&quot;all-mpnet-base-v2&quot;,&#39;all-roberta-large-v1&#39;,&quot;distiluse-base-multilingual-cased-v2&quot;]
-sbert_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in sbert_models]
+<span class="c1">### Sentence-Transformers precomputed vectors</span>
+<span class="n">sbert_models</span>      <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;all-mpnet-base-v2&quot;</span><span class="p">,</span><span class="s1">&#39;all-roberta-large-v1&#39;</span><span class="p">,</span><span class="s2">&quot;distiluse-base-multilingual-cased-v2&quot;</span><span class="p">]</span>
+<span class="n">sbert_model_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dict_dir</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sbert_models</span><span class="p">]</span>
 
-### Spacy precomputed vectors
-spacy_models      = [&quot;en_core_web_sm&quot;]
-spacy_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in spacy_models]
+<span class="c1">### Spacy precomputed vectors</span>
+<span class="n">spacy_models</span>      <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">]</span>
+<span class="n">spacy_model_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dict_dir</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">spacy_models</span><span class="p">]</span>
 
-### All precomputed vectors
-model_paths = [*sbert_model_paths,*spacy_model_paths]
+<span class="c1">### All precomputed vectors</span>
+<span class="n">model_paths</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">sbert_model_paths</span><span class="p">,</span><span class="o">*</span><span class="n">spacy_model_paths</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>PRETRAINED_QA_PARAMS = {
-    &quot;Input&quot;:{&quot;question&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}},&quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}}},
-}
-PRETRAINED_A_PARAMS = {
-    &quot;Input&quot;:{&quot;question&quot;:[&quot;drop&quot;],&quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:model_paths,&quot;env&quot;:[&#39;saved-dictionary&#39;]}}},
-}
-SKLEARN_QA_PARAMS  = {
-    &quot;Input&quot;:{
-        &quot;question&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1000,6500,1000)}},
-        &quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1500,8500,500)}}
-    },    
-}
-SKLEARN_A_PARAMS  = {
-    &quot;Input&quot;:{
-        &quot;question&quot;:[&quot;drop&quot;],
-        &quot;answer&quot;:{&quot;vectorizer&quot;:{&quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],&quot;env&quot;:[&#39;scikit-learn&#39;],&#39;max_features&#39;:np.arange(1500,8500,1000)}}
-    },    
-}
-LOGISTIC_PARAMS      = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;LogisticRegression&quot;],&quot;C&quot;:[0.001,0.01,0.1,0.1,1,10],&#39;penalty&#39;:[&#39;l1&#39;,&#39;l2&#39;],&#39;solver&#39;:[&#39;saga&#39;]}}
-RANDOM_FOREST_PARAMS = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;RandomForestClassifier&quot;],&quot;n_estimators&quot;:[100,200,400],&#39;max_depth&#39;:[5,10,25]}}
-SGD_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;SGDClassifier&quot;],&quot;loss&quot;:[&quot;modified_huber&quot;],&quot;penalty&quot;:[&quot;l2&quot;,&quot;l1&quot;]}}
-SVC_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;SVC&quot;],&quot;C&quot;:[0.001,0.01,0.1,0.1,1,10],&#39;kernel&#39;:[&#39;linear&#39;,&#39;rbf&#39;]}}
-KNN_PARAMS           = {&quot;Classifier&quot;:{&quot;model&quot;:[&quot;KNeighborsClassifier&quot;],&quot;n_neighbors&quot;:[5,10,15,25],&#39;weights&#39;:[&#39;uniform&#39;],}}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PRETRAINED_QA_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span><span class="s2">&quot;question&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">model_paths</span><span class="p">,</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;saved-dictionary&#39;</span><span class="p">]}},</span><span class="s2">&quot;answer&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">model_paths</span><span class="p">,</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;saved-dictionary&#39;</span><span class="p">]}}},</span>
+<span class="p">}</span>
+<span class="n">PRETRAINED_A_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span><span class="s2">&quot;question&quot;</span><span class="p">:[</span><span class="s2">&quot;drop&quot;</span><span class="p">],</span><span class="s2">&quot;answer&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">model_paths</span><span class="p">,</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;saved-dictionary&#39;</span><span class="p">]}}},</span>
+<span class="p">}</span>
+<span class="n">SKLEARN_QA_PARAMS</span>  <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;scikit-learn&#39;</span><span class="p">],</span><span class="s1">&#39;max_features&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">6500</span><span class="p">,</span><span class="mi">1000</span><span class="p">)}},</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;scikit-learn&#39;</span><span class="p">],</span><span class="s1">&#39;max_features&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span><span class="mi">8500</span><span class="p">,</span><span class="mi">500</span><span class="p">)}}</span>
+    <span class="p">},</span>    
+<span class="p">}</span>
+<span class="n">SKLEARN_A_PARAMS</span>  <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:[</span><span class="s2">&quot;drop&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span><span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span><span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s1">&#39;scikit-learn&#39;</span><span class="p">],</span><span class="s1">&#39;max_features&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span><span class="mi">8500</span><span class="p">,</span><span class="mi">1000</span><span class="p">)}}</span>
+    <span class="p">},</span>    
+<span class="p">}</span>
+<span class="n">LOGISTIC_PARAMS</span>      <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;LogisticRegression&quot;</span><span class="p">],</span><span class="s2">&quot;C&quot;</span><span class="p">:[</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;penalty&#39;</span><span class="p">:[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span><span class="s1">&#39;solver&#39;</span><span class="p">:[</span><span class="s1">&#39;saga&#39;</span><span class="p">]}}</span>
+<span class="n">RANDOM_FOREST_PARAMS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">],</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">],</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">]}}</span>
+<span class="n">SGD_PARAMS</span>           <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;SGDClassifier&quot;</span><span class="p">],</span><span class="s2">&quot;loss&quot;</span><span class="p">:[</span><span class="s2">&quot;modified_huber&quot;</span><span class="p">],</span><span class="s2">&quot;penalty&quot;</span><span class="p">:[</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span><span class="s2">&quot;l1&quot;</span><span class="p">]}}</span>
+<span class="n">SVC_PARAMS</span>           <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;SVC&quot;</span><span class="p">],</span><span class="s2">&quot;C&quot;</span><span class="p">:[</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;kernel&#39;</span><span class="p">:[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;rbf&#39;</span><span class="p">]}}</span>
+<span class="n">KNN_PARAMS</span>           <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span><span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">],</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">25</span><span class="p">],</span><span class="s1">&#39;weights&#39;</span><span class="p">:[</span><span class="s1">&#39;uniform&#39;</span><span class="p">],}}</span>
 
-VECTORIZATION_PARAMS   = [PRETRAINED_QA_PARAMS,PRETRAINED_A_PARAMS,SKLEARN_QA_PARAMS,SKLEARN_A_PARAMS]
-CLASSIFIER_PARAMS      = [LOGISTIC_PARAMS,RANDOM_FOREST_PARAMS,SGD_PARAMS,SVC_PARAMS,KNN_PARAMS]
-ALL_PARAM_COMBINATIONS = [{**vect_params, **clf_params} for vect_params in VECTORIZATION_PARAMS for clf_params in CLASSIFIER_PARAMS]
+<span class="n">VECTORIZATION_PARAMS</span>   <span class="o">=</span> <span class="p">[</span><span class="n">PRETRAINED_QA_PARAMS</span><span class="p">,</span><span class="n">PRETRAINED_A_PARAMS</span><span class="p">,</span><span class="n">SKLEARN_QA_PARAMS</span><span class="p">,</span><span class="n">SKLEARN_A_PARAMS</span><span class="p">]</span>
+<span class="n">CLASSIFIER_PARAMS</span>      <span class="o">=</span> <span class="p">[</span><span class="n">LOGISTIC_PARAMS</span><span class="p">,</span><span class="n">RANDOM_FOREST_PARAMS</span><span class="p">,</span><span class="n">SGD_PARAMS</span><span class="p">,</span><span class="n">SVC_PARAMS</span><span class="p">,</span><span class="n">KNN_PARAMS</span><span class="p">]</span>
+<span class="n">ALL_PARAM_COMBINATIONS</span> <span class="o">=</span> <span class="p">[{</span><span class="o">**</span><span class="n">vect_params</span><span class="p">,</span> <span class="o">**</span><span class="n">clf_params</span><span class="p">}</span> <span class="k">for</span> <span class="n">vect_params</span> <span class="ow">in</span> <span class="n">VECTORIZATION_PARAMS</span> <span class="k">for</span> <span class="n">clf_params</span> <span class="ow">in</span> <span class="n">CLASSIFIER_PARAMS</span><span class="p">]</span>
 
-CV_SEARCH_PARAMS = [crossval.convert_nested_params(p) for p in ALL_PARAM_COMBINATIONS]
-print(f&quot;Number of hyperparameter configurations: {crossval.count_hyperparameters(CV_SEARCH_PARAMS)}&quot;)
+<span class="n">CV_SEARCH_PARAMS</span> <span class="o">=</span> <span class="p">[</span><span class="n">crossval</span><span class="o">.</span><span class="n">convert_nested_params</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ALL_PARAM_COMBINATIONS</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of hyperparameter configurations: </span><span class="si">{</span><span class="n">crossval</span><span class="o">.</span><span class="n">count_hyperparameters</span><span class="p">(</span><span class="n">CV_SEARCH_PARAMS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -722,80 +722,80 @@ print(f&quot;Number of hyperparameter configurations: {crossval.count_hyperparam
 <p>Cross-validate over hyperparameters and select the best model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>NUM_BOOTSTRAP_RUNS = 25
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_BOOTSTRAP_RUNS</span> <span class="o">=</span> <span class="mi">25</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bootstrap_dfs = []
-cv_dfs        = []
-param_dfs     = []
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap_dfs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">cv_dfs</span>        <span class="o">=</span> <span class="p">[]</span>
+<span class="n">param_dfs</span>     <span class="o">=</span> <span class="p">[]</span>
 
-for bootstrap_run in range(1,NUM_BOOTSTRAP_RUNS+1,1):
+<span class="k">for</span> <span class="n">bootstrap_run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">NUM_BOOTSTRAP_RUNS</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
     
     
-    train_df, test_df   = train_test_split(human_coded_df,test_size=0.25)
+    <span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span>   <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">human_coded_df</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
     
-    train_df[&#39;split&#39;]   = &#39;train&#39;
-    test_df[&#39;split&#39;]    = &#39;test&#39;
-    uncoded_df[&#39;split&#39;] = &#39;unannotated&#39;
+    <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">&#39;train&#39;</span>
+    <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+    <span class="n">uncoded_df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unannotated&#39;</span>
     
-    boot_df = pd.concat([train_df,test_df,uncoded_df])
-    boot_df[&#39;bootstrap_run&#39;] = bootstrap_run
+    <span class="n">boot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train_df</span><span class="p">,</span><span class="n">test_df</span><span class="p">,</span><span class="n">uncoded_df</span><span class="p">])</span>
+    <span class="n">boot_df</span><span class="p">[</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bootstrap_run</span>
     
-    for code_var in code_variables:
+    <span class="k">for</span> <span class="n">code_var</span> <span class="ow">in</span> <span class="n">code_variables</span><span class="p">:</span>
         
-        print(f&quot;Bootstrap {bootstrap_run} | Annotation: {code_var}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bootstrap </span><span class="si">{</span><span class="n">bootstrap_run</span><span class="si">}</span><span class="s2"> | Annotation: </span><span class="si">{</span><span class="n">code_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         
-        ## Create X and y
-        X = train_df[[question_col,answer_col]]
-        y = train_df[code_var]
+        <span class="c1">## Create X and y</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[[</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">]]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">code_var</span><span class="p">]</span>
 
-        iqual_model = iqualnlp.Model()
-        iqual_model.add_text_features(question_col,answer_col)
-        iqual_model.add_classifier()
-        iqual_model.add_threshold()
-        iqual_model.compile()
+        <span class="n">iqual_model</span> <span class="o">=</span> <span class="n">iqualnlp</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
+        <span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">)</span>
+        <span class="n">iqual_model</span><span class="o">.</span><span class="n">add_classifier</span><span class="p">()</span>
+        <span class="n">iqual_model</span><span class="o">.</span><span class="n">add_threshold</span><span class="p">()</span>
+        <span class="n">iqual_model</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
         
-        cv_dict = iqual_model.cross_validate_fit(
-            X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
-            search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
-            cv_method=&#39;GridSearchCV&#39;,     # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
-            # n_iter=5,                           # n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;
-            scoring=scoring_dict,               # scoring: Scoring metric to use for cross-validation    
-            refit=&#39;f1&#39;,                         # refit: Metric to use for refitting the model
-            n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
-            cv_splits=3,                        # cv_splits: Number of cross-validation splits
-        )
+        <span class="n">cv_dict</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">cross_validate_fit</span><span class="p">(</span>
+            <span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span>                                <span class="c1"># X: Pandas DataFrame of features, y: Pandas Series of labels</span>
+            <span class="n">search_parameters</span><span class="o">=</span><span class="n">CV_SEARCH_PARAMS</span><span class="p">,</span> <span class="c1"># search_parameters: Dictionary of parameters to use for cross-validation</span>
+            <span class="n">cv_method</span><span class="o">=</span><span class="s1">&#39;GridSearchCV&#39;</span><span class="p">,</span>     <span class="c1"># cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV</span>
+            <span class="c1"># n_iter=5,                           # n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;</span>
+            <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_dict</span><span class="p">,</span>               <span class="c1"># scoring: Scoring metric to use for cross-validation    </span>
+            <span class="n">refit</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span>                         <span class="c1"># refit: Metric to use for refitting the model</span>
+            <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>                          <span class="c1"># n_jobs: Number of parallel threads to use  </span>
+            <span class="n">cv_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                        <span class="c1"># cv_splits: Number of cross-validation splits</span>
+        <span class="p">)</span>
         
         
-        ## Selected Best parameters
-        selected_param_df = pd.DataFrame.from_dict(iqual_model.cv.get_best_params(),orient=&#39;index&#39;).T
-        selected_param_df[&#39;annotation&#39;]    = code_var
-        selected_param_df[&#39;bootstrap_run&#39;] = bootstrap_run        
-        param_dfs.append(selected_param_df)
+        <span class="c1">## Selected Best parameters</span>
+        <span class="n">selected_param_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">iqual_model</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">get_best_params</span><span class="p">(),</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">selected_param_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">code_var</span>
+        <span class="n">selected_param_df</span><span class="p">[</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bootstrap_run</span>        
+        <span class="n">param_dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_param_df</span><span class="p">)</span>
         
-        # `NOTE`: Use `iqual_model.cv.get_cv_results()` to get more detailed cross-validation results.
+        <span class="c1"># `NOTE`: Use `iqual_model.cv.get_cv_results()` to get more detailed cross-validation results.</span>
         
-        ## Cross-Validation data
-        print(&quot;\n\nAverage F1 score for {code_var}: {score:.3f}&quot;.format(code_var=code_var,score=cv_dict[&#39;avg_test_score&#39;]),end=&#39;\n\n&#39;)
+        <span class="c1">## Cross-Validation data</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Average F1 score for </span><span class="si">{code_var}</span><span class="s2">: </span><span class="si">{score:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code_var</span><span class="o">=</span><span class="n">code_var</span><span class="p">,</span><span class="n">score</span><span class="o">=</span><span class="n">cv_dict</span><span class="p">[</span><span class="s1">&#39;avg_test_score&#39;</span><span class="p">]),</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
         
-        cv_df = pd.DataFrame([cv_dict])
-        cv_df[&#39;annotation&#39;]    = code_var
-        cv_df[&#39;bootstrap_run&#39;] = bootstrap_run
-        cv_dfs.append(cv_df)
+        <span class="n">cv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">cv_dict</span><span class="p">])</span>
+        <span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">code_var</span>
+        <span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bootstrap_run</span>
+        <span class="n">cv_dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_df</span><span class="p">)</span>
 
         
-        # Predict on both `test` (held-out human annotated data) and on (uncoded/machine data) using the dataframe:
-        boot_df[code_var+&quot;_pred&quot;]  = iqual_model.predict(boot_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])        
+        <span class="c1"># Predict on both `test` (held-out human annotated data) and on (uncoded/machine data) using the dataframe:</span>
+        <span class="n">boot_df</span><span class="p">[</span><span class="n">code_var</span><span class="o">+</span><span class="s2">&quot;_pred&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">boot_df</span><span class="p">[[</span><span class="s1">&#39;Q_en&#39;</span><span class="p">,</span><span class="s1">&#39;A_en&#39;</span><span class="p">]])</span>        
     
-    # Append after each bootstrap run
-    bootstrap_dfs.append(boot_df)
+    <span class="c1"># Append after each bootstrap run</span>
+    <span class="n">bootstrap_dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boot_df</span><span class="p">)</span>
 
-param_data     = pd.concat(param_dfs)    
-bootstrap_data = pd.concat(bootstrap_dfs,axis=0)
+<span class="n">param_data</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">param_dfs</span><span class="p">)</span>    
+<span class="n">bootstrap_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">bootstrap_dfs</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -805,21 +805,21 @@ bootstrap_data = pd.concat(bootstrap_dfs,axis=0)
 <h2>Selected model parameters<a class="headerlink" href="#selected-model-parameters" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>param_data     = pd.concat(param_dfs)    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_data</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">param_dfs</span><span class="p">)</span>    
 
-# Best Parameters
-param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;Input__question__vectorizer__model&#39;,&#39;Input__answer__vectorizer__model&#39;,&#39;Classifier__model&#39;]]
+<span class="c1"># Best Parameters</span>
+<span class="n">param_data</span> <span class="o">=</span> <span class="n">param_data</span><span class="p">[[</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">,</span><span class="s1">&#39;Input__question__vectorizer__model&#39;</span><span class="p">,</span><span class="s1">&#39;Input__answer__vectorizer__model&#39;</span><span class="p">,</span><span class="s1">&#39;Classifier__model&#39;</span><span class="p">]]</span>
 
-# Question: Drop | Keep
-param_data.loc[param_data[&#39;Input__question__vectorizer__model&#39;].isna(),&#39;question&#39;]  = &#39;Answer only&#39;
-param_data.loc[param_data[&#39;Input__question__vectorizer__model&#39;].notna(),&#39;question&#39;] = &#39;Question + Answer&#39;
+<span class="c1"># Question: Drop | Keep</span>
+<span class="n">param_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;Input__question__vectorizer__model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">&#39;Answer only&#39;</span>
+<span class="n">param_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;Input__question__vectorizer__model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">(),</span><span class="s1">&#39;question&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Question + Answer&#39;</span>
 
-# Rename columns
-param_data = param_data.rename(columns={&#39;Input__answer__vectorizer__model&#39;:&#39;vectorization&#39;,&#39;Classifier__model&#39;:&#39;classifier&#39;})
+<span class="c1"># Rename columns</span>
+<span class="n">param_data</span> <span class="o">=</span> <span class="n">param_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Input__answer__vectorizer__model&#39;</span><span class="p">:</span><span class="s1">&#39;vectorization&#39;</span><span class="p">,</span><span class="s1">&#39;Classifier__model&#39;</span><span class="p">:</span><span class="s1">&#39;classifier&#39;</span><span class="p">})</span>
 
-# Replace Dictionary paths of precomputed pkl files 
-param_data[&#39;vectorization&#39;] = param_data[&#39;vectorization&#39;].apply(lambda x: os.path.basename(x).replace(&#39;.pkl&#39;,&#39;&#39;))
-param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;question&#39;,&#39;vectorization&#39;,&#39;classifier&#39;]]
+<span class="c1"># Replace Dictionary paths of precomputed pkl files </span>
+<span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;vectorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;vectorization&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="n">param_data</span> <span class="o">=</span> <span class="n">param_data</span><span class="p">[[</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">,</span><span class="s1">&#39;question&#39;</span><span class="p">,</span><span class="s1">&#39;vectorization&#39;</span><span class="p">,</span><span class="s1">&#39;classifier&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -834,95 +834,95 @@ param_data = param_data[[&#39;annotation&#39;,&#39;bootstrap_run&#39;,&#39;quest
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>question_options      = param_data[&#39;question&#39;].unique()
-vectorizer_options    = param_data[&#39;vectorization&#39;].unique()
-classifier_options    = param_data[&#39;classifier&#39;].unique()
-all_options = [*question_options,*vectorizer_options,*classifier_options]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">question_options</span>      <span class="o">=</span> <span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">vectorizer_options</span>    <span class="o">=</span> <span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;vectorization&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">classifier_options</span>    <span class="o">=</span> <span class="n">param_data</span><span class="p">[</span><span class="s1">&#39;classifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">all_options</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">question_options</span><span class="p">,</span><span class="o">*</span><span class="n">vectorizer_options</span><span class="p">,</span><span class="o">*</span><span class="n">classifier_options</span><span class="p">]</span>
 
-colors = [
-    &#39;#00425A&#39;,&#39;#A4BE7B&#39;,
-    &#39;#9C2C77&#39;,&#39;#CD104D&#39;,&#39;#E14D2A&#39;,&#39;#FD841F&#39;,&#39;#FFD384&#39;,
-    &#39;#0C084C&#39;,&#39;#096386&#39;,&#39;#00B7A8&#39;, &#39;#544179&#39;, &#39;#BFEAF5&#39;,
-]
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;#00425A&#39;</span><span class="p">,</span><span class="s1">&#39;#A4BE7B&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#9C2C77&#39;</span><span class="p">,</span><span class="s1">&#39;#CD104D&#39;</span><span class="p">,</span><span class="s1">&#39;#E14D2A&#39;</span><span class="p">,</span><span class="s1">&#39;#FD841F&#39;</span><span class="p">,</span><span class="s1">&#39;#FFD384&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#0C084C&#39;</span><span class="p">,</span><span class="s1">&#39;#096386&#39;</span><span class="p">,</span><span class="s1">&#39;#00B7A8&#39;</span><span class="p">,</span> <span class="s1">&#39;#544179&#39;</span><span class="p">,</span> <span class="s1">&#39;#BFEAF5&#39;</span><span class="p">,</span>
+<span class="p">]</span>
 
-color_dict = {option:colors[o] for o, option in enumerate(all_options)}
+<span class="n">color_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">option</span><span class="p">:</span><span class="n">colors</span><span class="p">[</span><span class="n">o</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">option</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_options</span><span class="p">)}</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-# Subplots
-fig, axs = plt.subplots(1, 3, sharey=True, figsize=(18,18))
+<span class="c1"># Subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">18</span><span class="p">))</span>
 
-# Title
-fig.suptitle(&quot;Choices of text representation and classifier&quot;,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+<span class="c1"># Title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Choices of text representation and classifier&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">fontfamily</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,)</span>
 
-# Empty lists - handles/labels for adding common legend later.
-handles = []
-labels  = []
+<span class="c1"># Empty lists - handles/labels for adding common legend later.</span>
+<span class="n">handles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels</span>  <span class="o">=</span> <span class="p">[]</span>
 
-for i, (ax, col) in enumerate(zip(axs, [&#39;question&#39;, &#39;vectorization&#39;, &#39;classifier&#39;])):
-    param_df = param_data.groupby(&#39;annotation&#39;)[col].value_counts().unstack().fillna(0) / param_data.bootstrap_run.nunique()
-    bottom   = np.zeros(len(param_df.index))
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">,</span> <span class="s1">&#39;vectorization&#39;</span><span class="p">,</span> <span class="s1">&#39;classifier&#39;</span><span class="p">])):</span>
+    <span class="n">param_df</span> <span class="o">=</span> <span class="n">param_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;annotation&#39;</span><span class="p">)[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">param_data</span><span class="o">.</span><span class="n">bootstrap_run</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+    <span class="n">bottom</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">param_df</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
     
-    for j, key in enumerate(param_data[col].unique()):
-        values = param_df[key].values
-        h      = ax.barh(param_df.index, 
-                         values, 
-                         color=color_dict[key], 
-                         alpha=0.75,ec=&#39;k&#39;,lw=1, 
-                         left=bottom
-                        )
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">param_data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">param_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">h</span>      <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">param_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+                         <span class="n">values</span><span class="p">,</span> 
+                         <span class="n">color</span><span class="o">=</span><span class="n">color_dict</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> 
+                         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span><span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                         <span class="n">left</span><span class="o">=</span><span class="n">bottom</span>
+                        <span class="p">)</span>
         
-        bottom += values
+        <span class="n">bottom</span> <span class="o">+=</span> <span class="n">values</span>
         
-        handles.append(h)
-        labels.append(key)      
+        <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>      
     
-    ax.grid(False)
-    ax.margins(0, 0, tight=True)
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    ax.set_title(col.capitalize(),fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
-                                            &#39;fontsize&#39;:24,
-                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
-                                            &#39;fontweight&#39;:800
-                                           },
-                 pad=15)    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontsize&#39;</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span>
+                                            <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span><span class="mi">800</span>
+                                           <span class="p">},</span>
+                 <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>    
     
-    # Optional: Create a line at the boundary of each subplot
-    for pos in [&#39;top&#39;,&#39;right&#39;,&#39;bottom&#39;,&#39;left&#39;]:
-        ax.spines[pos].set(lw=1,ec=&#39;k&#39;) 
+    <span class="c1"># Optional: Create a line at the boundary of each subplot</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span> 
                 
-    # X-axis
-    ax.set_xticks([0,0.5,1],labels=[0,0.5,1], fontsize=16, fontweight=&#39;light&#39;)
+    <span class="c1"># X-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;light&#39;</span><span class="p">)</span>
     
-    # Y-axis
-    ax.tick_params(axis=&#39;y&#39;,labelsize=16, labelcolor=&#39;#4e4e4e&#39;)
+    <span class="c1"># Y-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
 
-# X-axis label
-fig.text(0.4, 0.07, &#39;Selected&#39;,fontdict={&quot;fontsize&quot;:18,
-                                         &#39;color&#39;:&quot;#4e4e4e&quot;,
-                                         &#39;weight&#39;:&#39;bold&#39;},)
+<span class="c1"># X-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="s1">&#39;Selected&#39;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+                                         <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">,</span>
+                                         <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="s1">&#39;bold&#39;</span><span class="p">},)</span>
 
-# Y-axis label
-fig.text(-0.05, 0.5,&#39;Annotation&#39;,rotation=&#39;vertical&#39;,fontdict={&quot;fontsize&quot;:18,
-                                                               &#39;color&#39;:&quot;#4e4e4e&quot;,
-                                                               &#39;weight&#39;:&#39;bold&#39;},
-        )
+<span class="c1"># Y-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;Annotation&#39;</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+                                                               <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">,</span>
+                                                               <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="s1">&#39;bold&#39;</span><span class="p">},</span>
+        <span class="p">)</span>
 
-# Legend
-fig.legend(handles, labels, ncol=1, loc=&#39;center right&#39;, 
-           frameon=False, labelspacing=0.5, 
-           handlelength=2,handleheight=5,
-           fontsize=&#39;x-large&#39;)
+<span class="c1"># Legend</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span> 
+           <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+           <span class="n">handlelength</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">handleheight</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
 
-# Plot
-plt.subplots_adjust(top=0.92,wspace=0.1,right=0.7)
-plt.show()
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.92</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -935,65 +935,65 @@ plt.show()
 <h2>Plot <code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">set</span> <span class="pre">performance</span></code><a class="headerlink" href="#plot-validation-set-performance" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### F1 score using random predictions --&gt; sparsity of variable
-random_f1_dict = dict(human_coded_df[code_variables].mean())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### F1 score using random predictions --&gt; sparsity of variable</span>
+<span class="n">random_f1_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">human_coded_df</span><span class="p">[</span><span class="n">code_variables</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.patches as mpatches
-fig, ax = plt.subplots(figsize=(10,12))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 
-# Title
-fig.suptitle(&quot;Validation set performance&quot;, x=0.4, y=0.95, fontfamily=&#39;Times New Roman&#39;,fontsize=24,)
+<span class="c1"># Title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Validation set performance&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">fontfamily</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,)</span>
 
-# X-axis
-ax.scatter(y=cv_df[&#39;annotation&#39;],
-           x=cv_df[&#39;mean_test_f1&#39;],
-           marker=&#39;o&#39;, s=100, ec=&#39;k&#39;,lw=2,color=&#39;g&#39;, alpha=0.1,
-           label=&#39;Validation Set&#39;
+<span class="c1"># X-axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">],</span>
+           <span class="n">x</span><span class="o">=</span><span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;mean_test_f1&#39;</span><span class="p">],</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Set&#39;</span>
            
-          )
-ax.scatter(y=list(random_f1_dict.keys()),
-           x=list(random_f1_dict.values()),
-           marker=&#39;o&#39;,s=100,ec=&#39;k&#39;,lw=1,color=&#39;r&#39;,alpha=1,
-           label=&#39;Random&#39;
-          )
+          <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">random_f1_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+           <span class="n">x</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">random_f1_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random&#39;</span>
+          <span class="p">)</span>
 
-# Y-axis
-ax.set_yticks(cv_df[&#39;annotation&#39;].unique())
-ax.set_yticklabels(cv_df[&#39;annotation&#39;].unique(), fontsize=16, fontweight=&#39;light&#39;)
-ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+<span class="c1"># Y-axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">cv_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;light&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
 
-# X-axis
-ax.tick_params(axis=&#39;x&#39;,labelsize=15, length=5, width=2)
-# Y-axis
-ax.tick_params(axis=&#39;y&#39;,labelsize=15, labelcolor=&#39;#4e4e4e&#39;)
+<span class="c1"># X-axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Y-axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
 
-# X-axis label
-fig.text(0.35, 0.05, &quot;F1-Score&quot;,fontsize=18)
-# Y-axis label
-fig.text(-0.2, 0.5,&#39;Annotation&#39;,rotation=&#39;vertical&#39;,fontsize=18)
+<span class="c1"># X-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;F1-Score&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="c1"># Y-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;Annotation&#39;</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 
-# Legend
-patches = [
-    mpatches.Patch(color=&#39;green&#39;, label=&#39;Validation Set&#39;),
-    mpatches.Patch(color=&#39;red&#39;, label=&#39;Random&#39;),    
-          ]
+<span class="c1"># Legend</span>
+<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Set&#39;</span><span class="p">),</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random&#39;</span><span class="p">),</span>    
+          <span class="p">]</span>
 
-fig.legend(handles=patches, 
-          title=&#39;F1 Score&#39;,
-          title_fontsize=20,
-          ncol=1,labelspacing=1,handlelength=1,
-          loc=&#39;center right&#39;,frameon=False,
-          fontsize=&#39;x-large&#39;,
-         )
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> 
+          <span class="n">title</span><span class="o">=</span><span class="s1">&#39;F1 Score&#39;</span><span class="p">,</span>
+          <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+          <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">labelspacing</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">handlelength</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+          <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">,</span>
+         <span class="p">)</span>
 
-# Figure
-plt.subplots_adjust(top=0.9,right=0.75)
-plt.show()
+<span class="c1"># Figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1055,6 +1055,7 @@ plt.show()
     By Aditya Karan Chhabra<br/>
   
       &copy; Copyright 2023, World Bank Group.<br/>
+    Last updated on Mar 11, 2023.<br/>
 </p>
         </footer>
     </div>

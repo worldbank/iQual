@@ -598,10 +598,10 @@ title="Print to PDF"
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import numpy as np
-import pandas as pd
-from iqual import tests
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">iqual</span> <span class="kn">import</span> <span class="n">tests</span>
 </pre></div>
 </div>
 </div>
@@ -611,13 +611,13 @@ from iqual import tests
 <h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir    = &quot;../../data&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span>    <span class="o">=</span> <span class="s2">&quot;../../data&quot;</span>
 
-### Qualitative data (Enhanced Data with progressive k-fold bootstrap)
-bootstrap_df  = pd.read_csv(os.path.join(data_dir,&quot;enhanced_bootstrap_kfold.csv&quot;))
+<span class="c1">### Qualitative data (Enhanced Data with progressive k-fold bootstrap)</span>
+<span class="n">bootstrap_df</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;enhanced_bootstrap_kfold.csv&quot;</span><span class="p">))</span>
 
-### Quantitative data
-quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
+<span class="c1">### Quantitative data</span>
+<span class="n">quant_df</span>      <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;quant_data.csv&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -627,9 +627,9 @@ quant_df      = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 <h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [&quot;ability_low&quot;,&quot;job_secular&quot;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotation_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ability_low&quot;</span><span class="p">,</span><span class="s2">&quot;job_secular&quot;</span><span class="p">]</span>
 
-id_vars         = [&#39;uid&#39;,&#39;split&#39;,&#39;data_round&#39;,&#39;refugee&#39;,&#39;bootstrap_run&#39;,&#39;train_sample_size&#39;]
+<span class="n">id_vars</span>         <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;split&#39;</span><span class="p">,</span><span class="s1">&#39;data_round&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span><span class="p">,</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">,</span><span class="s1">&#39;train_sample_size&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -639,8 +639,8 @@ id_vars         = [&#39;uid&#39;,&#39;split&#39;,&#39;data_round&#39;,&#39;refug
 <h2>Enhanced Bootstrap Dataframe (Merged with quantiative data)<a class="headerlink" href="#enhanced-bootstrap-dataframe-merged-with-quantiative-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bootstrap_df = bootstrap_df[[*id_vars,*annotation_vars]].copy()
-bootstrap_df = pd.merge(bootstrap_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;],how=&#39;left&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap_df</span> <span class="o">=</span> <span class="n">bootstrap_df</span><span class="p">[[</span><span class="o">*</span><span class="n">id_vars</span><span class="p">,</span><span class="o">*</span><span class="n">annotation_vars</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">bootstrap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">bootstrap_df</span><span class="p">,</span><span class="n">quant_df</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;data_round&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span><span class="p">],</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -650,91 +650,91 @@ bootstrap_df = pd.merge(bootstrap_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&
 <h2>Regression Configuration<a class="headerlink" href="#regression-configuration" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Numerical regressors (Continuous/Dummy variables)
-numerical_vars = [
-     &#39;refugee&#39;,&quot;int_sex&quot;, &quot;int_age&quot;,
-     &#39;hh_head_sex&#39;,
-     &#39;eld_sex&#39;,
-     &#39;parent_reledu&#39;,
-     &#39;num_child&#39;,
-     &#39;hh_head_age&#39;,
-     &#39;parent_eduyears&#39;,
-     &#39;eld_age&#39;,
-     &#39;hh_asset_index&#39;,
-     &#39;hh_income&#39;,
-     &#39;int_trauma_exp&#39;,
-]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical regressors (Continuous/Dummy variables)</span>
+<span class="n">numerical_vars</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s1">&#39;refugee&#39;</span><span class="p">,</span><span class="s2">&quot;int_sex&quot;</span><span class="p">,</span> <span class="s2">&quot;int_age&quot;</span><span class="p">,</span>
+     <span class="s1">&#39;hh_head_sex&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;eld_sex&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;parent_reledu&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;num_child&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;hh_head_age&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;parent_eduyears&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;eld_age&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;hh_asset_index&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;hh_income&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;int_trauma_exp&#39;</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import itertools.product
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools.product</span>
 
-HUMAN_SIZES    = [100, 200, 400, 700]
-MACHINE_SIZES  = [200, 400, 600, 800, 1000, 1200, 1400]
-BOOTSTRAP_RUNS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+<span class="n">HUMAN_SIZES</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">700</span><span class="p">]</span>
+<span class="n">MACHINE_SIZES</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1400</span><span class="p">]</span>
+<span class="n">BOOTSTRAP_RUNS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 
-N_DRAWS        = 5000
+<span class="n">N_DRAWS</span>        <span class="o">=</span> <span class="mi">5000</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coefs        = []
-random_draws = np.random.normal(size=N_DRAWS)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span>        <span class="o">=</span> <span class="p">[]</span>
+<span class="n">random_draws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N_DRAWS</span><span class="p">)</span>
 
 
-for ANNOTATION, REGRESSOR in [(&#39;job_secular&#39;,&#39;eld_sex&#39;),(&#39;ability_low&#39;,&#39;refugee&#39;)]:
+<span class="k">for</span> <span class="n">ANNOTATION</span><span class="p">,</span> <span class="n">REGRESSOR</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;job_secular&#39;</span><span class="p">,</span><span class="s1">&#39;eld_sex&#39;</span><span class="p">),(</span><span class="s1">&#39;ability_low&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span><span class="p">)]:</span>
 
-    for h, r, m in itertools.product(HUMAN_SIZES, BOOTSTRAP_RUNS, MACHINE_SIZES):
+    <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">HUMAN_SIZES</span><span class="p">,</span> <span class="n">BOOTSTRAP_RUNS</span><span class="p">,</span> <span class="n">MACHINE_SIZES</span><span class="p">):</span>
         
-        print(&quot;\r...| &quot;,&quot;Bootstrap Run:&quot;,r,&quot;Human:&quot;,h,&quot;Machine:&quot;,m,sep=&#39; &#39;,end=&#39; | ...&#39;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">...| &quot;</span><span class="p">,</span><span class="s2">&quot;Bootstrap Run:&quot;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s2">&quot;Human:&quot;</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="s2">&quot;Machine:&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; | ...&#39;</span><span class="p">)</span>
         
-        df = bootstrap_df[(bootstrap_df[&#39;train_sample_size&#39;]==h) &amp; (bootstrap_df[&#39;bootstrap_run&#39;]==r)]
+        <span class="n">df</span> <span class="o">=</span> <span class="n">bootstrap_df</span><span class="p">[(</span><span class="n">bootstrap_df</span><span class="p">[</span><span class="s1">&#39;train_sample_size&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">h</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bootstrap_df</span><span class="p">[</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">r</span><span class="p">)]</span>
         
-        # Separate human and machine data
-        human_df   = df[df.split == &#39;train&#39;]
-        # Sample machine data
-        machine_df = df[df.split != &#39;train&#39;].sample(m)
-        # Concatenate human and machine data for enhanced data
-        enh_df     = pd.concat([human_df, machine_df])
+        <span class="c1"># Separate human and machine data</span>
+        <span class="n">human_df</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">]</span>
+        <span class="c1"># Sample machine data</span>
+        <span class="n">machine_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">split</span> <span class="o">!=</span> <span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="c1"># Concatenate human and machine data for enhanced data</span>
+        <span class="n">enh_df</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">human_df</span><span class="p">,</span> <span class="n">machine_df</span><span class="p">])</span>
 
-        # Run regression on human 
-        human_model = tests.Interpretability(human_df,annotation_vars=[ANNOTATION],numerical_regressors=numerical_vars).fit_all()
-        # Human model coefficient and standard error
-        human_coef = human_model.get_model_coefficient(ANNOTATION,REGRESSOR)
-        human_se   = human_model.get_model_std_error(ANNOTATION,REGRESSOR)
+        <span class="c1"># Run regression on human </span>
+        <span class="n">human_model</span> <span class="o">=</span> <span class="n">tests</span><span class="o">.</span><span class="n">Interpretability</span><span class="p">(</span><span class="n">human_df</span><span class="p">,</span><span class="n">annotation_vars</span><span class="o">=</span><span class="p">[</span><span class="n">ANNOTATION</span><span class="p">],</span><span class="n">numerical_regressors</span><span class="o">=</span><span class="n">numerical_vars</span><span class="p">)</span><span class="o">.</span><span class="n">fit_all</span><span class="p">()</span>
+        <span class="c1"># Human model coefficient and standard error</span>
+        <span class="n">human_coef</span> <span class="o">=</span> <span class="n">human_model</span><span class="o">.</span><span class="n">get_model_coefficient</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">REGRESSOR</span><span class="p">)</span>
+        <span class="n">human_se</span>   <span class="o">=</span> <span class="n">human_model</span><span class="o">.</span><span class="n">get_model_std_error</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">REGRESSOR</span><span class="p">)</span>
 
         
-        # Run regression on enhanced data
-        enh_model  = tests.Interpretability(enh_df,annotation_vars=[ANNOTATION],numerical_regressors=numerical_vars).fit_all()
-        # Enhanced model coefficient and standard error
-        enh_coef = enh_model.get_model_coefficient(ANNOTATION,REGRESSOR)
-        enh_se   = enh_model.get_model_std_error(ANNOTATION,REGRESSOR)
+        <span class="c1"># Run regression on enhanced data</span>
+        <span class="n">enh_model</span>  <span class="o">=</span> <span class="n">tests</span><span class="o">.</span><span class="n">Interpretability</span><span class="p">(</span><span class="n">enh_df</span><span class="p">,</span><span class="n">annotation_vars</span><span class="o">=</span><span class="p">[</span><span class="n">ANNOTATION</span><span class="p">],</span><span class="n">numerical_regressors</span><span class="o">=</span><span class="n">numerical_vars</span><span class="p">)</span><span class="o">.</span><span class="n">fit_all</span><span class="p">()</span>
+        <span class="c1"># Enhanced model coefficient and standard error</span>
+        <span class="n">enh_coef</span> <span class="o">=</span> <span class="n">enh_model</span><span class="o">.</span><span class="n">get_model_coefficient</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">REGRESSOR</span><span class="p">)</span>
+        <span class="n">enh_se</span>   <span class="o">=</span> <span class="n">enh_model</span><span class="o">.</span><span class="n">get_model_std_error</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">REGRESSOR</span><span class="p">)</span>
         
         
-        # Random draws from normal distribution
-        for random_draw in random_draws:
-            # Bootstrap (Human) coefficient
-            human_boot_coef = human_coef + random_draw*human_se
+        <span class="c1"># Random draws from normal distribution</span>
+        <span class="k">for</span> <span class="n">random_draw</span> <span class="ow">in</span> <span class="n">random_draws</span><span class="p">:</span>
+            <span class="c1"># Bootstrap (Human) coefficient</span>
+            <span class="n">human_boot_coef</span> <span class="o">=</span> <span class="n">human_coef</span> <span class="o">+</span> <span class="n">random_draw</span><span class="o">*</span><span class="n">human_se</span>
             
-            # Bootstrap (Enhanced) coefficient
-            enh_boot_coef = enh_coef + random_draw*enh_se
+            <span class="c1"># Bootstrap (Enhanced) coefficient</span>
+            <span class="n">enh_boot_coef</span> <span class="o">=</span> <span class="n">enh_coef</span> <span class="o">+</span> <span class="n">random_draw</span><span class="o">*</span><span class="n">enh_se</span>
             
-            coefs.append({
-                &#39;annotation&#39;: ANNOTATION,&#39;regressor&#39;: REGRESSOR,
-                &#39;human_coef&#39;: human_coef,&#39;human_se&#39;:human_se,
-                &#39;enh_coef&#39;: enh_coef,&#39;enh_se&#39;:enh_se,
-                &#39;human_boot_coef&#39;: human_boot_coef,
-                &#39;enh_boot_coef&#39;: enh_boot_coef,
-                &#39;bootstrap_run&#39;:r,&#39;n_h&#39;: h,&#39;n_m&#39;: m,
-        })
+            <span class="n">coefs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;annotation&#39;</span><span class="p">:</span> <span class="n">ANNOTATION</span><span class="p">,</span><span class="s1">&#39;regressor&#39;</span><span class="p">:</span> <span class="n">REGRESSOR</span><span class="p">,</span>
+                <span class="s1">&#39;human_coef&#39;</span><span class="p">:</span> <span class="n">human_coef</span><span class="p">,</span><span class="s1">&#39;human_se&#39;</span><span class="p">:</span><span class="n">human_se</span><span class="p">,</span>
+                <span class="s1">&#39;enh_coef&#39;</span><span class="p">:</span> <span class="n">enh_coef</span><span class="p">,</span><span class="s1">&#39;enh_se&#39;</span><span class="p">:</span><span class="n">enh_se</span><span class="p">,</span>
+                <span class="s1">&#39;human_boot_coef&#39;</span><span class="p">:</span> <span class="n">human_boot_coef</span><span class="p">,</span>
+                <span class="s1">&#39;enh_boot_coef&#39;</span><span class="p">:</span> <span class="n">enh_boot_coef</span><span class="p">,</span>
+                <span class="s1">&#39;bootstrap_run&#39;</span><span class="p">:</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;n_h&#39;</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span><span class="s1">&#39;n_m&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span>
+        <span class="p">})</span>
 
-coef_data = pd.DataFrame(coefs)
-coef_data.head()
+<span class="n">coef_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
+<span class="n">coef_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -749,16 +749,16 @@ coef_data.head()
 <h2>Regression Coefficient Plots<a class="headerlink" href="#regression-coefficient-plots" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>keep_cols = [&#39;annotation&#39;,&#39;regressor&#39;,&#39;human_boot_coef&#39;,&#39;enh_boot_coef&#39;,&#39;bootstrap_run&#39;,&#39;n_h&#39;,&#39;n_m&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keep_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span><span class="s1">&#39;regressor&#39;</span><span class="p">,</span><span class="s1">&#39;human_boot_coef&#39;</span><span class="p">,</span><span class="s1">&#39;enh_boot_coef&#39;</span><span class="p">,</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">,</span><span class="s1">&#39;n_h&#39;</span><span class="p">,</span><span class="s1">&#39;n_m&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -768,91 +768,91 @@ import seaborn as sns
 <h2><code class="docutils literal notranslate"><span class="pre">Low</span> <span class="pre">Ability</span></code> (Coefficient on <code class="docutils literal notranslate"><span class="pre">Refugee</span></code>)<a class="headerlink" href="#low-ability-coefficient-on-refugee" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ANNOTATION, REGRESSOR = &#39;ability_low&#39;,&#39;refugee&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ANNOTATION</span><span class="p">,</span> <span class="n">REGRESSOR</span> <span class="o">=</span> <span class="s1">&#39;ability_low&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coef_df = coef_data.loc[(coef_data[&#39;annotation&#39;]==ANNOTATION),keep_cols]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coef_df</span> <span class="o">=</span> <span class="n">coef_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">coef_data</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">ANNOTATION</span><span class="p">),</span><span class="n">keep_cols</span><span class="p">]</span>
 
-fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(16,8), sharey=True, sharex=False)
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-fig.suptitle(ANNOTATION,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">fontfamily</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,)</span>
 
-# Iterate over N(h) 
-for i, human_size in enumerate(HUMAN_SIZES):  
-    # Get axis
-    ax = axs[i]
+<span class="c1"># Iterate over N(h) </span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">human_size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">HUMAN_SIZES</span><span class="p">):</span>  
+    <span class="c1"># Get axis</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     
-    # Select subset [n_h = human_size]
+    <span class="c1"># Select subset [n_h = human_size]</span>
     
-    df = coef_df[(coef_df[&#39;n_h&#39;]==human_size)]    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">coef_df</span><span class="p">[(</span><span class="n">coef_df</span><span class="p">[</span><span class="s1">&#39;n_h&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">human_size</span><span class="p">)]</span>    
     
-    # Zeroline (dashed)    
-    ax.axhline(y=0, ls=&#39;--&#39;,color=&#39;black&#39;,alpha=0.5, lw=2)
+    <span class="c1"># Zeroline (dashed)    </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
-    # Human sample
-    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;human_boot_coef&#39;],
-                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;cornflowerblue&#39;,
-                   name=None
-                  )
+    <span class="c1"># Human sample</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_m&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;human_boot_coef&#39;</span><span class="p">],</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">saturation</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span>
+                   <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
+                  <span class="p">)</span>
     
-    # Enhanced sample
-    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;enh_boot_coef&#39;],
-                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;firebrick&#39;,
-                   name=None
-                  )
+    <span class="c1"># Enhanced sample</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_m&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;enh_boot_coef&#39;</span><span class="p">],</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">saturation</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>
+                   <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
+                  <span class="p">)</span>
         
-    # Removing redundant xy axis labels
-    ax.set(ylabel=None,xlabel=None)
-    ax.tick_params(axis=&#39;y&#39;,labelsize=11, labelcolor=&#39;#4e4e4e&#39;)
-    ax.tick_params(axis=&#39;x&#39;,labelsize=10, labelcolor=&#39;#4e4e4e&#39;)
+    <span class="c1"># Removing redundant xy axis labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
     
-    ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
     
-    # Subplot title    
-    ax.set_title(f&quot;N[h] = {human_size}&quot;,fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
-                                            &#39;fontsize&#39;:18,
-                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
-                                            &#39;fontweight&#39;:800
-                                           },
-                 pad=15
-                )    
+    <span class="c1"># Subplot title    </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;N[h] = </span><span class="si">{</span><span class="n">human_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontsize&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+                                            <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span><span class="mi">800</span>
+                                           <span class="p">},</span>
+                 <span class="n">pad</span><span class="o">=</span><span class="mi">15</span>
+                <span class="p">)</span>    
 
     
-# Add legends
-human_patch = plt.plot([], [], color=&#39;cornflowerblue&#39;, marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
-enhanced_patch = plt.plot([], [], color=&#39;firebrick&#39;,  marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
-fig.legend(handles=[human_patch, enhanced_patch], loc=&#39;upper right&#39;, ncol=2)
+<span class="c1"># Add legends</span>
+<span class="n">human_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">enhanced_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">human_patch</span><span class="p">,</span> <span class="n">enhanced_patch</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-# Y-axis label
-fig.text(-0.02, 0.3,f&quot;Coefficient on {REGRESSOR.title()}&quot;,rotation=&#39;vertical&#39;,
-         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
-        )
-# X-axis label
-fig.text(0.3, 0.02,f&quot;Machine annotated sample size (N[m])&quot;,
-         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
-        )
+<span class="c1"># Y-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;Coefficient on </span><span class="si">{</span><span class="n">REGRESSOR</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span>
+         <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+<span class="c1"># X-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;Machine annotated sample size (N[m])&quot;</span><span class="p">,</span>
+         <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
 
-# Layout
+<span class="c1"># Layout</span>
 
-# Legend
-patches = [
-    mpatches.Patch(color=&#39;firebrick&#39;, label=&#39;Enhanced&#39;),
-    mpatches.Patch(color=&#39;cornflowerblue&#39;, label=&#39;Human&#39;),    
-          ]
-fig.legend(handles=patches,
-           title=&#39;Sample&#39;,
-           title_fontsize=16,
-           fontsize=15,
-           ncol=1,labelspacing=0.5,           
-           handlelength=1,handleheight=2,        
-           loc=&#39;center right&#39;,frameon=False,
-         )
-plt.subplots_adjust(top=0.85,wspace=0.05,right=0.88,left=0.05)
-plt.show()
+<span class="c1"># Legend</span>
+<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Enhanced&#39;</span><span class="p">),</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Human&#39;</span><span class="p">),</span>    
+          <span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span>
+           <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sample&#39;</span><span class="p">,</span>
+           <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+           <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>           
+           <span class="n">handlelength</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">handleheight</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>        
+           <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+         <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -865,91 +865,91 @@ plt.show()
 <h2><code class="docutils literal notranslate"><span class="pre">Secular</span> <span class="pre">Aspirations</span></code> (Coefficient on <code class="docutils literal notranslate"><span class="pre">Female</span> <span class="pre">eldest</span> <span class="pre">child</span></code>)<a class="headerlink" href="#secular-aspirations-coefficient-on-female-eldest-child" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ANNOTATION, REGRESSOR = &#39;job_secular&#39;,&#39;eld_child_sex&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ANNOTATION</span><span class="p">,</span> <span class="n">REGRESSOR</span> <span class="o">=</span> <span class="s1">&#39;job_secular&#39;</span><span class="p">,</span><span class="s1">&#39;eld_child_sex&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>coef_df = coef_data.loc[(coef_data[&#39;annotation&#39;]==ANNOTATION),keep_cols]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coef_df</span> <span class="o">=</span> <span class="n">coef_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">coef_data</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">ANNOTATION</span><span class="p">),</span><span class="n">keep_cols</span><span class="p">]</span>
 
-fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(16,8), sharey=True, sharex=False)
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-fig.suptitle(ANNOTATION,x=0.4, y=0.99, fontfamily=&#39;Times New Roman&#39;,fontsize=30,)
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">ANNOTATION</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">fontfamily</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,)</span>
 
-# Iterate over N(h) 
-for i, human_size in enumerate(HUMAN_SIZES):  
-    # Get axis
-    ax = axs[i]
+<span class="c1"># Iterate over N(h) </span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">human_size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">HUMAN_SIZES</span><span class="p">):</span>  
+    <span class="c1"># Get axis</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     
-    # Select subset [n_h = human_size]
+    <span class="c1"># Select subset [n_h = human_size]</span>
     
-    df = coef_df[(coef_df[&#39;n_h&#39;]==human_size)]    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">coef_df</span><span class="p">[(</span><span class="n">coef_df</span><span class="p">[</span><span class="s1">&#39;n_h&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">human_size</span><span class="p">)]</span>    
     
-    # Zeroline (dashed)    
-    ax.axhline(y=0, ls=&#39;--&#39;,color=&#39;black&#39;,alpha=0.5, lw=2)
+    <span class="c1"># Zeroline (dashed)    </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     
-    # Human sample
-    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;human_boot_coef&#39;],
-                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;cornflowerblue&#39;,
-                   name=None
-                  )
+    <span class="c1"># Human sample</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_m&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;human_boot_coef&#39;</span><span class="p">],</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">saturation</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span>
+                   <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
+                  <span class="p">)</span>
     
-    # Enhanced sample
-    sns.violinplot(x=df[&#39;n_m&#39;],y=df[&#39;enh_boot_coef&#39;],
-                   ax=ax,dodge=False,inner=None,saturation=0.7,color=&#39;firebrick&#39;,
-                   name=None
-                  )
+    <span class="c1"># Enhanced sample</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_m&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;enh_boot_coef&#39;</span><span class="p">],</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">saturation</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>
+                   <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
+                  <span class="p">)</span>
         
-    # Removing redundant xy axis labels
-    ax.set(ylabel=None,xlabel=None)
-    ax.tick_params(axis=&#39;y&#39;,labelsize=11, labelcolor=&#39;#4e4e4e&#39;)
-    ax.tick_params(axis=&#39;x&#39;,labelsize=10, labelcolor=&#39;#4e4e4e&#39;)
+    <span class="c1"># Removing redundant xy axis labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">)</span>
     
-    ax.grid(True, lw=1, c=&#39;lightgray&#39;)
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
     
-    # Subplot title    
-    ax.set_title(f&quot;N[h] = {human_size}&quot;,fontdict={&#39;family&#39;:&#39;Times New Roman&#39;,
-                                            &#39;fontsize&#39;:18,
-                                            &#39;color&#39;:&#39;#4e4e4e&#39;,
-                                            &#39;fontweight&#39;:800
-                                           },
-                 pad=15
-                )    
+    <span class="c1"># Subplot title    </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;N[h] = </span><span class="si">{</span><span class="n">human_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontsize&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+                                            <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;#4e4e4e&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span><span class="mi">800</span>
+                                           <span class="p">},</span>
+                 <span class="n">pad</span><span class="o">=</span><span class="mi">15</span>
+                <span class="p">)</span>    
 
     
-# Add legends
-human_patch = plt.plot([], [], color=&#39;cornflowerblue&#39;, marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
-enhanced_patch = plt.plot([], [], color=&#39;firebrick&#39;,  marker=&#39;s&#39;, markersize=10, linestyle=&#39;&#39;)[0]
-fig.legend(handles=[human_patch, enhanced_patch], loc=&#39;upper right&#39;, ncol=2)
+<span class="c1"># Add legends</span>
+<span class="n">human_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">enhanced_patch</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">human_patch</span><span class="p">,</span> <span class="n">enhanced_patch</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-# Y-axis label
-fig.text(-0.02, 0.3,f&quot;Coefficient on {REGRESSOR.title()}&quot;,rotation=&#39;vertical&#39;,
-         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
-        )
-# X-axis label
-fig.text(0.3, 0.02,f&quot;Machine annotated sample size (N[m])&quot;,
-         fontdict={&quot;fontsize&quot;:15,&#39;color&#39;:&quot;#4e4e4e&quot;},
-        )
+<span class="c1"># Y-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;Coefficient on </span><span class="si">{</span><span class="n">REGRESSOR</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span>
+         <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+<span class="c1"># X-axis label</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;Machine annotated sample size (N[m])&quot;</span><span class="p">,</span>
+         <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s2">&quot;#4e4e4e&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
 
-# Layout
+<span class="c1"># Layout</span>
 
-# Legend
-patches = [
-    mpatches.Patch(color=&#39;firebrick&#39;, label=&#39;Enhanced&#39;),
-    mpatches.Patch(color=&#39;cornflowerblue&#39;, label=&#39;Human&#39;),    
-          ]
-fig.legend(handles=patches,
-           title=&#39;Sample&#39;,
-           title_fontsize=16,
-           fontsize=15,
-           ncol=1,labelspacing=0.5,           
-           handlelength=1,handleheight=2,        
-           loc=&#39;center right&#39;,frameon=False,
-         )
-plt.subplots_adjust(top=0.85,wspace=0.05,right=0.88,left=0.05)
-plt.show()
+<span class="c1"># Legend</span>
+<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Enhanced&#39;</span><span class="p">),</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Human&#39;</span><span class="p">),</span>    
+          <span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span>
+           <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sample&#39;</span><span class="p">,</span>
+           <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+           <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>           
+           <span class="n">handlelength</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">handleheight</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>        
+           <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+         <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1011,6 +1011,7 @@ plt.show()
     By Aditya Karan Chhabra<br/>
   
       &copy; Copyright 2023, World Bank Group.<br/>
+    Last updated on Mar 11, 2023.<br/>
 </p>
         </footer>
     </div>

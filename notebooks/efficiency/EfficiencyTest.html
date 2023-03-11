@@ -546,10 +546,10 @@ title="Print to PDF"
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import numpy as np
-import pandas as pd
-from iqual import  tests
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">iqual</span> <span class="kn">import</span>  <span class="n">tests</span>
 </pre></div>
 </div>
 </div>
@@ -559,11 +559,11 @@ from iqual import  tests
 <h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span>         <span class="o">=</span> <span class="s2">&quot;../../data&quot;</span>
 
-### Enhanced bootstrap data
-bootstrap_df = pd.read_csv(os.path.join(data_dir,&quot;enhanced_bootstrap_mean.csv&quot;))
-bootstrap_df.head()
+<span class="c1">### Enhanced bootstrap data</span>
+<span class="n">bootstrap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;enhanced_bootstrap_mean.csv&quot;</span><span class="p">))</span>
+<span class="n">bootstrap_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -740,16 +740,16 @@ bootstrap_df.head()
 <h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotation_vars = [
-    &#39;ability_high&#39;, &#39;ability_low&#39;, 
-    &#39;awareness_information_high&#39;, &#39;awareness_information_low&#39;, 
-    &#39;budget_high&#39;, &#39;budget_low&#39;, &#39;covid_impacts&#39;, 
-    &#39;education_high&#39;, &#39;education_low&#39;, &#39;education_neutral&#39;, &#39;education_religious&#39;, 
-    &#39;entrepreneur&#39;, &#39;job_secular&#39;, &#39;marriage&#39;, &#39;migration&#39;, 
-    &#39;no_ambition&#39;, &#39;public_assistance&#39;, &#39;reliance_on_god&#39;, 
-    &#39;religious&#39;, &#39;secular&#39;, &#39;vague_job&#39;, &#39;vague_non_specific&#39;, 
-    &#39;vocational_training&#39;, &#39;worries_anxieties&#39;,
-]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotation_vars</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;ability_high&#39;</span><span class="p">,</span> <span class="s1">&#39;ability_low&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;awareness_information_high&#39;</span><span class="p">,</span> <span class="s1">&#39;awareness_information_low&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;budget_high&#39;</span><span class="p">,</span> <span class="s1">&#39;budget_low&#39;</span><span class="p">,</span> <span class="s1">&#39;covid_impacts&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;education_high&#39;</span><span class="p">,</span> <span class="s1">&#39;education_low&#39;</span><span class="p">,</span> <span class="s1">&#39;education_neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;education_religious&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;entrepreneur&#39;</span><span class="p">,</span> <span class="s1">&#39;job_secular&#39;</span><span class="p">,</span> <span class="s1">&#39;marriage&#39;</span><span class="p">,</span> <span class="s1">&#39;migration&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;no_ambition&#39;</span><span class="p">,</span> <span class="s1">&#39;public_assistance&#39;</span><span class="p">,</span> <span class="s1">&#39;reliance_on_god&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;religious&#39;</span><span class="p">,</span> <span class="s1">&#39;secular&#39;</span><span class="p">,</span> <span class="s1">&#39;vague_job&#39;</span><span class="p">,</span> <span class="s1">&#39;vague_non_specific&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;vocational_training&#39;</span><span class="p">,</span> <span class="s1">&#39;worries_anxieties&#39;</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -759,21 +759,21 @@ bootstrap_df.head()
 <h2>Separate Datasets<a class="headerlink" href="#separate-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Create three datasets
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Create three datasets</span>
 
-# &gt; Human DF
-human_df   = bootstrap_df[bootstrap_df.annotated==1]
+<span class="c1"># &gt; Human DF</span>
+<span class="n">human_df</span>   <span class="o">=</span> <span class="n">bootstrap_df</span><span class="p">[</span><span class="n">bootstrap_df</span><span class="o">.</span><span class="n">annotated</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
 
-# Machine DF
-machine_df = bootstrap_df[bootstrap_df.annotated==0]
+<span class="c1"># Machine DF</span>
+<span class="n">machine_df</span> <span class="o">=</span> <span class="n">bootstrap_df</span><span class="p">[</span><span class="n">bootstrap_df</span><span class="o">.</span><span class="n">annotated</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
 
-# Out-sample data / In-sample average predictions
+<span class="c1"># Out-sample data / In-sample average predictions</span>
 
-## &gt;  Out-Sample
-# test_df  = bootstrap_df[bootstrap_df.split==&#39;test&#39;]] 
+<span class="c1">## &gt;  Out-Sample</span>
+<span class="c1"># test_df  = bootstrap_df[bootstrap_df.split==&#39;test&#39;]] </span>
 
-## &gt;  In-sample average predictions
-med_df     = bootstrap_df[bootstrap_df.annotated==1].groupby([&#39;uid&#39;,&#39;refugee_status&#39;,&#39;data_round&#39;]).mean(numeric_only=True).reset_index()
+<span class="c1">## &gt;  In-sample average predictions</span>
+<span class="n">med_df</span>     <span class="o">=</span> <span class="n">bootstrap_df</span><span class="p">[</span><span class="n">bootstrap_df</span><span class="o">.</span><span class="n">annotated</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;refugee_status&#39;</span><span class="p">,</span><span class="s1">&#39;data_round&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -783,11 +783,11 @@ med_df     = bootstrap_df[bootstrap_df.annotated==1].groupby([&#39;uid&#39;,&#39
 <h2>Use <code class="docutils literal notranslate"><span class="pre">tests.Efficiency</span></code> from <code class="docutils literal notranslate"><span class="pre">iQual</span></code> to get <code class="docutils literal notranslate"><span class="pre">Measurement</span> <span class="pre">Error</span> <span class="pre">Variances</span></code><a class="headerlink" href="#use-tests-efficiency-from-iqual-to-get-measurement-error-variances" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.options.display.float_format = &#39;{:.4f}&#39;.format
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 
-efficiency_df  = tests.Efficiency(human_df,med_df,machine_df,annotation_vars).get_results_all()
-print(&quot;Measurement Error Variances&quot;)
-efficiency_df[[&#39;annotation&#39;,&#39;sig2_h&#39;,&#39;sig2_y&#39;,&#39;sig2_eps&#39;,&#39;se_h&#39;,&#39;se_enh&#39;]]
+<span class="n">efficiency_df</span>  <span class="o">=</span> <span class="n">tests</span><span class="o">.</span><span class="n">Efficiency</span><span class="p">(</span><span class="n">human_df</span><span class="p">,</span><span class="n">med_df</span><span class="p">,</span><span class="n">machine_df</span><span class="p">,</span><span class="n">annotation_vars</span><span class="p">)</span><span class="o">.</span><span class="n">get_results_all</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Measurement Error Variances&quot;</span><span class="p">)</span>
+<span class="n">efficiency_df</span><span class="p">[[</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span><span class="s1">&#39;sig2_h&#39;</span><span class="p">,</span><span class="s1">&#39;sig2_y&#39;</span><span class="p">,</span><span class="s1">&#39;sig2_eps&#39;</span><span class="p">,</span><span class="s1">&#39;se_h&#39;</span><span class="p">,</span><span class="s1">&#39;se_enh&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -1096,6 +1096,7 @@ efficiency_df[[&#39;annotation&#39;,&#39;sig2_h&#39;,&#39;sig2_y&#39;,&#39;sig2_
     By Aditya Karan Chhabra<br/>
   
       &copy; Copyright 2023, World Bank Group.<br/>
+    Last updated on Mar 11, 2023.<br/>
 </p>
         </footer>
     </div>

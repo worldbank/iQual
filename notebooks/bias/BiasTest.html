@@ -539,10 +539,10 @@ title="Print to PDF"
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import numpy as np
-import pandas as pd
-from iqual import tests
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">iqual</span> <span class="kn">import</span> <span class="n">tests</span>
 </pre></div>
 </div>
 </div>
@@ -552,20 +552,20 @@ from iqual import tests
 <h2>Load datasets<a class="headerlink" href="#load-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span>         <span class="o">=</span> <span class="s2">&quot;../../data&quot;</span>
 
-### Enhanced qualitative data
-bootstrap_df = pd.read_csv(os.path.join(data_dir,&quot;kfold_enh_pred_mean.csv&quot;))
+<span class="c1">### Enhanced qualitative data</span>
+<span class="n">bootstrap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;kfold_enh_pred_mean.csv&quot;</span><span class="p">))</span>
 
-### Quantitative data
-quant_df     = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
+<span class="c1">### Quantitative data</span>
+<span class="n">quant_df</span>     <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;quant_data.csv&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>annotated_df = bootstrap_df.loc[bootstrap_df.annotated==1].drop(columns=[&#39;annotated&#39;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotated_df</span> <span class="o">=</span> <span class="n">bootstrap_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bootstrap_df</span><span class="o">.</span><span class="n">annotated</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;annotated&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -575,7 +575,7 @@ quant_df     = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 <h2>Merge Data<a class="headerlink" href="#merge-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data         = pd.merge(annotated_df,quant_df,on=[&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;],how=&#39;left&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>         <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">annotated_df</span><span class="p">,</span><span class="n">quant_df</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;data_round&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span><span class="p">],</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -585,49 +585,49 @@ quant_df     = pd.read_csv(os.path.join(data_dir,&quot;quant_data.csv&quot;))
 <h2>Select variables of interest<a class="headerlink" href="#select-variables-of-interest" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categorical_vars = [
-     &#39;data_round&#39; # Data Round R2 or R3
-]
-numerical_vars = [
-                    &#39;refugee&#39;,       # Refugee
-                    &#39;hh_head_sex&#39;,   # Female HH Head
-                    &#39;eld_sex&#39;,       # Female eldest child
-                    &#39;parent_reledu&#39;, # Religiously educated parent                    
-                    &#39;num_child&#39;, # Number of Children
-                    &#39;hh_head_age&#39;, # Age of HH Head
-                    &#39;parent_eduyears&#39;, # Parent&#39;s years of education
-                    &#39;eld_age&#39;,       # Age of eldest child
-                    &#39;hh_asset_index&#39;, # HH asset index
-                    &#39;hh_income&#39;,      # HH Income
-                    &#39;int_trauma_exp&#39;, # Trauma Experience
-]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_vars</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s1">&#39;data_round&#39;</span> <span class="c1"># Data Round R2 or R3</span>
+<span class="p">]</span>
+<span class="n">numerical_vars</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="s1">&#39;refugee&#39;</span><span class="p">,</span>       <span class="c1"># Refugee</span>
+                    <span class="s1">&#39;hh_head_sex&#39;</span><span class="p">,</span>   <span class="c1"># Female HH Head</span>
+                    <span class="s1">&#39;eld_sex&#39;</span><span class="p">,</span>       <span class="c1"># Female eldest child</span>
+                    <span class="s1">&#39;parent_reledu&#39;</span><span class="p">,</span> <span class="c1"># Religiously educated parent                    </span>
+                    <span class="s1">&#39;num_child&#39;</span><span class="p">,</span> <span class="c1"># Number of Children</span>
+                    <span class="s1">&#39;hh_head_age&#39;</span><span class="p">,</span> <span class="c1"># Age of HH Head</span>
+                    <span class="s1">&#39;parent_eduyears&#39;</span><span class="p">,</span> <span class="c1"># Parent&#39;s years of education</span>
+                    <span class="s1">&#39;eld_age&#39;</span><span class="p">,</span>       <span class="c1"># Age of eldest child</span>
+                    <span class="s1">&#39;hh_asset_index&#39;</span><span class="p">,</span> <span class="c1"># HH asset index</span>
+                    <span class="s1">&#39;hh_income&#39;</span><span class="p">,</span>      <span class="c1"># HH Income</span>
+                    <span class="s1">&#39;int_trauma_exp&#39;</span><span class="p">,</span> <span class="c1"># Trauma Experience</span>
+<span class="p">]</span>
 
-annotation_vars = [
-     &quot;ability_high&quot;,
-     &quot;ability_low&quot;,
-     &quot;awareness_information_high&quot;,
-     &quot;awareness_information_low&quot;,
-     &quot;budget_high&quot;,
-     &quot;budget_low&quot;,
-     &quot;covid_impacts&quot;,
-     &quot;education_high&quot;,
-     &quot;education_low&quot;,
-     &quot;education_neutral&quot;,
-     &quot;education_religious&quot;,
-     &quot;entrepreneur&quot;,
-     &quot;job_secular&quot;,
-     &quot;marriage&quot;,
-     &quot;migration&quot;,
-     &quot;no_ambition&quot;,
-     &quot;public_assistance&quot;,
-     &quot;reliance_on_god&quot;,
-     &quot;religious&quot;,
-     &quot;secular&quot;,
-     &quot;vague_job&quot;,
-     &quot;vague_non_specific&quot;,
-     &quot;vocational_training&quot;,
-     &quot;worries_anxieties&quot;,
-    ]
+<span class="n">annotation_vars</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s2">&quot;ability_high&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ability_low&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;awareness_information_high&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;awareness_information_low&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;budget_high&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;budget_low&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;covid_impacts&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;education_high&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;education_low&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;education_neutral&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;education_religious&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;entrepreneur&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;job_secular&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;marriage&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;migration&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;no_ambition&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;public_assistance&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;reliance_on_god&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;religious&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;secular&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;vague_job&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;vague_non_specific&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;vocational_training&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;worries_anxieties&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -637,24 +637,24 @@ annotation_vars = [
 <h2>Bias tests (For each bootstrap-run)<a class="headerlink" href="#bias-tests-for-each-bootstrap-run" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>datasets = []
-for b, boot_df in data.groupby(&#39;bootstrap_run&#39;):
-    bias = tests.Bias(boot_df,
-                      annotation_vars=annotation_vars,
-                      categorical_regressors=categorical_vars,
-                      numerical_regressors=numerical_vars,
-                     )
-    bias.fit_all()
-    datasets.extend([{
-        &#39;bootstrap_run&#39;:b,
-        &#39;annotation&#39;:annotation,
-        &#39;fstat_enh&#39;:result.fvalue,
-        &#39;log_fstat_enh&#39;:np.log(result.fvalue),
-        &#39;pval_enh&#39;:result.f_pvalue,
-    }   for annotation, result in bias.model_fits.items()])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">boot_df</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">):</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">tests</span><span class="o">.</span><span class="n">Bias</span><span class="p">(</span><span class="n">boot_df</span><span class="p">,</span>
+                      <span class="n">annotation_vars</span><span class="o">=</span><span class="n">annotation_vars</span><span class="p">,</span>
+                      <span class="n">categorical_regressors</span><span class="o">=</span><span class="n">categorical_vars</span><span class="p">,</span>
+                      <span class="n">numerical_regressors</span><span class="o">=</span><span class="n">numerical_vars</span><span class="p">,</span>
+                     <span class="p">)</span>
+    <span class="n">bias</span><span class="o">.</span><span class="n">fit_all</span><span class="p">()</span>
+    <span class="n">datasets</span><span class="o">.</span><span class="n">extend</span><span class="p">([{</span>
+        <span class="s1">&#39;bootstrap_run&#39;</span><span class="p">:</span><span class="n">b</span><span class="p">,</span>
+        <span class="s1">&#39;annotation&#39;</span><span class="p">:</span><span class="n">annotation</span><span class="p">,</span>
+        <span class="s1">&#39;fstat_enh&#39;</span><span class="p">:</span><span class="n">result</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span>
+        <span class="s1">&#39;log_fstat_enh&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">fvalue</span><span class="p">),</span>
+        <span class="s1">&#39;pval_enh&#39;</span><span class="p">:</span><span class="n">result</span><span class="o">.</span><span class="n">f_pvalue</span><span class="p">,</span>
+    <span class="p">}</span>   <span class="k">for</span> <span class="n">annotation</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">bias</span><span class="o">.</span><span class="n">model_fits</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
     
-bias_df = pd.DataFrame(datasets)    
-bias_df = bias_df.sort_values(&#39;annotation&#39;)
+<span class="n">bias_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span>    
+<span class="n">bias_df</span> <span class="o">=</span> <span class="n">bias_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;annotation&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -664,9 +664,9 @@ bias_df = bias_df.sort_values(&#39;annotation&#39;)
 <h2>Significance<a class="headerlink" href="#significance" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bias_df[&#39;sig_level&#39;] = &#39;&gt;5%&#39;
-bias_df.loc[bias_df.pval_enh &lt;= 0.01, &#39;sig_level&#39;] = &#39;&lt;1%&#39;
-bias_df.loc[(bias_df.pval_enh &gt; 0.01) &amp; (bias_df.pval_enh &lt;= 0.05), &#39;sig_level&#39;] = &#39;&lt;5%&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias_df</span><span class="p">[</span><span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&gt;5%&#39;</span>
+<span class="n">bias_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bias_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&lt;=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;1%&#39;</span>
+<span class="n">bias_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">bias_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bias_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">),</span> <span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;5%&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -676,24 +676,24 @@ bias_df.loc[(bias_df.pval_enh &gt; 0.01) &amp; (bias_df.pval_enh &lt;= 0.05), &#
 <h2>Bias test (Average across Bootstrap runs)<a class="headerlink" href="#bias-test-average-across-bootstrap-runs" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>grouped_df = data.drop(columns=[&#39;bootstrap_run&#39;]).groupby([&#39;uid&#39;,&#39;data_round&#39;,&#39;refugee&#39;])
-avg_data   = grouped_df.mean(numeric_only=False).reset_index()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bootstrap_run&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;data_round&#39;</span><span class="p">,</span><span class="s1">&#39;refugee&#39;</span><span class="p">])</span>
+<span class="n">avg_data</span>   <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-bias = tests.Bias(avg_data,
-                  annotation_vars=annotation_vars,
-                  numerical_regressors=numerical_vars,
-                  categorical_regressors=categorical_vars,
-                 )
-bias.fit_all()
+<span class="n">bias</span> <span class="o">=</span> <span class="n">tests</span><span class="o">.</span><span class="n">Bias</span><span class="p">(</span><span class="n">avg_data</span><span class="p">,</span>
+                  <span class="n">annotation_vars</span><span class="o">=</span><span class="n">annotation_vars</span><span class="p">,</span>
+                  <span class="n">numerical_regressors</span><span class="o">=</span><span class="n">numerical_vars</span><span class="p">,</span>
+                  <span class="n">categorical_regressors</span><span class="o">=</span><span class="n">categorical_vars</span><span class="p">,</span>
+                 <span class="p">)</span>
+<span class="n">bias</span><span class="o">.</span><span class="n">fit_all</span><span class="p">()</span>
 
-bias_avg_df = pd.DataFrame([{
-        &#39;annotation&#39;:annotation,
-        &#39;fstat_enh&#39;:result.fvalue,
-        &#39;log_fstat_enh&#39;:np.log(result.fvalue),
-        &#39;pval_enh&#39;:result.f_pvalue,
-    }   for annotation, result in bias.model_fits.items()])
+<span class="n">bias_avg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span>
+        <span class="s1">&#39;annotation&#39;</span><span class="p">:</span><span class="n">annotation</span><span class="p">,</span>
+        <span class="s1">&#39;fstat_enh&#39;</span><span class="p">:</span><span class="n">result</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span>
+        <span class="s1">&#39;log_fstat_enh&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">fvalue</span><span class="p">),</span>
+        <span class="s1">&#39;pval_enh&#39;</span><span class="p">:</span><span class="n">result</span><span class="o">.</span><span class="n">f_pvalue</span><span class="p">,</span>
+    <span class="p">}</span>   <span class="k">for</span> <span class="n">annotation</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">bias</span><span class="o">.</span><span class="n">model_fits</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
-bias_avg_df = bias_avg_df.sort_values(&#39;annotation&#39;,ascending=True,ignore_index=True)
+<span class="n">bias_avg_df</span> <span class="o">=</span> <span class="n">bias_avg_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -703,9 +703,9 @@ bias_avg_df = bias_avg_df.sort_values(&#39;annotation&#39;,ascending=True,ignore
 <h2>Significance<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bias_avg_df[&#39;sig_level&#39;] = &#39;&gt;5%&#39;
-bias_avg_df.loc[bias_avg_df.pval_enh &lt;= 0.01, &#39;sig_level&#39;] = &#39;&lt;1%&#39;
-bias_avg_df.loc[(bias_avg_df.pval_enh &gt; 0.01) &amp; (bias_avg_df.pval_enh &lt;= 0.05), &#39;sig_level&#39;] = &#39;&lt;5%&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias_avg_df</span><span class="p">[</span><span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&gt;5%&#39;</span>
+<span class="n">bias_avg_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bias_avg_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&lt;=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;1%&#39;</span>
+<span class="n">bias_avg_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">bias_avg_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bias_avg_df</span><span class="o">.</span><span class="n">pval_enh</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">),</span> <span class="s1">&#39;sig_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;5%&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -715,61 +715,61 @@ bias_avg_df.loc[(bias_avg_df.pval_enh &gt; 0.01) &amp; (bias_avg_df.pval_enh &lt
 <h2>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from matplotlib.lines import Line2D
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
 
-#### Colors for p-value
-pvalue_color_dict = {&#39;&gt;5%&#39;:&#39;lightgreen&#39;,&#39;&lt;5%&#39;:&#39;yellow&#39;,&#39;&lt;1%&#39;:&#39;red&#39;}
+<span class="c1">#### Colors for p-value</span>
+<span class="n">pvalue_color_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&gt;5%&#39;</span><span class="p">:</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;5%&#39;</span><span class="p">:</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;1%&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">}</span>
 
-fig, ax = plt.subplots(figsize=(10,10))
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
-#### Bias (Bootstrap)
-ax.scatter(bias_df[&#39;log_fstat_enh&#39;], bias_df[&#39;annotation&#39;], 
-           s=100, 
-           color=(1,1,1,0.5),
-           lw=2,
-           edgecolors=bias_df[&#39;sig_level&#39;].replace(pvalue_color_dict),
-          )
+<span class="c1">#### Bias (Bootstrap)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bias_df</span><span class="p">[</span><span class="s1">&#39;log_fstat_enh&#39;</span><span class="p">],</span> <span class="n">bias_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">],</span> 
+           <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+           <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span>
+           <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">edgecolors</span><span class="o">=</span><span class="n">bias_df</span><span class="p">[</span><span class="s1">&#39;sig_level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pvalue_color_dict</span><span class="p">),</span>
+          <span class="p">)</span>
 
-#### Bias (Average)
-ax.scatter(bias_avg_df[&#39;log_fstat_enh&#39;], bias_avg_df[&#39;annotation&#39;], 
-           s=100, 
-           lw=2,
-           c=bias_avg_df[&#39;sig_level&#39;].replace(pvalue_color_dict),
-           edgecolors=&#39;k&#39;,
-          )
+<span class="c1">#### Bias (Average)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bias_avg_df</span><span class="p">[</span><span class="s1">&#39;log_fstat_enh&#39;</span><span class="p">],</span> <span class="n">bias_avg_df</span><span class="p">[</span><span class="s1">&#39;annotation&#39;</span><span class="p">],</span> 
+           <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+           <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">c</span><span class="o">=</span><span class="n">bias_avg_df</span><span class="p">[</span><span class="s1">&#39;sig_level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pvalue_color_dict</span><span class="p">),</span>
+           <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+          <span class="p">)</span>
 
 
-# Legend
+<span class="c1"># Legend</span>
 
-# 1. Legend for p-value
-pval_patches    = [
-    Line2D([0], [0], 
-           marker=&#39;.&#39;, c=color, lw=0,ms=10,
-           label=significance,
-          )
-     for significance, color in pvalue_color_dict.items() ]
+<span class="c1"># 1. Legend for p-value</span>
+<span class="n">pval_patches</span>    <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="n">significance</span><span class="p">,</span>
+          <span class="p">)</span>
+     <span class="k">for</span> <span class="n">significance</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">pvalue_color_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]</span>
 
-first_legend = plt.legend(handles=pval_patches,title=&#39;p-value&#39;,loc=&#39;lower left&#39;)
-plt.gca().add_artist(first_legend)
+<span class="n">first_legend</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">pval_patches</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;p-value&#39;</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">first_legend</span><span class="p">)</span>
 
-# 2. Legend for Mean/Bootsrap
-marker_patches =  [
-    Line2D([0], [0], marker=&#39;.&#39;, c=&#39;k&#39;, lw=0, ms=20, label=&quot;Bootstrap&quot;),
-    Line2D([0], [0], marker=&#39;o&#39;, c=&#39;k&#39;, lw=0,  ms=10, mfc=&#39;w&#39;, label=&quot;Mean&quot;)
-]
+<span class="c1"># 2. Legend for Mean/Bootsrap</span>
+<span class="n">marker_patches</span> <span class="o">=</span>  <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bootstrap&quot;</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+<span class="p">]</span>
 
-second_legend = plt.legend(handles=marker_patches, loc=&#39;upper left&#39;)
-plt.gca().add_artist(second_legend)
+<span class="n">second_legend</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">marker_patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">second_legend</span><span class="p">)</span>
 
-# Axes
-ax.grid(True,color=&#39;lightgray&#39;,)
-ax.set_xlabel(&#39;log F statistic&#39;,fontsize=12)
-ax.set_ylabel(&#39;Annotation&#39;, fontsize=12)
-ax.set_title(&#39;Bias test for each annotation&#39;,fontsize=18, pad=25)
+<span class="c1"># Axes</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;log F statistic&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annotation&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bias test for each annotation&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 
-plt.tight_layout()
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -824,6 +824,7 @@ plt.tight_layout()
     By Aditya Karan Chhabra<br/>
   
       &copy; Copyright 2023, World Bank Group.<br/>
+    Last updated on Mar 11, 2023.<br/>
 </p>
         </footer>
     </div>

@@ -590,9 +590,9 @@ title="Print to PDF"
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import pandas as pd
-from iqual import iqualnlp, evaluation, crossval
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">iqual</span> <span class="kn">import</span> <span class="n">iqualnlp</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">crossval</span>
 </pre></div>
 </div>
 </div>
@@ -602,9 +602,9 @@ from iqual import iqualnlp, evaluation, crossval
 <h2>Load <code class="docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">(human-coded)</span></code> and <code class="docutils literal notranslate"><span class="pre">unannotated</span></code> datasets<a class="headerlink" href="#load-annotated-human-coded-and-unannotated-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir         = &quot;../../data&quot;
-human_coded_df   = pd.read_csv(os.path.join(data_dir,&quot;annotated.csv&quot;))
-uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span>         <span class="o">=</span> <span class="s2">&quot;../../data&quot;</span>
+<span class="n">human_coded_df</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;annotated.csv&quot;</span><span class="p">))</span>
+<span class="n">uncoded_df</span>       <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s2">&quot;unannotated.csv&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -614,9 +614,9 @@ uncoded_df       = pd.read_csv(os.path.join(data_dir,&quot;unannotated.csv&quot;
 <h2>Split the data into training and test sets<a class="headerlink" href="#split-the-data-into-training-and-test-sets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
-train_df, test_df = train_test_split(human_coded_df,test_size=0.25)
-print(f&quot;Train Size: {len(train_df)}\nTest Size: {len(test_df)}&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">human_coded_df</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">Test Size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -632,16 +632,16 @@ Test Size: 2490
 <h2>Configure training data<a class="headerlink" href="#configure-training-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>### Select Question and Answer Columns
-question_col = &#39;Q_en&#39;
-answer_col   = &#39;A_en&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Select Question and Answer Columns</span>
+<span class="n">question_col</span> <span class="o">=</span> <span class="s1">&#39;Q_en&#39;</span>
+<span class="n">answer_col</span>   <span class="o">=</span> <span class="s1">&#39;A_en&#39;</span>
 
-### Select a code
-code_variable = &#39;marriage&#39;
+<span class="c1">### Select a code</span>
+<span class="n">code_variable</span> <span class="o">=</span> <span class="s1">&#39;marriage&#39;</span>
 
-### Create X and y
-X = train_df[[question_col,answer_col]]
-y = train_df[code_variable]
+<span class="c1">### Create X and y</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[[</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">code_variable</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -651,33 +651,33 @@ y = train_df[code_variable]
 <h2>Initiate model<a class="headerlink" href="#initiate-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Step 1: Initiate the model class
-iqual_model = iqualnlp.Model()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Initiate the model class</span>
+<span class="n">iqual_model</span> <span class="o">=</span> <span class="n">iqualnlp</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
 
-# Step 2: Add layers to the model
-#  Add text columns, and choose a feature extraction model (Available options: scikit-learn, spacy, sentence-transformers, saved-dictionary (picklized dictionary))
-iqual_model.add_text_features(question_col,answer_col,model=&#39;TfidfVectorizer&#39;,env=&#39;scikit-learn&#39;)
+<span class="c1"># Step 2: Add layers to the model</span>
+<span class="c1">#  Add text columns, and choose a feature extraction model (Available options: scikit-learn, spacy, sentence-transformers, saved-dictionary (picklized dictionary))</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;scikit-learn&#39;</span><span class="p">)</span>
 
-# Step 3: Add a feature transforming layer (optional)
-# A. Choose a feature-scaler. Available options: 
-# any scikit-learn scaler from `sklearn.preprocessing`
-### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;FeatureScaler&quot;)
-# OR
-# B. Choose a dimensionality reduction model. Available options:
-# - Any scikit-learn dimensionality reduction model from `sklearn.decomposition`
-# - Uniform Manifold Approximation and Projection (UMAP) using umap.UMAP (https://umap-learn.readthedocs.io/en/latest/)
+<span class="c1"># Step 3: Add a feature transforming layer (optional)</span>
+<span class="c1"># A. Choose a feature-scaler. Available options: </span>
+<span class="c1"># any scikit-learn scaler from `sklearn.preprocessing`</span>
+<span class="c1">### iqual_model.add_feature_transformer(name=&#39;StandardScaler&#39;, transformation=&quot;FeatureScaler&quot;)</span>
+<span class="c1"># OR</span>
+<span class="c1"># B. Choose a dimensionality reduction model. Available options:</span>
+<span class="c1"># - Any scikit-learn dimensionality reduction model from `sklearn.decomposition`</span>
+<span class="c1"># - Uniform Manifold Approximation and Projection (UMAP) using umap.UMAP (https://umap-learn.readthedocs.io/en/latest/)</span>
 
-### iqual_model.add_feature_transformer(name=&#39;PCA&#39;, transformation=&quot;DimensionalityReduction&quot;)
+<span class="c1">### iqual_model.add_feature_transformer(name=&#39;PCA&#39;, transformation=&quot;DimensionalityReduction&quot;)</span>
 
-# Step 4: Add a classifier layer
-# Choose a primary classifier model  (Available options: any scikit-learn classifier)
-iqual_model.add_classifier(name=&quot;LogisticRegression&quot;)
+<span class="c1"># Step 4: Add a classifier layer</span>
+<span class="c1"># Choose a primary classifier model  (Available options: any scikit-learn classifier)</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_classifier</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;LogisticRegression&quot;</span><span class="p">)</span>
 
-# Step 5: Add a threshold layer. This is optional, but recommended for binary classification
-iqual_model.add_threshold(scoring_metric=&#39;f1&#39;)
+<span class="c1"># Step 5: Add a threshold layer. This is optional, but recommended for binary classification</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_threshold</span><span class="p">(</span><span class="n">scoring_metric</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">)</span>
 
-# Step 6: Compile the model
-iqual_model.compile()
+<span class="c1"># Step 6: Compile the model</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -790,101 +790,101 @@ iqual_model.compile()
 <h2>Configure a Hyperparameter Grid for cross-validation + fitting<a class="headerlink" href="#configure-a-hyperparameter-grid-for-cross-validation-fitting" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Paths for precomputed vectors created using `sentence-transformers`
-dict_dir          = &quot;../../dictionaries&quot;
-sbert_models      = [&quot;all-mpnet-base-v2&quot;, &quot;distiluse-base-multilingual-cased-v2&quot;]
-sbert_model_paths = [os.path.join(dict_dir,m+&#39;.pkl&#39;) for m in sbert_models]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Paths for precomputed vectors created using `sentence-transformers`</span>
+<span class="n">dict_dir</span>          <span class="o">=</span> <span class="s2">&quot;../../dictionaries&quot;</span>
+<span class="n">sbert_models</span>      <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;all-mpnet-base-v2&quot;</span><span class="p">,</span> <span class="s2">&quot;distiluse-base-multilingual-cased-v2&quot;</span><span class="p">]</span>
+<span class="n">sbert_model_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dict_dir</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sbert_models</span><span class="p">]</span>
 
-SBERT_QA_PARAMS = {
-    &quot;Input&quot;:{
-        &quot;question&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:sbert_model_paths,
-                        &quot;env&quot;:[&quot;saved-dictionary&quot;],               
-                         },
-        },
-        &quot;answer&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:sbert_model_paths,
-                        &quot;env&quot;:[&quot;saved-dictionary&quot;],                
-                         },                        
-        },
-    }
-}
-SBERT_A_PARAMS = {
-    &quot;Input&quot;:{
-        &quot;question&quot;:[&quot;drop&quot;],
-        &quot;answer&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:sbert_model_paths,
-                        &quot;env&quot;:[&quot;saved-dictionary&quot;],
-                        },
-        }
-}
-}
+<span class="n">SBERT_QA_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">sbert_model_paths</span><span class="p">,</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;saved-dictionary&quot;</span><span class="p">],</span>               
+                         <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">sbert_model_paths</span><span class="p">,</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;saved-dictionary&quot;</span><span class="p">],</span>                
+                         <span class="p">},</span>                        
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">SBERT_A_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:[</span><span class="s2">&quot;drop&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">sbert_model_paths</span><span class="p">,</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;saved-dictionary&quot;</span><span class="p">],</span>
+                        <span class="p">},</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>
 
-SKLEARN_QA_PARAMS =     {
-    &quot;Input&quot;:{
-        &quot;question&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
-                        &quot;max_features&quot;:[500,1000,1500,2500,],
-                        &quot;env&quot;:[&quot;scikit-learn&quot;],               
-                         },
-        },
-        &quot;answer&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
-                        &quot;max_features&quot;:[1500,2500,4000,],
-                        &quot;env&quot;:[&quot;scikit-learn&quot;],                
-                         },                        
-        },
-    }
-}
+<span class="n">SKLEARN_QA_PARAMS</span> <span class="o">=</span>     <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;max_features&quot;</span><span class="p">:[</span><span class="mi">500</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2500</span><span class="p">,],</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;scikit-learn&quot;</span><span class="p">],</span>               
+                         <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;max_features&quot;</span><span class="p">:[</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2500</span><span class="p">,</span><span class="mi">4000</span><span class="p">,],</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;scikit-learn&quot;</span><span class="p">],</span>                
+                         <span class="p">},</span>                        
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-SKLEARN_A_PARAMS = {
-    &quot;Input&quot;:{
-        &quot;question&quot;:[&quot;drop&quot;],
-        &quot;answer&quot;:{
-            &quot;vectorizer&quot;:{
-                        &quot;model&quot;:[&#39;TfidfVectorizer&#39;,&#39;CountVectorizer&#39;],
-                        &quot;max_features&quot;:[1500,2500,4000,],
-                        &quot;env&quot;:[&quot;scikit-learn&quot;],
-                            },
-        }   
-    }
-}
+<span class="n">SKLEARN_A_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Input&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;question&quot;</span><span class="p">:[</span><span class="s2">&quot;drop&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;vectorizer&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="s1">&#39;CountVectorizer&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;max_features&quot;</span><span class="p">:[</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2500</span><span class="p">,</span><span class="mi">4000</span><span class="p">,],</span>
+                        <span class="s2">&quot;env&quot;</span><span class="p">:[</span><span class="s2">&quot;scikit-learn&quot;</span><span class="p">],</span>
+                            <span class="p">},</span>
+        <span class="p">}</span>   
+    <span class="p">}</span>
+<span class="p">}</span>
 
-LOGISTIC_PARAMS = {       
-    &quot;Classifier&quot;:{
-            &quot;model&quot;:[&quot;LogisticRegression&quot;],
-            &quot;C&quot;:[0.01,0.1],
-        },
-}
+<span class="n">LOGISTIC_PARAMS</span> <span class="o">=</span> <span class="p">{</span>       
+    <span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;LogisticRegression&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],</span>
+        <span class="p">},</span>
+<span class="p">}</span>
 
-RANDOM_FOREST_PARAMS = {
-    &quot;Classifier&quot;:{
-            &quot;model&quot;:[&quot;RandomForestClassifier&quot;],
-            &quot;n_estimators&quot;:[100,200],
-            &quot;max_depth&quot;:[5,10,15],
-        },
-}
+<span class="n">RANDOM_FOREST_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;n_estimators&quot;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span>
+            <span class="s2">&quot;max_depth&quot;</span><span class="p">:[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span>
+        <span class="p">},</span>
+<span class="p">}</span>
 
-SGD_PARAMS = {
-    &quot;Classifier&quot;:{
-            &quot;model&quot;:[&quot;SGDClassifier&quot;],
-            &quot;loss&quot;:[&quot;hinge&quot;,&quot;log&quot;],
-            &quot;alpha&quot;:[0.0001,0.001],
-        },
-}
+<span class="n">SGD_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Classifier&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:[</span><span class="s2">&quot;SGDClassifier&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;loss&quot;</span><span class="p">:[</span><span class="s2">&quot;hinge&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;alpha&quot;</span><span class="p">:[</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.001</span><span class="p">],</span>
+        <span class="p">},</span>
+<span class="p">}</span>
 
-### Combine a Vectorizer and Classifier
-VECTORIZATION_PARAMS = [SKLEARN_QA_PARAMS,SKLEARN_A_PARAMS,SBERT_QA_PARAMS,SBERT_A_PARAMS]
-CLASSIFIER_PARAMS    = [LOGISTIC_PARAMS,RANDOM_FOREST_PARAMS,SGD_PARAMS]
+<span class="c1">### Combine a Vectorizer and Classifier</span>
+<span class="n">VECTORIZATION_PARAMS</span> <span class="o">=</span> <span class="p">[</span><span class="n">SKLEARN_QA_PARAMS</span><span class="p">,</span><span class="n">SKLEARN_A_PARAMS</span><span class="p">,</span><span class="n">SBERT_QA_PARAMS</span><span class="p">,</span><span class="n">SBERT_A_PARAMS</span><span class="p">]</span>
+<span class="n">CLASSIFIER_PARAMS</span>    <span class="o">=</span> <span class="p">[</span><span class="n">LOGISTIC_PARAMS</span><span class="p">,</span><span class="n">RANDOM_FOREST_PARAMS</span><span class="p">,</span><span class="n">SGD_PARAMS</span><span class="p">]</span>
 
-params_all = [{**vect_params, **clf_params} for vect_params in VECTORIZATION_PARAMS for clf_params in CLASSIFIER_PARAMS]
-CV_SEARCH_PARAMS = [crossval.convert_nested_params(params) for params in params_all]
-print(CV_SEARCH_PARAMS)        
+<span class="n">params_all</span> <span class="o">=</span> <span class="p">[{</span><span class="o">**</span><span class="n">vect_params</span><span class="p">,</span> <span class="o">**</span><span class="n">clf_params</span><span class="p">}</span> <span class="k">for</span> <span class="n">vect_params</span> <span class="ow">in</span> <span class="n">VECTORIZATION_PARAMS</span> <span class="k">for</span> <span class="n">clf_params</span> <span class="ow">in</span> <span class="n">CLASSIFIER_PARAMS</span><span class="p">]</span>
+<span class="n">CV_SEARCH_PARAMS</span> <span class="o">=</span> <span class="p">[</span><span class="n">crossval</span><span class="o">.</span><span class="n">convert_nested_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">params_all</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">CV_SEARCH_PARAMS</span><span class="p">)</span>        
 </pre></div>
 </div>
 </div>
@@ -900,21 +900,21 @@ print(CV_SEARCH_PARAMS)
 <p>Cross-validate over hyperparameters and select the best model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scoring Dict for evaluation
-scoring_dict = {&#39;f1&#39;:evaluation.get_scorer(&#39;f1&#39;)}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scoring Dict for evaluation</span>
+<span class="n">scoring_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;f1&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="o">.</span><span class="n">get_scorer</span><span class="p">(</span><span class="s1">&#39;f1&#39;</span><span class="p">)}</span>
 
-cv_dict = iqual_model.cross_validate_fit(
-    X,y,                                # X: Pandas DataFrame of features, y: Pandas Series of labels
-    search_parameters=CV_SEARCH_PARAMS, # search_parameters: Dictionary of parameters to use for cross-validation
-    cv_method=&#39;RandomizedSearchCV&#39;,     # cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV
-    n_iter=30,                          # n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;
-    scoring=scoring_dict,               # scoring: Scoring metric to use for cross-validation    
-    refit=&#39;f1&#39;,                         # refit: Metric to use for refitting the model
-    n_jobs=-1,                          # n_jobs: Number of parallel threads to use  
-    cv_splits=3,                        # cv_splits: Number of cross-validation splits
-)
-print()
-print(&quot;Average F1 score: {:.3f}&quot;.format(cv_dict[&#39;avg_test_score&#39;]))
+<span class="n">cv_dict</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">cross_validate_fit</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span>                                <span class="c1"># X: Pandas DataFrame of features, y: Pandas Series of labels</span>
+    <span class="n">search_parameters</span><span class="o">=</span><span class="n">CV_SEARCH_PARAMS</span><span class="p">,</span> <span class="c1"># search_parameters: Dictionary of parameters to use for cross-validation</span>
+    <span class="n">cv_method</span><span class="o">=</span><span class="s1">&#39;RandomizedSearchCV&#39;</span><span class="p">,</span>     <span class="c1"># cv_method: Cross-validation method to use, options: GridSearchCV, RandomizedSearchCV</span>
+    <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>                          <span class="c1"># n_iter: Only when cv_method=&#39;RandomizedSearchCV&#39;</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_dict</span><span class="p">,</span>               <span class="c1"># scoring: Scoring metric to use for cross-validation    </span>
+    <span class="n">refit</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span>                         <span class="c1"># refit: Metric to use for refitting the model</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>                          <span class="c1"># n_jobs: Number of parallel threads to use  </span>
+    <span class="n">cv_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                        <span class="c1"># cv_splits: Number of cross-validation splits</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average F1 score: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cv_dict</span><span class="p">[</span><span class="s1">&#39;avg_test_score&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -930,14 +930,14 @@ Average F1 score: 0.843
 <h2>Check Best Model<a class="headerlink" href="#check-best-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>params = iqual_model.get_params()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
 
-print(f&quot;Q vectorizer: {params.get(&#39;Input__question__vectorizer__model&#39;,&#39;Dropped&#39;)}&quot;)
-print(f&quot;A vectorizer: {params.get(&#39;Input__answer__vectorizer__model&#39;)}&quot;)
-print(f&quot;Classifier: {params.get(&#39;Classifier__model&#39;)}&quot;)
-print(f&quot;Threshold for classification: {params.get(&#39;Threshold__threshold&#39;):.3f}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q vectorizer: </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Input__question__vectorizer__model&#39;</span><span class="p">,</span><span class="s1">&#39;Dropped&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A vectorizer: </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Input__answer__vectorizer__model&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classifier: </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Classifier__model&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold for classification: </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Threshold__threshold&#39;</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-iqual_model.model
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">model</span>
 </pre></div>
 </div>
 </div>
@@ -1010,16 +1010,16 @@ Threshold for classification: 0.377
 <h2>Evaluate model using out sample data (Held out human-coded data)<a class="headerlink" href="#evaluate-model-using-out-sample-data-held-out-human-coded-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>test_X = test_df[[&#39;Q_en&#39;,&#39;A_en&#39;]]
-test_y = test_df[code_variable]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_X</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[[</span><span class="s1">&#39;Q_en&#39;</span><span class="p">,</span><span class="s1">&#39;A_en&#39;</span><span class="p">]]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">code_variable</span><span class="p">]</span>
 
-f1_score  = iqual_model.score(test_X,test_y,
-                              scoring_function=evaluation.get_metric(&#39;f1_score&#39;))
-print(f&quot;Out-sample F1-score: {f1_score:.3f}&quot;)
+<span class="n">f1_score</span>  <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_X</span><span class="p">,</span><span class="n">test_y</span><span class="p">,</span>
+                              <span class="n">scoring_function</span><span class="o">=</span><span class="n">evaluation</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="s1">&#39;f1_score&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Out-sample F1-score: </span><span class="si">{</span><span class="n">f1_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-accuracy  = iqual_model.score(test_X,test_y,
-                              scoring_function=evaluation.get_metric(&#39;accuracy_score&#39;))
-print(f&quot;Out-sample accuracy-score: {accuracy:.3f}&quot;)
+<span class="n">accuracy</span>  <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_X</span><span class="p">,</span><span class="n">test_y</span><span class="p">,</span>
+                              <span class="n">scoring_function</span><span class="o">=</span><span class="n">evaluation</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="s1">&#39;accuracy_score&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Out-sample accuracy-score: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1035,9 +1035,9 @@ Out-sample accuracy-score: 0.980
 <h2>Predict labels for unannotated data<a class="headerlink" href="#predict-labels-for-unannotated-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>uncoded_df[code_variable+&#39;_pred&#39;] = iqual_model.predict(uncoded_df[[&#39;Q_en&#39;,&#39;A_en&#39;]])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uncoded_df</span><span class="p">[</span><span class="n">code_variable</span><span class="o">+</span><span class="s1">&#39;_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">uncoded_df</span><span class="p">[[</span><span class="s1">&#39;Q_en&#39;</span><span class="p">,</span><span class="s1">&#39;A_en&#39;</span><span class="p">]])</span>
 
-uncoded_df[code_variable+&quot;_pred&quot;].hist(figsize=(3,3),bins=3)
+<span class="n">uncoded_df</span><span class="p">[</span><span class="n">code_variable</span><span class="o">+</span><span class="s2">&quot;_pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1053,9 +1053,9 @@ uncoded_df[code_variable+&quot;_pred&quot;].hist(figsize=(3,3),bins=3)
 <h2>Examples for positive predictions<a class="headerlink" href="#examples-for-positive-predictions" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for idx, row in uncoded_df.loc[(uncoded_df[code_variable+&quot;_pred&quot;]==1),[&#39;Q_en&#39;,&#39;A_en&#39;]].sample(3).iterrows():
-    print(&quot;Q: &quot;,row[&#39;Q_en&#39;],&quot;\n&quot;,&quot;A: &quot;, row[&#39;A_en&#39;],sep=&#39;&#39;)
-    print()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">uncoded_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">uncoded_df</span><span class="p">[</span><span class="n">code_variable</span><span class="o">+</span><span class="s2">&quot;_pred&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">),[</span><span class="s1">&#39;Q_en&#39;</span><span class="p">,</span><span class="s1">&#39;A_en&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q: &quot;</span><span class="p">,</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Q_en&#39;</span><span class="p">],</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;A: &quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;A_en&#39;</span><span class="p">],</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1126,6 +1126,7 @@ A: Yes, I will marry. That&#39;s right.
     By Aditya Karan Chhabra<br/>
   
       &copy; Copyright 2023, World Bank Group.<br/>
+    Last updated on Mar 11, 2023.<br/>
 </p>
         </footer>
     </div>
