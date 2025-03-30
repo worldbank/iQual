@@ -2,6 +2,13 @@
 
 This directory contains Jupyter notebooks that demonstrate how to use the `iQual` package.
 
+## [Getting Started](Getting%20Started.ipynb)
+
+The **Getting Started** notebook provides a complete introduction to iQual with a self-contained example:
+* Learn the basics of iQual
+* Process and prepare data for analysis
+* Train a simple model and check the out-of-sample performance
+
 ## [Basic Usage](basic/)
 
 The following notebooks demonstrate how to construct a basic model for a single annotation task:
