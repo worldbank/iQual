@@ -7,6 +7,8 @@ parts:
       title: Notebooks
     - file: notebooks/Getting Started
       title: Getting Started
+    - file: notebooks/Model Training
+      title: Model Training
     - file: notebooks/basic/README
       title: Basic Usage
       sections:
