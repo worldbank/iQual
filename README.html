@@ -372,7 +372,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model Training</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>
@@ -397,7 +398,7 @@ document.write(`
 <p><a class="reference external" href="https://github.com/worldbank/iQual/blob/main/LICENSE.md"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-green.svg" /></a>
 <a class="reference external" href="https://badge.fury.io/py/iQual"><img alt="PyPI version" src="https://img.shields.io/pypi/v/iQual?color=blue&amp;label=pypi%20package&amp;kill_cache=1" /></a>
 <a class="reference external" href="https://worldbank.github.io/iQual/"><img alt="Docs - GitHub.io" src="https://img.shields.io/static/v1?logo=github&amp;style=flat&amp;color=orange&amp;label=docs&amp;message=iQual" /></a></p>
-<p>This repository contains the code and resources necessary to implement the techniques described in the paper <a class="reference external" href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996">A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh</a>. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package is designed for qualitative analysis of open-ended interviews and aims to extend a small set of interpretative human-codes to a much larger set of documents using natural language processing. The package provides a method for assessing the robustness and reliability of this approach. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package has been applied to analyze 2,200 open-ended interviews on parent’s aspirations for children from Rohingya refugees and their Bangladeshi hosts in Cox’s Bazaar, Bangladesh. It draws on work in anthropology and philosophy to expand conceptions of aspirations in economics to distinguish between material goals, moral and religious values, and navigational capacity—the ability to achieve goals and aspirations, showing that they have very different correlates.</p>
+<p>This repository contains the code and resources necessary to implement the techniques described in the paper <a class="reference external" href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099759305162210822/idu0a357362e00b6004c580966006b1c2f2e3996">A Method to Scale-Up Interpretative Qualitative Analysis, with an Application to Aspirations in Cox’s Bazaar, Bangladesh</a>. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package is designed for qualitative analysis of open-ended interviews and aims to extend a small set of interpretative human-codes to a much larger set of documents using natural language processing. The package provides a method for assessing the robustness and reliability of this approach. The <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package has been applied to analyze 2,200 open-ended interviews on parent’s aspirations for children from Rohingya refugees and their Bangladeshi hosts in Cox’s Bazaar, Bangladesh.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">iQual</span></code>, researchers can efficiently analyze large amounts of qualitative data while maintaining the nuance and accuracy of human interpretation.</p>
 <hr class="docutils" />
 <section id="installation">
@@ -408,34 +409,23 @@ document.write(`
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>iQual
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Alternatively, you can install <code class="docutils literal notranslate"><span class="pre">iQual</span></code> from source. To do so, use the following commands:</p></li>
-</ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/worldbank/iQual.git
-<span class="nb">cd</span><span class="w"> </span>iQual
-pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
 </section>
 <hr class="docutils" />
-<section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">iQual</span></code> requires Python 3.7+ and the following dependencies:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a></p></li>
-<li><p><a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a></p></li>
-<li><p><a class="reference external" href="https://sbert.net/">sentence-transformers</a></p></li>
-<li><p><a class="reference external" href="https://spacy.io/">spaCy</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/">numpy</a></p></li>
-<li><p><a class="reference external" href="https://umap-learn.readthedocs.io/en/latest/">umap-learn</a></p></li>
-<li><p><a class="reference external" href="https://www.scipy.org/">scipy</a></p></li>
-<li><p><a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a></p></li>
-<li><p><a class="reference external" href="https://simplejson.readthedocs.io/en/latest/">simplejson</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
-<li><p><a class="reference external" href="https://seaborn.pydata.org/">seaborn</a></p></li>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p>For a quick introduction to using iQual, check out our <a class="reference internal" href="notebooks/Getting%20Started.html"><span class="std std-doc">Getting Started notebook</span></a>. This tutorial provides:</p>
+<ul class="simple">
+<li><p>A complete overview of the basic workflow</p></li>
+<li><p>Step-by-step examples using real-world data</p></li>
+<li><p>Clear explanations of key concepts</p></li>
+<li><p>Code you can run immediately</p></li>
 </ul>
-</div></blockquote>
+<p>This notebook is perfect for new users who want to understand iQual’s core functionality without diving into the technical details.</p>
+</section>
+<hr class="docutils" />
+<section id="model-training">
+<h2>Model Training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="notebooks/Model%20Training.html"><span class="std std-doc">Model Training</span></a> notebook demonstrates advanced training techniques including cross-validation and hyperparameter optimization using the same politeness dataset from <a class="reference internal" href="notebooks/Getting%20Started.html"><span class="std std-doc">Getting Started</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="features">
@@ -458,94 +448,47 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 </ul>
 </li>
 <li><p>Model selection and performance evaluation using <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection">scikit-learn</a> methods.</p></li>
-<li><p>Model performance evaluation using <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics">scikit-learn</a> metrics.</p></li>
 <li><p>Tests for bias and interpretability, with <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a>.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h2>
-<p>The following code demonstrates the basic usage of the <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package. It shows how to construct a pipeline, fit it to the data, and use it to classify new data.</p>
-<p>Import the <code class="docutils literal notranslate"><span class="pre">iqual</span></code> package and initiate the model class.</p>
+<p>The following code demonstrates the basic usage of the <code class="docutils literal notranslate"><span class="pre">iQual</span></code> package:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">iqual</span><span class="w"> </span><span class="kn">import</span> <span class="n">iqualnlp</span>     <span class="c1"># Import `iqualnlp` from the `iqual` package</span>
 
 <span class="n">iqual_model</span> <span class="o">=</span> <span class="n">iqualnlp</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="c1"># Initiate the model class</span>
-</pre></div>
-</div>
-<p>Add text features to the model. The <code class="docutils literal notranslate"><span class="pre">add_text_features</span></code> method takes the following arguments:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">question_col</span></code>: The name of the column containing the question text.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">answer_col</span></code>: The name of the column containing the answer text.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: Name of a scikit-learn, spaCy, sentence-transformers, or a precomputed vector (picklized dictionary) model. The default is <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>: The environment or package which is being used. The default is <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Available options are <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, <code class="docutils literal notranslate"><span class="pre">spacy</span></code>, <code class="docutils literal notranslate"><span class="pre">sentence-transformers</span></code>, and <code class="docutils literal notranslate"><span class="pre">saved-dict</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>: Additional keyword arguments to pass to the model.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a scikit-learn feature extraction method</span>
-<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;TfidfVectorizer&#39;</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;scikit-learn&#39;</span><span class="p">)</span> 
 
-<span class="c1"># OR - Use a sentence-transformers model</span>
-<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;all-mpnet-base-v2&#39;</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;sentence-transformers&#39;</span><span class="p">)</span> 
+<span class="c1"># Add text features (using TF-IDF vectorization by default)</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="s1">&#39;question&#39;</span><span class="p">,</span> <span class="s1">&#39;answer&#39;</span><span class="p">)</span>
 
-<span class="c1"># OR - Use a spaCy model</span>
-<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;en_core_web_lg&#39;</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;spacy&#39;</span><span class="p">)</span> 
+<span class="c1"># Add a classifier (Logistic Regression by default)</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_classifier</span><span class="p">()</span>
 
-<span class="c1"># OR - Use a precomputed vector (picklized dictionary)</span>
-<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_text_features</span><span class="p">(</span><span class="n">question_col</span><span class="p">,</span><span class="n">answer_col</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;qa_precomputed.pkl&#39;</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;saved-dict&#39;</span><span class="p">)</span> 
+<span class="c1"># Add a threshold layer for improved performance on imbalanced data</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">add_threshold</span><span class="p">()</span>
+
+<span class="c1"># Compile the model</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+<span class="c1"># Fit the model to your data</span>
+<span class="n">iqual_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em><strong>(OPTIONAL)</strong></em> Add a feature transformation layer. The <code class="docutils literal notranslate"><span class="pre">add_feature_transformer</span></code> method takes the following arguments:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the feature transformation layer.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transformation</span></code>: The type of transformation. Available options are <code class="docutils literal notranslate"><span class="pre">FeatureScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">DimensionalityReduction</span></code>.</p></li>
-</ul>
-<p>To add a <strong>feature scaling</strong> layer, use the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_feature_transformer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Normalizer&#39;</span><span class="p">,</span> <span class="n">transformation</span><span class="o">=</span><span class="s2">&quot;FeatureScaler&quot;</span><span class="p">)</span> <span class="c1"># or any other scikit-learn scaler</span>
-</pre></div>
-</div>
-<p>To add a <strong>dimensionality reduction</strong> layer, use the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_feature_transformer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;UMAP&#39;</span><span class="p">,</span> <span class="n">transformation</span><span class="o">=</span><span class="s2">&quot;DimensionalityReduction&quot;</span><span class="p">)</span> <span class="c1"># supports UMAP or any other scikit-learn decomposition method</span>
-</pre></div>
-</div>
-<p>Add a classifier layer. The <code class="docutils literal notranslate"><span class="pre">add_classifier</span></code> method takes the following arguments:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the classifier layer. The default is <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>: Additional keyword arguments to pass to the classifier.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_classifier</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">)</span> <span class="c1">#  Add a classifier layer from scikit-learn</span>
-</pre></div>
-</div>
-<p><em><strong>(OPTIONAL)</strong></em> Add a threshold layer for the classifier using <code class="docutils literal notranslate"><span class="pre">add_threshold</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">add_threshold</span><span class="p">()</span> <span class="c1"># Add a threshold layer for the classifier, recommended for imbalanced data</span>
-</pre></div>
-</div>
-<p>Compile the model with <code class="docutils literal notranslate"><span class="pre">compile</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span> <span class="c1"># Compile the model</span>
-</pre></div>
-</div>
-<p>Fit the model to the data using <code class="docutils literal notranslate"><span class="pre">fit</span></code>. The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method takes the following arguments:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">X_train</span></code>: The training data. (pandas dataframe)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">y_train</span></code>: The training labels. (pandas series)</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iqual_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1"># Fit the model to the data</span>
-</pre></div>
-</div>
-<p>Predict the labels for new data using <code class="docutils literal notranslate"><span class="pre">predict</span></code>. The <code class="docutils literal notranslate"><span class="pre">predict</span></code> method takes the following arguments:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">X_test</span></code>: The test data. (pandas dataframe)</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">iqual_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="c1"># Predict the labels for new data</span>
-</pre></div>
-</div>
-<p>For examples on cross-validation fitting, model selection &amp; performance evaluation, bias, interpretability and measurement tests, refer to the <a class="reference internal" href="#notebooks"><span class="xref myst">notebooks</span></a> folder.</p>
+<p>For a more detailed introduction, check out our <a class="reference internal" href="notebooks/Getting%20Started.html"><span class="std std-doc">Getting Started notebook</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="notebooks">
 <h2>Notebooks<a class="headerlink" href="#notebooks" title="Link to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks">notebooks</a> folder contains detailed examples on using <code class="docutils literal notranslate"><span class="pre">iQual</span></code>. The notebooks are organized into the following categories:</p>
+<p>The <a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks">notebooks</a> folder contains detailed examples on using <code class="docutils literal notranslate"><span class="pre">iQual</span></code>:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks/Getting%20Started.ipynb">Getting Started</a>
+A complete introduction to iQual with a self-contained example for new users.</p></li>
 <li><p><a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks/basic">Basic Modelling</a>
-These notebooks demonstrates the basic usage of the package, the pipeline construction, and the vectorization and classification options.</p></li>
+These notebooks demonstrate the basic usage of the package, the pipeline construction, and the vectorization and classification options.</p></li>
 <li><p><a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks/advanced">Advanced Modelling</a>
 These notebooks demonstrate advanced pipeline construction, mixing and matching of feature extraction and classification methods, and model selection.</p></li>
 <li><p><a class="reference external" href="https://github.com/worldbank/iQual/tree/main/notebooks/interpretability">Interpretability</a>
@@ -637,7 +580,8 @@ http://documents.worldbank.org/curated/en/099759305162210822/IDU0a357362e00b6004
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model Training</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>

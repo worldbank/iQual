@@ -9,6 +9,10 @@ The **Getting Started** notebook provides a complete introduction to iQual with 
 * Process and prepare data for analysis
 * Train a simple model and check the out-of-sample performance
 
+## [Model Training](Model%20Training.ipynb)
+
+This notebook demonstrates advanced training techniques including cross-validation and hyperparameter optimization using the same politeness dataset from [Getting Started](Getting%20Started.ipynb).
+
 ## [Basic Usage](basic/)
 
 The following notebooks demonstrate how to construct a basic model for a single annotation task:

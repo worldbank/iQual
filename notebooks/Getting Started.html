@@ -373,15 +373,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-package-from-pypi">Install the package from PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stanford-politeness-corpus">Stanford Politeness Corpus</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-training-and-testing-sets">Split the data into training and testing sets</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-the-test-set">Make predictions on the test set</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-performance-metrics">Calculate performance metrics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#see-results-dataframe-with-examples">See results dataframe with examples</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-training-and-testing-sets">Split the data into training and testing sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-the-test-set">Make predictions on the test set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-performance-metrics">Calculate performance metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-results-dataframe-with-examples">See results dataframe with examples</a></li>
 </ul>
             </nav>
         </div>
@@ -633,8 +629,9 @@ Impolite requests: 4947
 </table>
 </div></div></div>
 </div>
+</section>
 <section id="split-the-data-into-training-and-testing-sets">
-<h3>Split the data into training and testing sets<a class="headerlink" href="#split-the-data-into-training-and-testing-sets" title="Link to this heading">#</a></h3>
+<h2>Split the data into training and testing sets<a class="headerlink" href="#split-the-data-into-training-and-testing-sets" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
@@ -1198,8 +1195,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                   threshold_range=(np.float64(0.015664853903903313),
                                    np.float64(0.858797346850902)))</pre></div> </div></div></div></div></div></div></div></div>
 </div>
+</section>
 <section id="make-predictions-on-the-test-set">
-<h4>Make predictions on the test set<a class="headerlink" href="#make-predictions-on-the-test-set" title="Link to this heading">#</a></h4>
+<h2>Make predictions on the test set<a class="headerlink" href="#make-predictions-on-the-test-set" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -1209,9 +1207,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 </section>
-</section>
 <section id="calculate-performance-metrics">
-<h3>Calculate performance metrics<a class="headerlink" href="#calculate-performance-metrics" title="Link to this heading">#</a></h3>
+<h2>Calculate performance metrics<a class="headerlink" href="#calculate-performance-metrics" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1279,7 +1276,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="see-results-dataframe-with-examples">
-<h3>See results dataframe with examples<a class="headerlink" href="#see-results-dataframe-with-examples" title="Link to this heading">#</a></h3>
+<h2>See results dataframe with examples<a class="headerlink" href="#see-results-dataframe-with-examples" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1421,7 +1418,6 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1490,15 +1486,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-package-from-pypi">Install the package from PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stanford-politeness-corpus">Stanford Politeness Corpus</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-training-and-testing-sets">Split the data into training and testing sets</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-the-test-set">Make predictions on the test set</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-performance-metrics">Calculate performance metrics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#see-results-dataframe-with-examples">See results dataframe with examples</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-training-and-testing-sets">Split the data into training and testing sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-the-test-set">Make predictions on the test set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-performance-metrics">Calculate performance metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-results-dataframe-with-examples">See results dataframe with examples</a></li>
 </ul>
   </nav></div>
 
