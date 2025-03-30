@@ -381,10 +381,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cross-validation-with-hyperparameter-search">4. Run cross-validation with hyperparameter search</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-best-model-parameters">5. Analyzing the Best Model Parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fold-by-fold-cross-validation-predictions-with-best-parameters">6. Fold-by-Fold Cross-Validation Predictions with Best Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-fold-by-fold-predictions">5. Evaluating Fold-by-Fold Predictions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-final-model-and-evaluate-on-test-set">6. Train Final Model and Evaluate on Test Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-fold-by-fold-predictions">7. Evaluate Fold-by-Fold Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-final-model-and-evaluate-on-test-set">8. Train Final Model and Evaluate on Test Set</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-cv-performance-vs-test-performance">Compare CV Performance vs Test Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-predictions">Examining Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-predictions">Examine Predictions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-correct-predictions-polite">Examples of Correct Predictions (Polite):</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-correct-predictions-impolite">Examples of Correct Predictions (Impolite):</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-incorrect-predictions-false-negatives">Examples of Incorrect Predictions (False Negatives)</a></li>
@@ -1287,8 +1287,8 @@ Processing fold 2/3
 </div>
 </div>
 </section>
-<section id="evaluating-fold-by-fold-predictions">
-<h2>5. Evaluating Fold-by-Fold Predictions<a class="headerlink" href="#evaluating-fold-by-fold-predictions" title="Link to this heading">#</a></h2>
+<section id="evaluate-fold-by-fold-predictions">
+<h2>7. Evaluate Fold-by-Fold Predictions<a class="headerlink" href="#evaluate-fold-by-fold-predictions" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1351,7 +1351,7 @@ weighted avg       0.67      0.52      0.55      4617
 </div>
 </section>
 <section id="train-final-model-and-evaluate-on-test-set">
-<h2>6. Train Final Model and Evaluate on Test Set<a class="headerlink" href="#train-final-model-and-evaluate-on-test-set" title="Link to this heading">#</a></h2>
+<h2>8. Train Final Model and Evaluate on Test Set<a class="headerlink" href="#train-final-model-and-evaluate-on-test-set" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train final model on all training data</span>
@@ -1460,8 +1460,8 @@ weighted avg       0.69      0.53      0.56      1979
 </div>
 </div>
 </section>
-<section id="examining-predictions">
-<h2>Examining Predictions<a class="headerlink" href="#examining-predictions" title="Link to this heading">#</a></h2>
+<section id="examine-predictions">
+<h2>Examine Predictions<a class="headerlink" href="#examine-predictions" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a DataFrame with test examples and their predictions</span>
@@ -1847,10 +1847,10 @@ Decision Boundary: 0.24
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cross-validation-with-hyperparameter-search">4. Run cross-validation with hyperparameter search</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-best-model-parameters">5. Analyzing the Best Model Parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fold-by-fold-cross-validation-predictions-with-best-parameters">6. Fold-by-Fold Cross-Validation Predictions with Best Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-fold-by-fold-predictions">5. Evaluating Fold-by-Fold Predictions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-final-model-and-evaluate-on-test-set">6. Train Final Model and Evaluate on Test Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-fold-by-fold-predictions">7. Evaluate Fold-by-Fold Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-final-model-and-evaluate-on-test-set">8. Train Final Model and Evaluate on Test Set</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-cv-performance-vs-test-performance">Compare CV Performance vs Test Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-predictions">Examining Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-predictions">Examine Predictions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-correct-predictions-polite">Examples of Correct Predictions (Polite):</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-correct-predictions-impolite">Examples of Correct Predictions (Impolite):</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-incorrect-predictions-false-negatives">Examples of Incorrect Predictions (False Negatives)</a></li>
