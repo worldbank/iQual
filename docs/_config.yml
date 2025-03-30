@@ -17,6 +17,13 @@ repository:
 execute:
   execute_notebooks: off # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")
 
+# Allow following symlinks when building the book
+sphinx:
+  config:
+    html_theme: sphinx_book_theme
+    html_sourcelink_suffix: ""
+    follow_external_links: true
+
 #######################################################################################
 # Parse and render settings
 parse:

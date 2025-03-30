@@ -1,10 +1,12 @@
 format: jb-book
-root: README
+root: README.md
 parts:
   - caption: Examples
     chapters:
     - file: notebooks/README
       title: Notebooks
+    - file: notebooks/Getting Started
+      title: Getting Started
     - file: notebooks/basic/README
       title: Basic Usage
       sections:
