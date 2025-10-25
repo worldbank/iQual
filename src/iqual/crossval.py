@@ -193,15 +193,21 @@ class Splitter:
     def split(self, X, y=None, groups=None):
         """
         Generate indices to split data into training and test set.
+        Ensures a valid iterable is always returned.
         """
+        split_generator = None
+
         for _ in range(self.attempts):
             split_generator = self.split_and_verify(X, y, groups)
-            if self.valid_split:
+            if self.valid_split and split_generator is not None:
                 break
-            else:
-                continue
-        if not self.valid_split:
-            warnings.warn("Splitter Threshold not met")
+
+        if not self.valid_split or split_generator is None:
+            warnings.warn("Splitter Threshold not met – falling back to default splitter")
+            # Fallback to the base sklearn splitter for safe behavior
+            base_splitter = getattr(sklearn.model_selection, self.method)(**self.kwargs)
+            split_generator = base_splitter.split(X, y, groups)
+
         return split_generator
 
     def get_datasets(self, X, y=None):
@@ -222,3 +228,4 @@ class Splitter:
                 }
             )
         return datasets
+
